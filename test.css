@@ -1,0 +1,17 @@
+body {
+    font-family: 'Helvetica', sans;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    
+}
+
+.center {
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+}
