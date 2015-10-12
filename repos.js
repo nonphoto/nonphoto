@@ -12,18 +12,18 @@ jQuery.fn.loadRepositories = function(username) {
 	sortByName(repos);
 
 	// Write back to HTML
-	var list = $('<ul/>');
+	var list = $('<ul id="filterList"/>');
 	target.empty().append(list);
 	$(repos).each(function() {
 	    if (this.has_pages && this.name != username + '.github.io') {
-		list.append('<li><a href="http://' + username + '.github.io/' + this.name +'">' + this.name + '</a></li>');
-	    }
-	});
-    });
+		list.append('<li class="' + this.language + '"><a href="http://' + username + '.github.io/' + this.name +'">' + this.name + '</a></li>');
+}
+});
+});
 
-    function sortByName(repos) {
-	repos.sort(function(a,b) {
-	    return a.name - b.name;
-	});
-    }
+function sortByName(repos) {
+repos.sort(function(a,b) {
+return a.name - b.name;
+});
+}
 };
