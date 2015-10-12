@@ -16,14 +16,18 @@ jQuery.fn.loadRepositories = function(username) {
 	target.empty().append(list);
 	$(repos).each(function() {
 	    if (this.has_pages && this.name != username + '.github.io') {
-		list.append('<li class="' + this.language + '"><a href="http://' + username + '.github.io/' + this.name +'">' + this.name + '</a></li>');
-}
-});
-});
+		var type = "analogue";
+		if (this.language) {
+		    type = "digital";
+		}
+		list.append('<li class="' + type + '"><a href="http://' + username + '.github.io/' + this.name +'">' + this.name + '</a></li>');
+	    }
+	});
+    });
 
-function sortByName(repos) {
-repos.sort(function(a,b) {
-return a.name - b.name;
-});
-}
+    function sortByName(repos) {
+	repos.sort(function(a,b) {
+	    return a.name - b.name;
+	});
+    }
 };
