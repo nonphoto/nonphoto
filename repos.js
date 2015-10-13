@@ -12,15 +12,14 @@ jQuery.fn.loadRepositories = function(username) {
 	sortByName(repos);
 
 	// Write back to HTML
-	var list = $('<ul id="filterList"/>');
-	target.empty().append(list);
+	target.empty();
 	$(repos).each(function() {
 	    if (this.has_pages && this.name != username + '.github.io') {
 		var type = "analogue";
 		if (this.language) {
 		    type = "digital";
 		}
-		list.append('<li class="' + type + '"><a href="http://' + username + '.github.io/' + this.name +'">' + this.name + '</a></li>');
+		target.append('<li class="' + type + '"><a href="http://' + username + '.github.io/' + this.name +'">' + this.name + '</a></li>');
 	    }
 	});
     });

@@ -1,14 +1,17 @@
-$('#digital').click(function() {
-    $(this).toggleClass("active");
-    $("#filterList li").show();
-    $("#filterList li").not(".digital").hide();
+$("#digital").click(function() {
+    $("#filter-buttons button").removeClass("selected");
+    $(this).addClass("selected");
+    $("#project-list li").show();
+    $("#project-list li").not(".digital").hide();
 });
-$('#analogue').click(function() {
-    $(this).toggleClass("active");
-    $("#filterList li").show();
-    $("#filterList li").not(".analogue").hide();
+$("#analogue").click(function() {
+    $("#filter-buttons button").removeClass("selected");
+    $(this).addClass("selected");
+    $("#project-list li").show();
+    $("#project-list li").not(".analogue").hide();
 });
-$('#both').click(function() {
-    $(this).toggleClass("active");
-    $("#filterList li").show();
+$("#both").click(function() {
+    $("#filter-buttons button").removeClass("selected");
+    $(this).addClass("selected");
+    $("#project-list li").show();
 });
