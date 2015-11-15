@@ -11,12 +11,12 @@ Grey: AFB9C4
     padding: 0em;
 }
 
-html {
+body {
+    background: #F2F2EA;
     background: #ECECF0;
     background: white;
-}
-
-body {
+    background: #171117;
+    
     color: black;
     font-family: sans-serif;
     font-size: 1em;
@@ -27,13 +27,26 @@ body {
     -moz-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
-    padding: 0rem 4rem;
-    margin: 4rem auto;
+}
+
+.header {
+    width: 100%;
+    height: 60vh;
+    min-height: 20rem;
+    padding: 3rem;
+}
+
+.main {
+    background: #ECECF0;
+    color: black;
+    padding: 4rem;
+    margin: 0rem auto 4rem auto;
 }
 
 h1 {
+    color: white;
     font-family: 'DejaVuSerifCondensed-BoldItalic';
-    font-size: 3.5rem;
+    font-size: 3rem;
     text-transform: uppercase;
     line-height: 1;
     word-spacing: 100em;
@@ -46,8 +59,13 @@ h2 {
     margin-top: 4em;
 }
 
+h3 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
 p {
-    margin: 2em 0em;
+    margin: 1em 0em;
 }
 
 a {
@@ -55,23 +73,11 @@ a {
     text-decoration: none;
 }
 
-#project-list {
-}
-
-button {
-    font-size: 1rem;
-    background: white;
-    display: inline-block;
-    color: black;
-    padding: 0.5em;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-}
-
-button.selected {
-    background: black;
-    color: white;
+hr {
+    height: 1px;
+    background-color: #CCCCCC;
+    border-style: none;
+    margin: 3em 0em 1em 0em;
 }
 
 ol {
@@ -82,17 +88,54 @@ ul {
     list-style-type: none;
 }
 
-li {
-}
-
 img {
     width: 100%;
     display: block;
     margin: 4em 0em;
 }
 
+[class*='col-'] {
+    float: left;
+}
+
+.col-1 {
+    width: 10%;
+}
+.col-2 {
+    width: 20%;
+}
+.col-3 {
+    width: 30%;
+}
+.col-4 {
+    width: 40%;
+}
+.col-5 {
+    width: 50%;
+}
+.col-6 {
+    width: 60%;
+}
+.col-7 {
+    width: 70%;
+}
+.col-8 {
+    width: 80%;
+}
+.col-9 {
+    width: 90%;
+}
+.col-0 {
+    width: 100%;
+}
+.grid:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 @media (min-width: 35rem) {
-    body {
+    .main {
 	max-width: 35rem;
     }
 }

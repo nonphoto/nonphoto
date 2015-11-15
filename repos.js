@@ -16,11 +16,7 @@ jQuery.fn.loadRepositories = function(username) {
 	$(repos).each(function() {
 	    if (this.has_pages && this.name != username + '.github.io') {
 		var name = this.name.replace(/-/g, " ");
-		var type = "analogue";
-		if (this.language) {
-		    type = "digital";
-		}
-		target.append('<li class="' + type + '"><a href="http://' + username + '.github.io/' + this.name +'">' + name + '</a></li>');
+		target.append('<li><a href="http://' + username + '.github.io/' + this.name +'">' + name + '</a></li>');
 	    }
 	});
     });
