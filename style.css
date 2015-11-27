@@ -4,19 +4,23 @@ Green: 00EAFF
 Yellow: FFFD94
 Red: FF5C98
 Grey: AFB9C4
+
+F2F2EA
+ECECF0
+171117
 */
+
 
 * {
     margin: 0em;
     padding: 0em;
 }
 
+html {
+    background: #DCDCE2;
+}
+
 body {
-    background: #F2F2EA;
-    background: #ECECF0;
-    background: white;
-    background: #171117;
-    
     color: black;
     font-family: sans-serif;
     font-size: 1em;
@@ -30,10 +34,8 @@ body {
 }
 
 .header {
-    width: 100%;
-    height: 60vh;
-    min-height: 20rem;
-    padding: 3rem;
+    width: auto;
+    height: 10vh;
 }
 
 .main {
@@ -41,27 +43,19 @@ body {
     color: black;
     padding: 4rem;
     margin: 0rem auto 4rem auto;
+    max-width: 35rem;
 }
+
 
 h1 {
-    color: white;
-    font-family: 'DejaVuSerifCondensed-BoldItalic';
-    font-size: 3rem;
-    text-transform: uppercase;
-    line-height: 1;
-    word-spacing: 100em;
-    margin-top: 5rem;
-}
 
-h2 {
-    font-size: 1em;
-    font-weight: bold;
-    margin-top: 4em;
+    font-size: 1.5rem;
+    font-weight: 500;
+    /*word-spacing: 100em;*/
 }
 
 h3 {
-    font-size: 1em;
-    font-weight: bold;
+    font-size: 1rem;
 }
 
 p {
@@ -70,6 +64,7 @@ p {
 
 a {
     color: inherit;
+    font-style: normal;
     text-decoration: none;
 }
 
@@ -86,12 +81,6 @@ ol {
 
 ul {
     list-style-type: none;
-}
-
-img {
-    width: 100%;
-    display: block;
-    margin: 4em 0em;
 }
 
 [class*='col-'] {
@@ -135,11 +124,8 @@ img {
 }
 
 @media (min-width: 35rem) {
-    .main {
-	max-width: 35rem;
-    }
 }
 
 @media (min-width: 50rem) {
-    
+
 }
