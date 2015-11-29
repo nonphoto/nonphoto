@@ -38,11 +38,11 @@ body {
     height: 10vh;
 }
 
-.main {
+#main {
     background: #ECECF0;
     color: black;
     padding: 4rem;
-    margin: 0rem auto 4rem auto;
+    margin: 0rem auto;
     max-width: 35rem;
 }
 

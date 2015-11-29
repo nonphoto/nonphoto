@@ -1,83 +1,42 @@
+---
+layout: default
+title: Home
+---
 
-<!DOCTYPE html>
-<html>
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Test</title>
-    <link rel="stylesheet" href="style.css" type="text/css">
-  </head>
-
-  <body>
-    <div class="header">
-    </div>
-    <div class="main">
-      <h1> Jonas Luebbers </h1>
-      <p>
-        I'm a programmer, designer, and artist, fascinated by the beauty in details, computer interfaces, simulations, architecture, nature, loud music, and the unknown. I'm currently completing my fourth year as an undergraduate by majoring in both Computer Science and Studio Art at Williams College in Massachusetts.
-      </p>
-      <p>
-        I'm still just starting to work on this site, so many of the links are broken. Feel free to look at the source on Github.
-      </p>
-      <hr>
-      <div class="grid">
-        <div class="col-4">
-          <h3>Programming</h3>
-        </div>
-        <div class="col-6">
-          <ul id="programming-list"></ul>
-        </div>
-      </div>
-      <hr>
-      <div class="grid">
-        <div class="col-4">
-          <h3>Design</h3>
-        </div>
-        <div class="col-6">
-          <ul id="design-list">
-            <li><a href="">peck</a></li>
-            <li><a href="">architecture</a></li>
-          </ul>
-        </div>
-      </div>
-      <hr>
-      <div class="grid">
-        <div class="col-4">
-          <h3>Studio</h3>
-        </div>
-        <div class="col-6">
-          <ul id="studio-list">
-            <li><a href="">retaining wall memory</a></li>
-            <li><a href="">eyes through a car window</a></li>
-            <li><a href="">photography</a></li>
-            <li><a href="">miscellaneous</a></li>
-          </ul>
-        </div>
-      </div>
-      <hr>
-      <div class="grid">
-        <div class="col-4">
-          <h3>Network</h3>
-        </div>
-        <div class="col-6">
-          <ul id="network-list">
-            <li><a href="jonaskluebbers@gmail.com">gmail</a></li>
-            <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba">linkedin</a></li>
-            <li><a href="github.com/nonphoto">github</a></li>
-            <li><a href="https://open.spotify.com/user/wurfle">spotify</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </body>
-
-  <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.min.js" type="text/javascript">
-  </script>
-  <script src="repos.js" type="text/javascript">
-  </script>
-  <script type="text/javascript">
-    $(function() {
-    $("#programming-list").loadRepositories("nonphoto");
-    });
-  </script>
-</html>
+<h1>Jonas Luebbers</h1>
+<p>
+  I'm a programmer, designer, and artist, fascinated by the beauty in details, computer interfaces, simulations, architecture, nature, loud music, and the unknown.
+</p>
+<hr>
+<div class="grid">
+  <div class="col-4">
+    <h3>Projects</h3>
+  </div>
+  <div class="col-6">
+    <ul id="project-list">
+      {% for page in site.pages %}
+      {% if page.title != 'Home' %}
+      <li>
+        <a href="{{ page.url }}">
+          <h3>{{ page.title }}</h3>
+        </a>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+<hr>
+<div class="grid">
+  <div class="col-4">
+    <h3>Elsewhere</h3>
+  </div>
+  <div class="col-6">
+    <ul id="network-list">
+      <li><a href="jonaskluebbers@gmail.com">gmail</a></li>
+      <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba">linkedin</a></li>
+      <li><a href="github.com/nonphoto">github</a></li>
+      <li><a href="https://open.spotify.com/user/wurfle">spotify</a></li>
+    </ul>
+  </div>
+</div>
