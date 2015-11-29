@@ -3,40 +3,38 @@ layout: default
 title: Home
 ---
 
-<h1>Jonas Luebbers</h1>
-<p>
-  I'm a programmer, designer, and artist, fascinated by the beauty in details, computer interfaces, simulations, architecture, nature, loud music, and the unknown.
-</p>
-<hr>
-<div class="grid">
-  <div class="col-4">
-    <h3>Projects</h3>
+<article>
+  <h1>Jonas Luebbers</h1>
+  <p>
+    I'm a programmer, designer, and artist, fascinated by the beauty in details, computer interfaces, simulations, architecture, nature, loud music, and the unknown.
+  </p>
+  <hr>
+  <div class="grid">
+    <div class="col-4">
+      <h3>Projects</h3>
+    </div>
+    <div class="col-6">
+      <ul id="project-list">
+        {% for page in site.pages %}
+        {% if page.title != 'Home' %}
+        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
   </div>
-  <div class="col-6">
-    <ul id="project-list">
-      {% for page in site.pages %}
-      {% if page.title != 'Home' %}
-      <li>
-        <a href="{{ page.url }}">
-          <h3>{{ page.title }}</h3>
-        </a>
-      </li>
-      {% endif %}
-      {% endfor %}
-    </ul>
+  <hr>
+  <div class="grid">
+    <div class="col-4">
+      <h3>Elsewhere</h3>
+    </div>
+    <div class="col-6">
+      <ul id="network-list">
+        <li><a href="jonaskluebbers@gmail.com">gmail</a></li>
+        <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba">linkedin</a></li>
+        <li><a href="github.com/nonphoto">github</a></li>
+        <li><a href="https://open.spotify.com/user/wurfle">spotify</a></li>
+      </ul>
+    </div>
   </div>
-</div>
-<hr>
-<div class="grid">
-  <div class="col-4">
-    <h3>Elsewhere</h3>
-  </div>
-  <div class="col-6">
-    <ul id="network-list">
-      <li><a href="jonaskluebbers@gmail.com">gmail</a></li>
-      <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba">linkedin</a></li>
-      <li><a href="github.com/nonphoto">github</a></li>
-      <li><a href="https://open.spotify.com/user/wurfle">spotify</a></li>
-    </ul>
-  </div>
-</div>
+</article>
