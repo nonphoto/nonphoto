@@ -18,46 +18,56 @@ ECECF0
 }
 
 html {
-    background: #dcdce2;
-    background: #ececf0;
+    font-size: 18px;
+    background: #fff;
 }
 
 body {
     color: black;
-    font-family: "nimbus-sans", sans-serif;
+    font-family: "nimbus-sans";
     line-height: 1.4;
 }
 
-.headspace {
-    width: auto;
-    height: 10vh;
-}
-
 article {
-    background: #fff;
-    padding: 4rem;
-    margin: 0rem auto;
+    position: relative;
+    margin: 0 3rem;
     /* max-width: 35rem; */
 }
 
+.topbar{
+    height: 0;
+}
+
+.bottombar{
+    height: 4rem;
+}
+
+.television {
+    background: #000;
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+}
 
 h1 {
     font-size: 1.5rem;
     font-weight: 500;
 }
 
-h3 {
-    font-size: 1rem;
+h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 4rem;
 }
 
 p {
     margin: 1rem 0;
     max-width: 35rem;
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    
+    /* -webkit-hyphens: auto; */
+    /* -moz-hyphens: auto; */
+    /* -ms-hyphens: auto; */
+    /* hyphens: auto;     */
 }
 
 a {
@@ -66,15 +76,15 @@ a {
     text-decoration: none;
 }
 
-hr {
-    height: 1px;
-    background-color: #ccc;
-    border-style: none;
-    margin: 3em 0 1em 0;
+a:hover {
+    color: #aaa;
 }
 
-ol {
-    list-style-type: decimal-leading-zero;
+hr {
+    height: 1px;
+    background-color: #000;
+    border-style: none;
+    margin: 0.5rem 0;
 }
 
 ul {
@@ -84,7 +94,7 @@ ul {
 img {
     max-width: 100%;
     max-height: 80vh;
-    margin: auto;
+    margin: 2rem 0;
 }
 
 .thumbnail {
@@ -132,8 +142,36 @@ img {
 }
 
 @media (min-width: 35em) {
+    .topbar {
+        height: 10rem;
+    }
+
+    .television {
+        width: 80%;
+        height: 60vh;
+        margin: 0 10%;
+    }
+
+    article {
+        width: 80%;
+        margin: 0 10%
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
 }
 
-@media (min-width: 50em) {
+@media (min-width: 55em) {
 
+    .television {
+        width: 60%;
+        height: 60vh;
+        margin: 0 20%;
+    }
+
+    article {
+        width: 60%;
+        margin: 0 20%
+    }
 }

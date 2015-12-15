@@ -3,38 +3,25 @@ layout: default
 title: Home
 ---
 
+<div class="television">
+</div>
+
 <article>
-  <h1>Jonas Luebbers</h1>
-  <p>
-    I'm a programmer, designer, and artist, fascinated by the beauty in details, computer interfaces, simulations, architecture, nature, loud music, and the unknown.
-  </p>
+  <h2>Projects</h2> 
   <hr>
-  <div class="grid">
-    <div class="col-4">
-      <h3>Projects</h3>
-    </div>
-    <div class="col-6">
-      <ul id="project-list">
-        {% for page in site.pages %}
-        {% if page.title != 'Home' %}
-        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
+  <ul class="project-list">
+    {% for page in site.pages %}
+    {% if page.title != 'Home' %}
+    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  <h2>Elsewhere</h2>
   <hr>
-  <div class="grid">
-    <div class="col-4">
-      <h3>Elsewhere</h3>
-    </div>
-    <div class="col-6">
-      <ul id="network-list">
-        <li><a href="jonaskluebbers@gmail.com">Gmail</a></li>
-        <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba">LinkedIn</a></li>
-        <li><a href="github.com/nonphoto">Github</a></li>
-        <li><a href="https://open.spotify.com/user/wurfle">Spotify</a></li>
-      </ul>
-    </div>
-  </div>
+  <ul>
+    <li><a href="jonaskluebbers@gmail.com">Gmail</a></li>
+    <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba">LinkedIn</a></li>
+    <li><a href="github.com/nonphoto">Github</a></li>
+    <li><a href="https://open.spotify.com/user/wurfle">Spotify</a></li>
+  </ul>
 </article>
