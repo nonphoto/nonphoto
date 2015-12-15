@@ -13,26 +13,19 @@ ECECF0
 *,
 *:before,
 *:after {
-    box-sizing: inherit;
     margin: 0;
     padding: 0;
 }
 
 html {
-    box-sizing: border-box;
     background: #dcdce2;
     background: #ececf0;
 }
 
 body {
     color: black;
-    font-family: sans-serif;
-    letter-spacing: 0.08ch;
+    font-family: "nimbus-sans", sans-serif;
     line-height: 1.4;
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
 }
 
 .headspace {
@@ -44,7 +37,7 @@ article {
     background: #fff;
     padding: 4rem;
     margin: 0rem auto;
-    max-width: 35rem;
+    /* max-width: 35rem; */
 }
 
 
@@ -58,12 +51,19 @@ h3 {
 }
 
 p {
-    margin: 1em 0;
+    margin: 1rem 0;
+    max-width: 35rem;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    
 }
 
 a {
     color: inherit;
     font-style: normal;
+    text-decoration: none;
 }
 
 hr {
@@ -82,7 +82,13 @@ ul {
 }
 
 img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 80vh;
+    margin: auto;
+}
+
+.thumbnail {
+    max-width: 10rem;
 }
 
 [class*='col-'] {
