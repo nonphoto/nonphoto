@@ -1,4 +1,4 @@
-/*
+/*A
 Blue: 2640FF
 Green: 00EAFF
 Yellow: FFFD94
@@ -34,8 +34,27 @@ article {
     /* max-width: 35rem; */
 }
 
-.topbar{
-    height: 0;
+.home-button {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    width: 6rem;
+    margin: 4rem auto;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #000;
+}
+
+.return-button {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    width: 6rem;
+    margin: 4rem auto;
 }
 
 .bottombar{
@@ -50,11 +69,6 @@ article {
 }
 
 h1 {
-    font-size: 1.5rem;
-    font-weight: 500;
-}
-
-h2 {
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -77,11 +91,11 @@ a {
 }
 
 a:hover {
-    color: #aaa;
+    background: #c2fac4;
 }
 
 hr {
-    height: 1px;
+    height: 2px;
     background-color: #000;
     border-style: none;
     margin: 0.5rem 0;
@@ -142,10 +156,6 @@ img {
 }
 
 @media (min-width: 35em) {
-    .topbar {
-        height: 10rem;
-    }
-
     .television {
         width: 80%;
         height: 60vh;
@@ -155,10 +165,6 @@ img {
     article {
         width: 80%;
         margin: 0 10%
-    }
-
-    h3 {
-        font-size: 1.2rem;
     }
 }
 
