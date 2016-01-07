@@ -35,10 +35,13 @@ article {
     /* max-width: 35rem; */
 }
 
+.home {
+    margin: 4rem auto;
+    width: 20rem;
+}
+
 .home-button {
     display: block;
-    font-size: 1.2rem;
-    font-weight: 600;
     text-transform: uppercase;
     text-align: center;
     width: 6rem;
@@ -56,11 +59,6 @@ article {
     text-align: center;
     width: 6rem;
     margin: 4rem auto;
-}
-
-.about {
-    margin: 4rem auto;
-    width: 20rem;
 }
 
 .copyright{
@@ -97,85 +95,99 @@ p a {
 }
 
 a:hover {
-	background: #c2fac4;
-    }
+    background: #c2fac4;
+}
 
-    hr {
-	height: 2px;
-	background-color: #000;
-	border-style: none;
-	margin: 0.5rem 0;
-    }
+hr {
+    height: 2px;
+    background-color: #000;
+    border-style: none;
+    margin: 0.5rem 0;
+}
 
-    ol {
-	padding-left: 2rem;
-	margin: 1rem 0;
-    }
+ol {
+    padding-left: 2rem;
+    margin: 1rem 0;
+}
 
-    ul {
-	list-style-type: none;
-    }
+ul {
+    list-style-type: none;
+}
 
-    img {
-	max-width: 100%;
-	max-height: 80vh;
-	margin: 2rem 0;
-    }
+.project-list {
+    margin-bottom: 3rem;
+}
 
-    .thumbnail {
-	max-width: 10rem;
-    }
+.network-list {
+    margin-top: 3rem;
+}
 
-    [class*='col-'] {
-	float: left;
-    }
+img {
+    max-width: 100%;
+    max-height: 80vh;
+    margin: 2rem 0;
+}
 
-    .col-1 {
-	width: 10%;
-    }
-    .col-2 {
-	width: 20%;
-    }
-    .col-3 {
-	width: 30%;
-    }
-    .col-4 {
-	width: 40%;
-    }
-    .col-5 {
-	width: 50%;
-    }
-    .col-6 {
-	width: 60%;
-    }
-    .col-7 {
-	width: 70%;
-    }
-    .col-8 {
-	width: 80%;
-    }
-    .col-9 {
-	width: 90%;
-    }
-    .col-0 {
-	width: 100%;
-    }
-    .grid:after {
-	content: "";
-	display: table;
-	clear: both;
-    }
+.thumbnail {
+    max-width: 10rem;
+}
 
-    @media (min-width: 35em) {
-	article {
-            width: 80%;
-            margin: 0 10%
-	}
-    }
+.project-title {
+    background: inherit;
+    width: 15rem;
+    margin: 0.5rem auto;
+}
 
-    @media (min-width: 50em) {
-	article {
-            width: 60%;
-            margin: 0 20%
-	}
+[class*='col-'] {
+    float: left;
+}
+
+.col-1 {
+    width: 10%;
+}
+.col-2 {
+    width: 20%;
+}
+.col-3 {
+    width: 30%;
+}
+.col-4 {
+    width: 40%;
+}
+.col-5 {
+    width: 50%;
+}
+.col-6 {
+    width: 60%;
+}
+.col-7 {
+    width: 70%;
+}
+.col-8 {
+    width: 80%;
+}
+.col-9 {
+    width: 90%;
+}
+.col-0 {
+    width: 100%;
+}
+.grid:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media (min-width: 35em) {
+    article {
+        width: 80%;
+        margin: 0 10%
     }
+}
+
+@media (min-width: 50em) {
+    article {
+        width: 60%;
+        margin: 0 20%
+    }
+}
