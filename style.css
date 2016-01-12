@@ -33,11 +33,11 @@ body {
 @keyframes fadein {
     from {
         opacity: 0;
-	transform: translateX(1rem);
+	transform: translateY(1rem);
     }
     to {
         opacity: 1;
-	transform: translateX(0);
+	transform: translateY(0);
     }
 }
 
