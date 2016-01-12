@@ -27,6 +27,18 @@ body {
     color: black;
     font-family: "nimbus-sans";
     line-height: 1.4;
+    animation: fadein 0.5s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+	transform: translateX(1rem);
+    }
+    to {
+        opacity: 1;
+	transform: translateX(0);
+    }
 }
 
 article {
@@ -194,7 +206,7 @@ img {
     }
 
     .home-button {
-	position: fixed;
-	margin: 0 3rem;	
+        position: fixed;
+        margin: 0 3rem;
     }
 }
