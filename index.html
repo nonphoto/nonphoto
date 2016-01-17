@@ -3,21 +3,19 @@ layout: default
 title: Home
 ---
 
-<div class="home">
-  <h1>Projects</h1>
+<div class="about">
   <ul class="project-list">
     {% for page in site.pages %}
     {% if page.title != 'Home' %}
-    <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+    <li class="project-button"><a href="{{ page.url }}">{{ page.title }}</a></li>
     {% endif %}
     {% endfor %}
   </ul>
-  <h1>Elswhere</h1>
-  <ul class="network-list">
-    <li><a href="mailto:jonaskluebbers@gmail.com">Gmail</a></li>
-    <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba">LinkedIn</a></li>
-    <li><a href="https://github.com/nonphoto">Github</a></li>
-  </ul>
+  <!-- <ul class="network-list"> -->
+  <!--   <li><a href="mailto:jonaskluebbers@gmail.com">Gmail</a></li> -->
+  <!--   <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba">LinkedIn</a></li> -->
+  <!--   <li><a href="https://github.com/nonphoto">Github</a></li> -->
+  <!-- </ul> -->
   <p>
     I am a programmer, artist, and designer, fascinated by the beauty in details, computer interfaces, simulations, architecture, nature, loud music, and the unkown.
   </p>
