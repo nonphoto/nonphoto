@@ -32,6 +32,7 @@ body {
     font-family: "nimbus-sans";
     line-height: 1.4;
     animation: fadein 0.5s;
+    margin: 3rem 0;
 }
 
 @keyframes fadein {
@@ -47,7 +48,6 @@ body {
 
 article {
     position: relative;
-    margin: 0 3rem;
     /* max-width: 35rem; */
 }
 
