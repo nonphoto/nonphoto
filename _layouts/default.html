@@ -10,13 +10,21 @@
     <link rel="stylesheet" href="/style.css"/>
   </head>
   <body>
-    {% for page in site.pages %}
-    {% if page.title == 'Home' %}
-    <a href="{{ page.url }}" class="home-button"><span class="red">Jonas Kent Luebbers</span><span class="cyan">Jonas Kent Luebbers</span></a>
-    {% endif %}
-    {% endfor %}
-    {{ content }}
-    <a href="#" onclick="window.scrollTo(0, 0)" class="return-button">&uarr;</a>
-    <p class="copyright"> &copy; 2015 <br> Jonas Luebbers </p>
+    <div class="page-sidebar">
+      <div class="site-title">
+        Jonas <br> Kent <br> Luebbers
+      </div>
+      <ul class="project-list">
+        {% for page in site.pages %}
+        {% if page.title != 'Home' %}
+        <li class="project-button"><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      <!-- <div class="copyright"> &copy; 2015 <br> Jonas Luebbers </div> -->
+    </div>
+    <div class="page-content">
+      {{ content }}
+    </div>
   </body>
 </html>

@@ -3,14 +3,6 @@ layout: default
 title: Home
 ---
 
-<div class="about">
-  <ul class="project-list">
-    {% for page in site.pages %}
-    {% if page.title != 'Home' %}
-    <li class="project-button"><a href="{{ page.url }}">{{ page.title }}</a></li>
-    {% endif %}
-    {% endfor %}
-  </ul>
   <!-- <ul class="network-list"> -->
   <!--   <li><a href="mailto:jonaskluebbers@gmail.com">Gmail</a></li> -->
   <!--   <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba">LinkedIn</a></li> -->
@@ -22,4 +14,3 @@ title: Home
   <p>
     This website represents a portfolio of my recent art and design projects. The text is set in Nimbus Sans. The source code (which is still very much a work in progress) is available on my <a href="github.com/nonphoto">Github</a> page.
   </p>
-</div>
