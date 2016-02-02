@@ -45,37 +45,63 @@ body {
     font-smoothing: subpixel-antialiased;
 }
 
+nav {
+    position: fixed;
+    width: 100%;
+    height: 5rem;
+    top: 0;
+    left: 0;
+    background: white;
+}
+
 .title {
+    position: absolute;
+    top: 0;
+    left: 0;
     font-size: 1rem;
     line-height: 1.1;
     letter-spacing: 0.2ch;
     text-transform: uppercase;
-    padding: 0 3rem;
-    margin: 3rem 0;
+    margin: 1rem 3rem;
+}
+
+.menu-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3rem;
+    height: 3rem;
+    margin: 1rem 3rem;
 }
 
 .project-list {
+    visibility: hidden;
     padding: 0 3rem;
     margin: 3rem 0;
 }
 
 .content {
-    animation: fadein 0.5s;
-    padding: 0 3rem;
-    margin: 3rem 0;
+    // animation: fadein 0.5s;
+    margin: 3rem;
 }
 
 @media (min-width: 50rem) {
-    .title {
+    nav {
         position: fixed;
         top: 0;
         left: 0;
+	width: 18rem;
+	height: 100vh;
+    }
+
+    .title, .menu-button {
+	margin: 3rem;
     }
 
     .project-list {
-	position: fixed;
-	bottom: 0;
-	left: 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
     }
 
     .content {

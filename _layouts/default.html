@@ -10,16 +10,22 @@
     <link rel="stylesheet" href="/style.css"/>
   </head>
   <body>
-    <div class="title">
-      Jonas <br> Kent <br> Luebbers
-    </div>
-    <ul class="project-list">
-      {% for page in site.pages %}
-      {% if page.title != 'Home' %}
-      <li class="project-button"><a href="{{ page.url }}">{{ page.title }}</a></li>
-      {% endif %}
-      {% endfor %}
-    </ul>
+    <nav>
+      <div class="title">
+        Jonas <br> Kent <br> Luebbers
+      </div>
+      <svg class="menu-button">
+        <line x1="0%" y1="50%" x2="100%" y2="50%"/>
+        <line x1="50%" y1="0%" x2="50%" y2="100%"/>
+      </svg>
+      <ul class="project-list">
+        {% for page in site.pages %}
+        {% if page.title != 'Home' %}
+        <li class="project-button"><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </nav>
     <!-- <div class="copyright"> &copy; 2015 <br> Jonas Luebbers </div> -->
     <div class="content">
       {{ content }}
