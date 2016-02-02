@@ -45,40 +45,42 @@ body {
     font-smoothing: subpixel-antialiased;
 }
 
-.page-sidebar {
+.title {
+    font-size: 1rem;
+    line-height: 1.1;
+    letter-spacing: 0.2ch;
+    text-transform: uppercase;
     padding: 0 3rem;
     margin: 3rem 0;
 }
 
-.page-content {
+.project-list {
+    padding: 0 3rem;
+    margin: 3rem 0;
+}
+
+.content {
     animation: fadein 0.5s;
     padding: 0 3rem;
     margin: 3rem 0;
 }
 
 @media (min-width: 50rem) {
-    .page-sidebar {
+    .title {
         position: fixed;
-	float: left;
-	top: 0;
+        top: 0;
         left: 0;
-	width: 20rem;
     }
 
-    .page-content {
-	margin-left: 20rem;
+    .project-list {
+	position: fixed;
+	bottom: 0;
+	left: 0;
     }
-}
 
-.site-title {
-    font-size: 1rem;
-    line-height: 1.1;
-    letter-spacing: 0.2ch;
-    text-transform: uppercase;
-}
-
-.project-list {
-    margin-top: 3rem;
+    .content {
+        margin-left: 18rem;
+    }
 }
 
 .scroll-button {
