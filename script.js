@@ -1,4 +1,5 @@
 var frameRequest,
+    button,
     list,
     svg,
     svgBounds,
@@ -85,12 +86,14 @@ function stopPlanets() {
 
 function toggleMenu() {
     if (menuIsOpen) {
+	button.classList.remove("activated");
 	list.style.visibility = "hidden";
 	svg.style.visibility = "hidden";
 	stopPlanets();
 	menuIsOpen = false;
     }
     else {
+	button.classList.add("activated");
 	list.style.visibility = "visible";
 	svg.style.visibility = "visible";
 	startPlanets();
@@ -99,7 +102,7 @@ function toggleMenu() {
 }
 
 window.onload = function() {
-    menu = document.getElementById("menu");
+    button = document.getElementById("menu-button");
     list = document.getElementById("project-list");
     svg = document.getElementById("planet-svg"),
     svgBounds = svg.getBoundingClientRect();

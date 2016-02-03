@@ -76,8 +76,16 @@ body {
     transition: transform 0.2s
 }
 
+#menu-button.activated {
+    transform: rotate(135deg);
+}
+
 #menu-button:hover {
     transform: rotate(10deg);
+}
+
+#menu-button.activated:hover {
+    transform: rotate(145deg);
 }
 
 #project-list {
