@@ -8,17 +8,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <title> {% if page.title != 'Home' %} {{ page.title }} - {% endif %} Jonas Luebbers</title>
     <link rel="stylesheet" href="/style.css"/>
+    <script src="/script.js"></script>
   </head>
   <body>
-    <nav>
-      <div class="title">
+    <nav id="menu">
+      <div id="title">
         Jonas <br> Kent <br> Luebbers
       </div>
-      <svg class="menu-button">
+      <svg id="menu-button" onclick="toggleMenu()">
         <line x1="0%" y1="50%" x2="100%" y2="50%"/>
         <line x1="50%" y1="0%" x2="50%" y2="100%"/>
       </svg>
-      <ul class="project-list">
+      <ul id="project-list">
         {% for page in site.pages %}
         {% if page.title != 'Home' %}
         <li class="project-button"><a href="{{ page.url }}">{{ page.title }}</a></li>
@@ -26,8 +27,12 @@
         {% endfor %}
       </ul>
     </nav>
+
+    <div id="planet-div">
+      <svg id="planet-svg"></svg>
+    </div>
     <!-- <div class="copyright"> &copy; 2015 <br> Jonas Luebbers </div> -->
-    <div class="content">
+    <div id="content">
       {{ content }}
     </div>
   </body>
