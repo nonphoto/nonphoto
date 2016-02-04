@@ -86,17 +86,13 @@ function stopPlanets() {
 
 function toggleMenu() {
     if (menuIsOpen) {
-	button.classList.remove("activated");
-	list.style.visibility = "hidden";
-	svg.style.visibility = "hidden";
 	stopPlanets();
+	menu.classList.remove("open");
 	menuIsOpen = false;
     }
     else {
-	button.classList.add("activated");
-	list.style.visibility = "visible";
-	svg.style.visibility = "visible";
 	startPlanets();
+	menu.classList.add("open");
 	menuIsOpen = true;
     }
 }

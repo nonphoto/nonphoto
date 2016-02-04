@@ -15,7 +15,7 @@
       <div id="title">
         Jonas <br> Kent <br> Luebbers
       </div>
-      <svg id="menu-button" onclick="toggleMenu()">
+      <svg id="toggle-button" onclick="toggleMenu()">
         <line x1="0%" y1="50%" x2="100%" y2="50%"/>
         <line x1="50%" y1="0%" x2="50%" y2="100%"/>
       </svg>
@@ -26,11 +26,10 @@
         {% endif %}
         {% endfor %}
       </ul>
+      <div id="planet-container">
+        <svg id="planet-svg"></svg>
+      </div>
     </nav>
-
-    <div id="planet-div">
-      <svg id="planet-svg"></svg>
-    </div>
     <!-- <div class="copyright"> &copy; 2015 <br> Jonas Luebbers </div> -->
     <div id="content">
       {{ content }}
