@@ -1,4 +1,5 @@
 var frameRequest,
+    menu,
     svg,
     svgBounds,
     menuIsOpen = false,
@@ -11,21 +12,36 @@ var focalLength = 10,
     planets = [];
 
 class Planet {
-    constructor(radius) {
+    constructor(radius, link) {
         this.x = 0;
         this.y = 0;
         this.z = 0;
         this.r = radius;
 
         // Create a new svg element
-        this.element = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        this.element.onmouseover = function() {
+        var element = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+
+
+        function hoverOver() {
+            link.classList.add("hover");
+            element.classList.add("hover");
             hovering = true;
         }
-        this.element.onmouseout = function() {
+
+	function hoverOut() {
+            link.classList.remove("hover");
+            element.classList.remove("hover");
             hovering = false;
         }
-        svg.appendChild(this.element);
+	
+        link.onmouseover = hoverOver;
+        element.onmouseover = hoverOver;
+
+        link.onmouseout = hoverOut;
+        element.onmouseout = hoverOut;
+
+        svg.appendChild(element);
+	this.element = element;
     }
 
     // Convert 3D coordinates to 2D coordinates and scale, updates svg element
@@ -94,25 +110,26 @@ function toggleMenu() {
 }
 
 window.onload = function() {
+    menu = document.getElementById("menu");
     svg = document.getElementById("planet-svg"),
     svgBounds = svg.getBoundingClientRect();
 
     // Sun / about page
-    planets.push(new Planet(planetRadius * 3));
+    // planets.push(new Planet(planetRadius * 3));
 
     var projects = document.getElementById("project-list").children;
     for (var i = 0; i < projects.length; i++) {
-	var planet = new Planet(planetRadius * 2);
+        var planet = new Planet(planetRadius * 2, projects[i]);
 
-	// Assign random position within boundaries
-	planet.x = Math.random() - 0.5;
-	planet.y = Math.random() - 0.5;
-	planet.z = Math.random() - 0.5;
-	planets.push(planet);
+        // Assign random position within boundaries
+        planet.x = Math.random() - 0.5;
+        planet.y = Math.random() - 0.5;
+        planet.z = Math.random() - 0.5;
+        planets.push(planet);
     }
 
     // Update size of parent svg when window resizes
     document.body.onresize = function() {
-	svgBounds = svg.getBoundingClientRect();
+        svgBounds = svg.getBoundingClientRect();
     }
 };
