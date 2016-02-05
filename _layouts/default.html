@@ -6,7 +6,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <title> {% if page.title != 'Home' %} {{ page.title }} - {% endif %} Jonas Luebbers</title>
+    <title> {% if page.title != 'About' %} {{ page.title }} - {% endif %} Jonas Luebbers</title>
     <link rel="stylesheet" href="/style.css"/>
     <script src="/script.js"></script>
   </head>
@@ -20,8 +20,13 @@
         <line x1="50%" y1="0%" x2="50%" y2="100%"/>
       </svg>
       <ul id="project-list">
+        <li>
+          <a href="/" id="about-link">
+            About
+          </a>
+        </li>
         {% for page in site.pages %}
-        {% if page.title != 'Home' %}
+        {% if page.title != 'About' %}
         <li>
           <a href="{{ page.url }}" class="project-link">
             {{ page.title }}

@@ -121,14 +121,17 @@ window.onload = function() {
     // Sun / about page
     // planets.push(new Planet(planetRadius * 3));
 
+    var sun = new Planet(planetRadius * 4, document.getElementById("about-link"));
+    planets.push(sun);
+    
     var links = document.getElementsByClassName("project-link");
     for (var i = 0; i < links.length; i++) {
-        var planet = new Planet(planetRadius * 2, links[i]);
+	var planet = new Planet(planetRadius * 2, links[i]);
 
-        // Assign random position within boundaries
-        planet.x = width * Math.random() - (width / 2);
-        planet.y = height * Math.random() - (height / 2);
-        planet.z = width * Math.random() - (width / 2);
-        planets.push(planet);
+	// Assign random position within boundaries
+	planet.x = width * Math.random() - (width / 2);
+	planet.y = height * Math.random() - (height / 2);
+	planet.z = width * Math.random() - (width / 2);
+	planets.push(planet);
     }
 };
