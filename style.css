@@ -111,6 +111,7 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
+    pointer-events: none;
 }
 
 #planet-svg {
@@ -121,6 +122,7 @@ body {
 
 #menu.open #planet-svg {
     visibility: visible;
+    pointer-events: auto;
 }
 
 #content {
@@ -151,7 +153,7 @@ body {
     }
 
     #planet-container {
-        display: block;
+	display: block;
         top: 0;
         left: 17rem;
         right: 0rem;
@@ -188,6 +190,10 @@ body {
     background: black;
     color: white;
     fill: black;
+}
+
+.project-link {
+    display: block;
 }
 
 /*

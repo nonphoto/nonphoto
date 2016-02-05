@@ -22,17 +22,17 @@
       <ul id="project-list">
         {% for page in site.pages %}
         {% if page.title != 'Home' %}
-        <li class="project-button">
-	  <a href="{{ page.url }}">
-	    {{ page.title }}
-	  </a>
-	</li>
+        <li>
+          <a href="{{ page.url }}" class="project-link">
+            {{ page.title }}
+          </a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <div id="planet-container">
         <svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMidYMid meet">
-	</svg>
+        </svg>
       </div>
     </nav>
     <!-- <div class="copyright"> &copy; 2015 <br> Jonas Luebbers </div> -->

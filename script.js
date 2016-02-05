@@ -28,20 +28,24 @@ class Planet {
             hovering = true;
         }
 
-	function hoverOut() {
+        function hoverOut() {
             link.classList.remove("hover");
             element.classList.remove("hover");
             hovering = false;
         }
-	
+
         link.onmouseover = hoverOver;
         element.onmouseover = hoverOver;
 
         link.onmouseout = hoverOut;
         element.onmouseout = hoverOut;
 
+	element.onclick = function() {
+            window.location.href = link.href;
+        }
+
         svg.appendChild(element);
-	this.element = element;
+        this.element = element;
     }
 
     // Convert 3D coordinates to 2D coordinates and scale, updates svg element
@@ -117,14 +121,14 @@ window.onload = function() {
     // Sun / about page
     // planets.push(new Planet(planetRadius * 3));
 
-    var projects = document.getElementById("project-list").children;
-    for (var i = 0; i < projects.length; i++) {
-	var planet = new Planet(planetRadius * 2, projects[i]);
+    var links = document.getElementsByClassName("project-link");
+    for (var i = 0; i < links.length; i++) {
+        var planet = new Planet(planetRadius * 2, links[i]);
 
-	// Assign random position within boundaries
-	planet.x = width * Math.random() - (width / 2);
-	planet.y = height * Math.random() - (height / 2);
-	planet.z = width * Math.random() - (width / 2);
-	planets.push(planet);
+        // Assign random position within boundaries
+        planet.x = width * Math.random() - (width / 2);
+        planet.y = height * Math.random() - (height / 2);
+        planet.z = width * Math.random() - (width / 2);
+        planets.push(planet);
     }
 };
