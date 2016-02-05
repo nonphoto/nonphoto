@@ -1,15 +1,16 @@
 var frameRequest,
     menu,
     svg,
-    svgBounds,
+    width,
+    height;
+
+var focalLength = 60,
+    cameraDistance = 60,
+    rotationSpeed = 0.001,
+    planetRadius = 3,
+    planets = [],
     menuIsOpen = false,
     hovering = false;
-
-var focalLength = 10,
-    cameraDistance = 2,
-    rotationSpeed = 0.001,
-    planetRadius = 0.03,
-    planets = [];
 
 class Planet {
     constructor(radius, link) {
@@ -20,7 +21,6 @@ class Planet {
 
         // Create a new svg element
         var element = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-
 
         function hoverOver() {
             link.classList.add("hover");
@@ -46,11 +46,10 @@ class Planet {
 
     // Convert 3D coordinates to 2D coordinates and scale, updates svg element
     project() {
-        var scale = Math.min(svgBounds.width, svgBounds.height),
-            perspective = focalLength / (focalLength + this.z + cameraDistance);
-        this.element.setAttribute("cx", this.x * perspective * scale + (svgBounds.width / 2));
-        this.element.setAttribute("cy", this.y * perspective * scale + (svgBounds.height / 2));
-        this.element.setAttribute("r", this.r * perspective * scale);
+        var perspective = focalLength / (focalLength + this.z + cameraDistance);
+        this.element.setAttribute("cx", this.x * perspective + (width / 2));
+        this.element.setAttribute("cy", this.y * perspective + (height / 2));
+        this.element.setAttribute("r", this.r * perspective);
     }
 }
 
@@ -111,25 +110,21 @@ function toggleMenu() {
 
 window.onload = function() {
     menu = document.getElementById("menu");
-    svg = document.getElementById("planet-svg"),
-    svgBounds = svg.getBoundingClientRect();
+    svg = document.getElementById("planet-svg");
+    width = svg.viewBox.baseVal.width;
+    height = svg.viewBox.baseVal.height;
 
     // Sun / about page
     // planets.push(new Planet(planetRadius * 3));
 
     var projects = document.getElementById("project-list").children;
     for (var i = 0; i < projects.length; i++) {
-        var planet = new Planet(planetRadius * 2, projects[i]);
+	var planet = new Planet(planetRadius * 2, projects[i]);
 
-        // Assign random position within boundaries
-        planet.x = Math.random() - 0.5;
-        planet.y = Math.random() - 0.5;
-        planet.z = Math.random() - 0.5;
-        planets.push(planet);
-    }
-
-    // Update size of parent svg when window resizes
-    document.body.onresize = function() {
-        svgBounds = svg.getBoundingClientRect();
+	// Assign random position within boundaries
+	planet.x = width * Math.random() - (width / 2);
+	planet.y = height * Math.random() - (height / 2);
+	planet.z = width * Math.random() - (width / 2);
+	planets.push(planet);
     }
 };
