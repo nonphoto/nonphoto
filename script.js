@@ -1,11 +1,10 @@
 var frameRequest,
-    menu,
     svg,
     width,
     height;
 
 var focalLength = 60,
-    cameraDistance = 60,
+    cameraDistance = 50,
     rotationSpeed = 0.001,
     planetRadius = 3,
     planets = [],
@@ -102,18 +101,17 @@ function stopPlanets() {
 function toggleMenu() {
     if (menuIsOpen) {
         stopPlanets();
-        menu.classList.remove("open");
+        document.body.classList.remove("menu-open");
         menuIsOpen = false;
     }
     else {
         startPlanets();
-        menu.classList.add("open");
+        document.body.classList.add("menu-open");
         menuIsOpen = true;
     }
 }
 
 window.onload = function() {
-    menu = document.getElementById("menu");
     svg = document.getElementById("planet-svg");
     width = svg.viewBox.baseVal.width;
     height = svg.viewBox.baseVal.height;

@@ -11,38 +11,33 @@
     <script src="/script.js"></script>
   </head>
   <body>
-    <nav id="menu">
-      <div id="title">
-        Jonas <br> Kent <br> Luebbers
-      </div>
-      <svg id="toggle-button" onclick="toggleMenu()">
-        <line x1="0%" y1="50%" x2="100%" y2="50%"/>
-        <line x1="50%" y1="0%" x2="50%" y2="100%"/>
-      </svg>
-      <ul id="project-list">
-        <li>
-          <a href="/" id="about-link">
-            About
-          </a>
-        </li>
-        {% for page in site.pages %}
-        {% if page.title != 'About' %}
-        <li>
-          <a href="{{ page.url }}" class="project-link">
-            {{ page.title }}
-          </a>
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-      <div id="planet-container">
-        <svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMidYMid meet">
-        </svg>
-      </div>
-    </nav>
-    <!-- <div class="copyright"> &copy; 2015 <br> Jonas Luebbers </div> -->
+    <div id="title">
+      Jonas <br> Kent <br> Luebbers
+    </div>
+    <svg id="toggle-button" onclick="toggleMenu()">
+      <line x1="0%" y1="50%" x2="100%" y2="50%"/>
+      <line x1="50%" y1="0%" x2="50%" y2="100%"/>
+    </svg>
+    <ul id="project-list">
+      <li>
+        <a href="/" id="about-link">
+          About
+        </a>
+      </li>
+      {% for page in site.pages %}
+      {% if page.title != 'About' %}
+      <li>
+        <a href="{{ page.url }}" class="project-link">
+          {{ page.title }}
+        </a>
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
     <div id="content">
       {{ content }}
     </div>
+    <!-- <div class="copyright"> &copy; 2015 <br> Jonas Luebbers </div> -->
+    <svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMinYMid meet"></svg>
   </body>
 </html>
