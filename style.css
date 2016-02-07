@@ -45,8 +45,8 @@ body {
 }
 
 #content {
-    margin: 2rem;
-    margin-left: 5rem;
+    margin: 13rem 2rem 2rem 5rem;
+    transition: opacity 0.2s;
 }
 
 .menu-open #content {
@@ -55,6 +55,9 @@ body {
 }
 
 #title {
+    position: absolute;
+    top: 0;
+    left: 0;
     font-size: 1rem;
     line-height: 1.1;
     letter-spacing: 0.2ch;
@@ -92,16 +95,18 @@ body {
 }
 
 #menu {
-    visibility: hidden;
-    background: white;
     position: fixed;
     left: 0;
     bottom: 0;
     margin: 5rem;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.2s, transform 0.2s;
 }
 
 .menu-open #menu {
-    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .menu-list {
@@ -110,13 +115,14 @@ body {
 
 #planet-svg {
     display: none;
-    visibility: hidden;
     width: 100%;
     height: 100%;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
 .menu-open #planet-svg {
-    visibility: visible;
+    opacity: 1;
     pointer-events: auto;
 }
 
@@ -125,13 +131,13 @@ body {
         margin: 5rem;
         margin-left: 30%;
     }
-
+    
     #title {
         position: fixed;
         top: 0;
         left: 0;
     }
-
+    
     #planet-svg {
         display: block;
         position: fixed;
@@ -190,7 +196,9 @@ a {
 }
 
 p a {
+    padding: 0 0.2rem;
     border-bottom: solid black 2px;
+    transition: background 0.2s, color 0.2s;
 }
 
 p a:hover {
@@ -218,6 +226,7 @@ img {
 }
 
 svg {
+    overflow: visible;
     fill: white;
     stroke: black;
     stroke-width: 2px;
