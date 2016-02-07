@@ -42,6 +42,7 @@ body {
     line-height: 1.4;
     /* prevents bug where "position: fixed" displays thinner text on Safari */
     -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
 }
 
 #content {
