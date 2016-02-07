@@ -106,7 +106,8 @@ function toggleMenu() {
     if (menuIsOpen) {
         stopPlanets();
         document.body.classList.remove("menu-open");
-        menuIsOpen = false;
+	document.getElementById("menu").scrollTop = 0;
+	menuIsOpen = false;
     }
     else {
         startPlanets();
@@ -125,22 +126,33 @@ window.onload = function() {
         var planet = new Planet(links[i]);
 
         if (links[i].classList.contains("about-link")) {
-            planet.r *= 4;
+	    planet.r *= 4;
         }
         else if (links[i].classList.contains("network-link")) {
 	    // Assign random position within boundaries
-            planet.x = width * Math.random() - (width / 2);
-            planet.y = height * Math.random() - (height / 2);
-            planet.z = width * Math.random() - (width / 2);
+	    planet.x = width * Math.random() - (width / 2);
+	    planet.y = height * Math.random() - (height / 2);
+	    planet.z = width * Math.random() - (width / 2);
         }
         else {
-            planet.r *= 2;
+	    planet.r *= 2;
 
-            // Assign random position within boundaries
-            planet.x = width * Math.random() - (width / 2);
-            planet.y = height * Math.random() - (height / 2);
-            planet.z = width * Math.random() - (width / 2);
+	    // Assign random position within boundaries
+	    planet.x = width * Math.random() - (width / 2);
+	    planet.y = height * Math.random() - (height / 2);
+	    planet.z = width * Math.random() - (width / 2);
         }
         planets.push(planet);
     }
 };
+
+function hoverFix()
+{
+    var element = this;
+    var parent = element.parentNode;
+    var next = element.nextSibling;
+    parent.removeChild(element);
+    setTimeout(function() {
+	parent.insertBefore(element, next);
+    }, 0)
+}

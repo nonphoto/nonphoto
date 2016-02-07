@@ -45,7 +45,8 @@ body {
 }
 
 #content {
-    margin: 13rem 2rem 2rem 5rem;
+    margin: 2rem;
+    margin-left: 5rem;
     transition: opacity 0.2s;
 }
 
@@ -54,21 +55,45 @@ body {
     opacity: 0.05;
 }
 
-#title {
-    position: absolute;
-    top: 0;
+#menu {
+    pointer-events: none;
+    position: fixed;
     left: 0;
-    font-size: 1rem;
-    line-height: 1.1;
-    letter-spacing: 0.2ch;
-    text-transform: uppercase;
-    margin: 5rem;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 5rem;
+    overflow: scroll
 }
 
-.menu-open #title {
-    position: fixed;
-    top: 0;
-    left: 0;
+.menu-open #menu {
+    pointer-events: auto;
+}
+
+#menu ul {
+    opacity: 0;
+    margin-top: 1rem;
+    transform: translateY(1rem);
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.menu-open #menu ul {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#menu .title {
+    opacity: 0;
+    margin-bottom: 5rem;
+    transition: opacity 0.2s;
+}
+
+.menu-open #menu .title {
+    opacity: 1;
+}
+
+#content .title {
+    margin: 5rem 0;
 }
 
 #toggle-button {
@@ -94,27 +119,6 @@ body {
     transform: rotate(145deg);
 }
 
-#menu {
-    pointer-events: none;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    margin: 5rem;
-    opacity: 0;
-    transform: translateY(1rem);
-    transition: opacity 0.2s, transform 0.2s;
-}
-
-.menu-open #menu {
-    pointer-events: auto;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.menu-list {
-    margin-top: 1rem;
-}
-
 #planet-svg {
     display: none;
     pointer-events: none;
@@ -130,18 +134,31 @@ body {
     pointer-events: auto;
 }
 
+#scroll-button {
+    display: block;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 3rem;
+    width: 3rem;
+    height: 3rem;
+    margin: 5rem auto;
+}
+
 @media (min-width: 45rem) {
     #content {
         margin: 5rem;
         margin-left: 30%;
     }
-    
-    #title {
-        position: fixed;
-        top: 0;
-        left: 0;
+
+    #content .title {
+        display: none;
     }
-    
+
+    #menu .title {
+        opacity: 1;
+    }
+
     #planet-svg {
         display: block;
         position: fixed;
@@ -151,20 +168,16 @@ body {
     }
 }
 
-.scroll-button {
-    display: block;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 3rem;
-    width: 3rem;
-    height: 3rem;
-    margin: auto;
-}
-
 .copyright {
     color: #ccc;
     font-size: 0.8rem;
+}
+
+.title {
+    font-size: 1rem;
+    line-height: 1.1;
+    letter-spacing: 0.2ch;
+    text-transform: uppercase;
 }
 
 .hover {
@@ -238,43 +251,4 @@ svg {
 
 circle, line {
     vector-effect: non-scaling-stroke;
-}
-
-[class*='col-'] {
-    float: left;
-}
-.col-1 {
-    width: 10%;
-}
-.col-2 {
-    width: 20%;
-}
-.col-3 {
-    width: 30%;
-}
-.col-4 {
-    width: 40%;
-}
-.col-5 {
-    width: 50%;
-}
-.col-6 {
-    width: 60%;
-}
-.col-7 {
-    width: 70%;
-}
-.col-8 {
-    width: 80%;
-}
-.col-9 {
-    width: 90%;
-}
-.col-0 {
-    width: 100%;
-}
-.grid:after {
-    content: "";
-    display: table;
-    clear: both;
 }
