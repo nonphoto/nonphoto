@@ -63,13 +63,13 @@ body {
     top: 0;
     bottom: 0;
     padding: 5rem;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-
+    overflow-y: hidden;
 }
 
 .menu-open #menu {
     pointer-events: auto;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 #menu ul {
@@ -79,15 +79,15 @@ body {
     transition: opacity 0.2s, transform 0.2s;
 }
 
+.menu-open #menu ul {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 #menu ul li{
     overflow-x: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-}
-
-.menu-open #menu ul {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 #menu .title {
