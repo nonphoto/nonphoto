@@ -40,6 +40,8 @@ body {
     color: black;
     font-family: "nimbus-sans", sans-serif;
     line-height: 1.4;
+    /* prevents bug where "position: fixed" displays thinner text on Safari */
+    -webkit-font-smoothing: antialiased;
 }
 
 #content {
