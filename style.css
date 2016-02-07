@@ -63,7 +63,9 @@ body {
     top: 0;
     bottom: 0;
     padding: 5rem;
-    overflow: scroll
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+
 }
 
 .menu-open #menu {
@@ -75,6 +77,12 @@ body {
     margin-top: 1rem;
     transform: translateY(1rem);
     transition: opacity 0.2s, transform 0.2s;
+}
+
+#menu ul li{
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .menu-open #menu ul {
