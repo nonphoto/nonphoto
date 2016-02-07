@@ -63,7 +63,6 @@ body {
     letter-spacing: 0.2ch;
     text-transform: uppercase;
     margin: 5rem;
-    transition: position 0.2;
 }
 
 .menu-open #title {
@@ -201,7 +200,7 @@ a {
 }
 
 p a {
-    padding: 0 0.2rem;
+    padding: 0 2px;
     border-bottom: solid black 2px;
     transition: background 0.2s, color 0.2s;
 }

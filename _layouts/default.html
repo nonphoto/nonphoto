@@ -11,6 +11,25 @@
     <script src="/script.js"></script>
   </head>
   <body>
+    <svg xmlns="http://www.w3.org/2000/svg" display="none" version="1.1">
+      <filter id="glitch-filter" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix"
+                       in="SourceGraphic"
+                       values="1 0 0 0 0
+                               0 0 0 0 0
+                               0 0 0 0 0
+                               0 0 0 1 0" result="A1"/>
+        <feColorMatrix type="matrix"
+                       in="SourceGraphic"
+                       values="0 0 0 0 0
+                               0 1 0 0 0
+                               0 0 1 0 0
+                               0 0 0 1 0" result="B1"/>
+        <feOffset dx="-2" dy="0" in="A1" result="A2"/>
+        <feOffset dx="2" dy="0" in="B1" result="B2"/>
+        <feBlend in="A2" in2="B2" result="C" mode="multiply"/>
+      </filter>
+    </svg>
     <div id="title">
       Jonas <br> Kent <br> Luebbers
     </div>
