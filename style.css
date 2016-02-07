@@ -40,9 +40,6 @@ body {
     color: black;
     font-family: "nimbus-sans", sans-serif;
     line-height: 1.4;
-    -webkit-font-smoothing: subpixel-antialiased;
-    -moz-font-smoothing: subpixel-antialiased;
-    font-smoothing: subpixel-antialiased;
 }
 
 #content {
@@ -159,17 +156,15 @@ body {
     fill: black;
 }
 
-.project-link {
+.indicator::before {
     display: block;
-}
-
-#link-indicator {
-    display: block;
+    content: " ";
+    background-image: url("/indicator.svg");
     position: absolute;
     left: -3rem;
-    margin-top: 0.1rem;
-    width: 1rem;
     height: 1rem;
+    width: 1rem;
+    margin-top: 0.1rem;
 }
 
 /*
@@ -245,7 +240,7 @@ svg {
     stroke-width: 2px;
 }
 
-circle {
+circle, line {
     vector-effect: non-scaling-stroke;
 }
 

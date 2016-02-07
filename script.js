@@ -12,47 +12,51 @@ var focalLength = 60,
     hovering = false;
 
 class Planet {
-    constructor(radius, link) {
+    constructor(link) {
         this.x = 0;
         this.y = 0;
         this.z = 0;
-        this.r = radius;
+        this.r = planetRadius;
 
         // Create a new svg element
-        var element = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
         function hoverOver() {
             link.classList.add("hover");
-            element.classList.add("hover");
+            circle.classList.add("hover");
             hovering = true;
         }
 
         function hoverOut() {
             link.classList.remove("hover");
-            element.classList.remove("hover");
+            circle.classList.remove("hover");
             hovering = false;
         }
 
         link.onmouseover = hoverOver;
-        element.onmouseover = hoverOver;
+        circle.onmouseover = hoverOver;
 
         link.onmouseout = hoverOut;
-        element.onmouseout = hoverOut;
+        circle.onmouseout = hoverOut;
 
-	element.onclick = function() {
+        circle.onclick = function() {
             window.location.href = link.href;
         }
-
-        svg.appendChild(element);
-        this.element = element;
+	
+        svg.appendChild(circle);
+        this.circle = circle;
     }
 
     // Convert 3D coordinates to 2D coordinates and scale, updates svg element
     project() {
         var perspective = focalLength / (focalLength + this.z + cameraDistance);
-        this.element.setAttribute("cx", this.x * perspective + (width / 2));
-        this.element.setAttribute("cy", this.y * perspective + (height / 2));
-        this.element.setAttribute("r", this.r * perspective);
+        var x = this.x * perspective + (width / 2);
+        var y = this.y * perspective + (height / 2);
+        var r = this.r * perspective;
+
+        this.circle.setAttribute("cx", x);
+        this.circle.setAttribute("cy", y);
+        this.circle.setAttribute("r", r);
     }
 }
 
@@ -79,7 +83,7 @@ function updatePlanets() {
         // Don't update DOM if hovering because it resets hover status
         if (!hovering) {
             // Update DOM order according to order of zsorted planet list
-            svg.insertBefore(p.element, null);
+            svg.insertBefore(p.circle, null);
         }
 
         // Update element position and scale.
@@ -116,20 +120,21 @@ window.onload = function() {
     width = svg.viewBox.baseVal.width;
     height = svg.viewBox.baseVal.height;
 
-    // Sun / about page
-    // planets.push(new Planet(planetRadius * 3));
-
-    var sun = new Planet(planetRadius * 4, document.getElementById("about-link"));
-    planets.push(sun);
-    
-    var links = document.getElementsByClassName("project-link");
+    var links = document.getElementsByClassName("planet-link");
     for (var i = 0; i < links.length; i++) {
-	var planet = new Planet(planetRadius * 2, links[i]);
+        var planet = new Planet(links[i]);
 
-	// Assign random position within boundaries
-	planet.x = width * Math.random() - (width / 2);
-	planet.y = height * Math.random() - (height / 2);
-	planet.z = width * Math.random() - (width / 2);
-	planets.push(planet);
+        if (links[i].classList.contains("about-link")) {
+            planet.r *= 4;
+        }
+        else {
+            planet.r *= 2;
+
+            // Assign random position within boundaries
+            planet.x = width * Math.random() - (width / 2);
+            planet.y = height * Math.random() - (height / 2);
+            planet.z = width * Math.random() - (width / 2);
+        }
+        planets.push(planet);
     }
 };
