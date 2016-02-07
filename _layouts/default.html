@@ -14,16 +14,23 @@
     <div id="title">
       Jonas <br> Kent <br> Luebbers
     </div>
-    <object data="/plus.svg" type="image/svg+xml" id="toggle-button" onclick="toggleMenu()"></object>
-    <ul id="project-list">
-      {% for p in site.pages %}
-      <li>
-        <a href="{{ p.url }}" class="planet-link {% if p.title == 'About' %} about-link {% else %} project-link {% endif %} {% if p.title == page.title %} indicator {% endif %}">
-          {{ p.title }}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
+    <img src="/plus.svg" id="toggle-button" onclick="toggleMenu()">
+    <div id="menu">
+      <ul class="menu-list">
+        <li><a href="mailto:contact@jonasluebbers.com" class="planet-link">Contact</a></li>
+        <li><a href="https://github.com/nonphoto" class="planet-link">Github</a></li>
+        <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba" class="planet-link">LinkedIn</a></li>
+      </ul>
+      <ul class="menu-list">
+        {% for p in site.pages %}
+        <li>
+          <a href="{{ p.url }}" class="planet-link {% if p.title == 'About' %} about-link {% else %} project-link {% endif %} {% if p.title == page.title %} indicator {% endif %}">
+            {{ p.title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
     <div id="content">
       {{ content }}
     </div>

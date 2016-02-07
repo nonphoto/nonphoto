@@ -73,6 +73,7 @@ body {
     width: 5rem;
     height: 5rem;
     padding: 2rem;
+    margin: 0;
     transition: transform 0.2s
 }
 
@@ -88,7 +89,7 @@ body {
     transform: rotate(145deg);
 }
 
-#project-list {
+#menu {
     visibility: hidden;
     background: white;
     position: fixed;
@@ -97,8 +98,12 @@ body {
     margin: 5rem;
 }
 
-.menu-open #project-list {
+.menu-open #menu {
     visibility: visible;
+}
+
+.menu-list {
+    margin-top: 1rem;
 }
 
 #planet-svg {
@@ -167,30 +172,6 @@ body {
     margin-top: 0.1rem;
 }
 
-/*
-.red {
-    position: absolute;
-    mix-blend-mode: multiply;
-    color: #f00;
-    transition: transform 0.2s, background 0.2s;
-}
-
-.cyan {
-    pointer-events: none;
-    position: absolute;
-    color: #0ff;
-    mix-blend-mode: multiply;
-    transition: transform 0.2s, background 0.2s;
-}
-
-.red:hover {
-    transform: translateY(-0.2rem);
-}
-
-.cyan:hover {
-}
-*/
-
 h1 {
     font-size: 1rem;
     font-weight: normal;
@@ -207,10 +188,10 @@ a {
 }
 
 p a {
-    font-style: italic;
+    border-bottom: solid black 2px;
 }
 
-a:hover {
+p a:hover {
     color: white;
     background: black;
 }

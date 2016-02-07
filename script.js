@@ -42,7 +42,7 @@ class Planet {
         circle.onclick = function() {
             window.location.href = link.href;
         }
-	
+
         svg.appendChild(circle);
         this.circle = circle;
     }
@@ -126,6 +126,12 @@ window.onload = function() {
 
         if (links[i].classList.contains("about-link")) {
             planet.r *= 4;
+        }
+        else if (links[i].classList.contains("network-link")) {
+	    // Assign random position within boundaries
+            planet.x = width * Math.random() - (width / 2);
+            planet.y = height * Math.random() - (height / 2);
+            planet.z = width * Math.random() - (width / 2);
         }
         else {
             planet.r *= 2;
