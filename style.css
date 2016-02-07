@@ -120,14 +120,6 @@ body {
     transform: rotate(135deg);
 }
 
-#toggle-button:hover {
-    transform: rotate(10deg);
-}
-
-.menu-open #toggle-button:hover {
-    transform: rotate(145deg);
-}
-
 #planet-svg {
     display: none;
     pointer-events: none;
@@ -167,7 +159,15 @@ body {
     #menu .title {
         opacity: 1;
     }
+    
+    #toggle-button:hover {
+	transform: rotate(10deg);
+    }
 
+    .menu-open #toggle-button:hover {
+	transform: rotate(145deg);
+    }
+    
     #planet-svg {
         display: block;
         position: fixed;
