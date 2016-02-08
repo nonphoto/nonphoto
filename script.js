@@ -1,4 +1,6 @@
 var frameRequest,
+    filterLeft,
+    filterRight,
     svg,
     width,
     height;
@@ -23,13 +25,13 @@ class Planet {
 
         function hoverOver() {
             link.classList.add("hover");
-            circle.classList.add("hover");
+            circle.classList.add("glitch");
             hovering = true;
         }
 
         function hoverOut() {
             link.classList.remove("hover");
-            circle.classList.remove("hover");
+            circle.classList.remove("glitch");
             hovering = false;
         }
 
@@ -60,42 +62,46 @@ class Planet {
     }
 }
 
-function updatePlanets() {
+function update() {
+    // var offset = Math.random() * 3;
+    // filterLeft.setAttribute("dx", -offset);
+    // filterRight.setAttribute("dx", offset);
+    
     // Rotate planet positions around Y axis
     var cos = Math.cos(rotationSpeed),
-        sin = Math.sin(rotationSpeed);
+	sin = Math.sin(rotationSpeed);
     for (var i = 0; i < planets.length; i++) {
-        var p = planets[i];
-        x = p.x * cos - p.z * sin,
-        z = p.z * cos + p.x * sin;
-        p.x = x;
-        p.z = z;
+	var p = planets[i];
+	x = p.x * cos - p.z * sin,
+	z = p.z * cos + p.x * sin;
+	p.x = x;
+	p.z = z;
     }
 
     // Sort planets by z value
     planets.sort(function(a, b) {
-        return b.z - a.z;
+	return b.z - a.z;
     });
 
     for (var i = 0; i < planets.length; i++) {
-        var p = planets[i];
+	var p = planets[i];
 
-        // Don't update DOM if hovering because it resets hover status
-        if (!hovering) {
-            // Update DOM order according to order of zsorted planet list
-            svg.insertBefore(p.circle, null);
-        }
+	// Don't update DOM if hovering because it resets hover status
+	if (!hovering) {
+	    // Update DOM order according to order of zsorted planet list
+	    svg.insertBefore(p.circle, null);
+	}
 
-        // Update element position and scale.
-        p.project();
+	// Update element position and scale.
+	p.project();
     }
 
     // Continue animation
-    frameRequest = requestAnimationFrame(updatePlanets);
+    frameRequest = requestAnimationFrame(update);
 }
 
 function startPlanets() {
-    frameRequest = requestAnimationFrame(updatePlanets);
+    frameRequest = requestAnimationFrame(update);
 }
 
 function stopPlanets() {
@@ -104,55 +110,46 @@ function stopPlanets() {
 
 function toggleMenu() {
     if (menuIsOpen) {
-        stopPlanets();
-        document.body.classList.remove("menu-open");
+	stopPlanets();
+	document.body.classList.remove("menu-open");
 	document.getElementById("menu").scrollTop = 0;
 	menuIsOpen = false;
     }
     else {
-        startPlanets();
-        document.body.classList.add("menu-open");
-        menuIsOpen = true;
+	startPlanets();
+	document.body.classList.add("menu-open");
+	menuIsOpen = true;
     }
 }
 
 window.onload = function() {
+    filterLeft = document.getElementById("filter-left");
+    filterRight = document.getElementById("filter-right");
     svg = document.getElementById("planet-svg");
     width = svg.viewBox.baseVal.width;
     height = svg.viewBox.baseVal.height;
 
     var links = document.getElementsByClassName("planet-link");
     for (var i = 0; i < links.length; i++) {
-        var planet = new Planet(links[i]);
+	var planet = new Planet(links[i]);
 
-        if (links[i].classList.contains("about-link")) {
+	if (links[i].classList.contains("about-link")) {
 	    planet.r *= 4;
-        }
-        else if (links[i].classList.contains("network-link")) {
+	}
+	else if (links[i].classList.contains("network-link")) {
 	    // Assign random position within boundaries
 	    planet.x = width * Math.random() - (width / 2);
 	    planet.y = height * Math.random() - (height / 2);
 	    planet.z = width * Math.random() - (width / 2);
-        }
-        else {
+	}
+	else {
 	    planet.r *= 2;
 
 	    // Assign random position within boundaries
 	    planet.x = width * Math.random() - (width / 2);
 	    planet.y = height * Math.random() - (height / 2);
 	    planet.z = width * Math.random() - (width / 2);
-        }
-        planets.push(planet);
+	}
+	planets.push(planet);
     }
 };
-
-function hoverFix()
-{
-    var element = this;
-    var parent = element.parentNode;
-    var next = element.nextSibling;
-    parent.removeChild(element);
-    setTimeout(function() {
-	parent.insertBefore(element, next);
-    }, 0)
-}

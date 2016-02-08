@@ -159,15 +159,15 @@ body {
     #menu .title {
         opacity: 1;
     }
-    
+
     #toggle-button:hover {
-	transform: rotate(10deg);
+        transform: rotate(10deg);
     }
 
     .menu-open #toggle-button:hover {
-	transform: rotate(145deg);
+        transform: rotate(145deg);
     }
-    
+
     #planet-svg {
         display: block;
         position: fixed;
@@ -177,12 +177,12 @@ body {
     }
 }
 
-.copyright {
-    color: #ccc;
-    font-size: 0.8rem;
+.planet-link {
+    padding: 0 2px;
 }
 
 .title {
+    padding: 0 2px;
     font-size: 1rem;
     line-height: 1.1;
     letter-spacing: 0.2ch;
@@ -192,7 +192,13 @@ body {
 .hover {
     background: black;
     color: white;
-    fill: black;
+}
+
+.glitch {
+    stroke: white;
+    fill: white;
+    filter: url(#glitch-filter);
+    -webkit-filter: url(#glitch-filter);
 }
 
 .indicator::before {
@@ -224,7 +230,6 @@ a {
 p a {
     padding: 0 2px;
     border-bottom: solid black 2px;
-    transition: background 0.2s, color 0.2s;
 }
 
 p a:hover {
