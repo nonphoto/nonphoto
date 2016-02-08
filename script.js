@@ -1,3 +1,6 @@
+
+"use strict";
+
 var frameRequest,
     filterLeft,
     filterRight,
@@ -66,34 +69,34 @@ function update() {
     // var offset = Math.random() * 3;
     // filterLeft.setAttribute("dx", -offset);
     // filterRight.setAttribute("dx", offset);
-    
+
     // Rotate planet positions around Y axis
-    var cos = Math.cos(rotationSpeed),
-	sin = Math.sin(rotationSpeed);
+    var cos = Math.cos(rotationSpeed);
+    var sin = Math.sin(rotationSpeed);
     for (var i = 0; i < planets.length; i++) {
-	var p = planets[i];
-	x = p.x * cos - p.z * sin,
-	z = p.z * cos + p.x * sin;
-	p.x = x;
-	p.z = z;
+        var p = planets[i];
+        var x = p.x * cos - p.z * sin;
+        var z = p.z * cos + p.x * sin;
+        p.x = x;
+        p.z = z;
     }
 
     // Sort planets by z value
     planets.sort(function(a, b) {
-	return b.z - a.z;
+        return b.z - a.z;
     });
 
     for (var i = 0; i < planets.length; i++) {
-	var p = planets[i];
+        var p = planets[i];
 
-	// Don't update DOM if hovering because it resets hover status
-	if (!hovering) {
-	    // Update DOM order according to order of zsorted planet list
-	    svg.insertBefore(p.circle, null);
-	}
+        // Don't update DOM if hovering because it resets hover status
+        if (!hovering) {
+            // Update DOM order according to order of zsorted planet list
+            svg.insertBefore(p.circle, null);
+        }
 
-	// Update element position and scale.
-	p.project();
+        // Update element position and scale.
+        p.project();
     }
 
     // Continue animation
@@ -110,15 +113,15 @@ function stopPlanets() {
 
 function toggleMenu() {
     if (menuIsOpen) {
-	stopPlanets();
-	document.body.classList.remove("menu-open");
-	document.getElementById("menu").scrollTop = 0;
-	menuIsOpen = false;
+        stopPlanets();
+        document.body.classList.remove("menu-open");
+        document.getElementById("menu").scrollTop = 0;
+        menuIsOpen = false;
     }
     else {
-	startPlanets();
-	document.body.classList.add("menu-open");
-	menuIsOpen = true;
+        startPlanets();
+        document.body.classList.add("menu-open");
+        menuIsOpen = true;
     }
 }
 
@@ -131,25 +134,25 @@ window.onload = function() {
 
     var links = document.getElementsByClassName("planet-link");
     for (var i = 0; i < links.length; i++) {
-	var planet = new Planet(links[i]);
+        var planet = new Planet(links[i]);
 
-	if (links[i].classList.contains("about-link")) {
-	    planet.r *= 4;
-	}
-	else if (links[i].classList.contains("network-link")) {
-	    // Assign random position within boundaries
-	    planet.x = width * Math.random() - (width / 2);
-	    planet.y = height * Math.random() - (height / 2);
-	    planet.z = width * Math.random() - (width / 2);
-	}
-	else {
-	    planet.r *= 2;
+        if (links[i].classList.contains("about-link")) {
+            planet.r *= 4;
+        }
+        else if (links[i].classList.contains("network-link")) {
+            // Assign random position within boundaries
+            planet.x = width * Math.random() - (width / 2);
+            planet.y = height * Math.random() - (height / 2);
+            planet.z = width * Math.random() - (width / 2);
+        }
+        else {
+            planet.r *= 2;
 
-	    // Assign random position within boundaries
-	    planet.x = width * Math.random() - (width / 2);
-	    planet.y = height * Math.random() - (height / 2);
-	    planet.z = width * Math.random() - (width / 2);
-	}
-	planets.push(planet);
+            // Assign random position within boundaries
+            planet.x = width * Math.random() - (width / 2);
+            planet.y = height * Math.random() - (height / 2);
+            planet.z = width * Math.random() - (width / 2);
+        }
+        planets.push(planet);
     }
 };
