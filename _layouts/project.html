@@ -4,12 +4,13 @@ layout: default
 
 <article>
   <header>
-    <h1>{{ page.title }}</h1>
-    <p>{{ page.date }}</p>
-    <p>{{ page.description }}</p>
+    <div class="project-title">{{ page.title }}</div>
+    <div class="project-data">{{ page.date }}</div>
   </header>
 
   {{ content }}
+
+  <span class="project-end"></span>
 
   <a id="scroll-button" href="#" onclick="window.scrollTo(0, 0)">&uarr;</a>
 </article>
