@@ -16,53 +16,56 @@ var focalLength = 60,
     menuIsOpen = false,
     hovering = false;
 
-class Planet {
-    constructor(link) {
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-        this.r = planetRadius;
 
-        // Create a new svg element
-        var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-        function hoverOver() {
-            link.classList.add("hover");
-            circle.classList.add("glitch");
-            hovering = true;
-        }
+function constructPlanet(link) {
+    var planet = {
+        x: 0,
+        y: 0,
+        z: 0,
+        r: planetRadius
+    };
 
-        function hoverOut() {
-            link.classList.remove("hover");
-            circle.classList.remove("glitch");
-            hovering = false;
-        }
+    // Create a new svg element
+    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-        link.onmouseover = hoverOver;
-        circle.onmouseover = hoverOver;
-
-        link.onmouseout = hoverOut;
-        circle.onmouseout = hoverOut;
-
-        circle.onclick = function() {
-            window.location.href = link.href;
-        }
-
-        svg.appendChild(circle);
-        this.circle = circle;
+    var hoverOver = function() {
+	link.classList.add("hover");
+	circle.classList.add("glitch");
+	hovering = true;
     }
 
-    // Convert 3D coordinates to 2D coordinates and scale, updates svg element
-    project() {
-        var perspective = focalLength / (focalLength + this.z + cameraDistance);
-        var x = this.x * perspective + (width / 2);
-        var y = this.y * perspective + (height / 2);
-        var r = this.r * perspective;
-
-        this.circle.setAttribute("cx", x);
-        this.circle.setAttribute("cy", y);
-        this.circle.setAttribute("r", r);
+    var hoverOut = function() {
+	link.classList.remove("hover");
+	circle.classList.remove("glitch");
+	hovering = false;
     }
+    
+    link.onmouseover = hoverOver;
+    circle.onmouseover = hoverOver;
+
+    link.onmouseout = hoverOut;
+    circle.onmouseout = hoverOut;
+
+    circle.onclick = function() {
+	window.location.href = link.href;
+    }
+
+    svg.appendChild(circle);
+    planet.circle = circle;
+    return planet;
+}
+
+// Convert 3D coordinates to 2D coordinates and scale, updates svg element
+function projectPlanet(planet) {
+    var perspective = focalLength / (focalLength + planet.z + cameraDistance);
+    var x = planet.x * perspective + (width / 2);
+    var y = planet.y * perspective + (height / 2);
+    var r = planet.r * perspective;
+
+    planet.circle.setAttribute("cx", x);
+    planet.circle.setAttribute("cy", y);
+    planet.circle.setAttribute("r", r);
 }
 
 function update() {
@@ -91,12 +94,12 @@ function update() {
 
         // Don't update DOM if hovering because it resets hover status
         if (!hovering) {
-            // Update DOM order according to order of zsorted planet list
-            svg.insertBefore(p.circle, null);
+	    // Update DOM order according to order of zsorted planet list
+	    svg.insertBefore(p.circle, null);
         }
 
         // Update element position and scale.
-        p.project();
+        projectPlanet(p);
     }
 
     // Continue animation
@@ -134,25 +137,25 @@ window.onload = function() {
 
     var links = document.getElementsByClassName("planet-link");
     for (var i = 0; i < links.length; i++) {
-        var planet = new Planet(links[i]);
+        var p = constructPlanet(links[i]);
 
         if (links[i].classList.contains("about-link")) {
-            planet.r *= 4;
+	    p.r *= 4;
         }
         else if (links[i].classList.contains("network-link")) {
-            // Assign random position within boundaries
-            planet.x = width * Math.random() - (width / 2);
-            planet.y = height * Math.random() - (height / 2);
-            planet.z = width * Math.random() - (width / 2);
+	    // Assign random position within boundaries
+	    p.x = width * Math.random() - (width / 2);
+	    p.y = height * Math.random() - (height / 2);
+	    p.z = width * Math.random() - (width / 2);
         }
         else {
-            planet.r *= 2;
+	    p.r *= 2;
 
-            // Assign random position within boundaries
-            planet.x = width * Math.random() - (width / 2);
-            planet.y = height * Math.random() - (height / 2);
-            planet.z = width * Math.random() - (width / 2);
+	    // Assign random position within boundaries
+	    p.x = width * Math.random() - (width / 2);
+	    p.y = height * Math.random() - (height / 2);
+	    p.z = width * Math.random() - (width / 2);
         }
-        planets.push(planet);
+        planets.push(p);
     }
 };
