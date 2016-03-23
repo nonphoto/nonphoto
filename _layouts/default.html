@@ -40,41 +40,6 @@
     </div>
     <!-- <div class="copyright"> &copy; 2015 <br> Jonas Luebbers </div> -->
     <svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMinYMid meet">
-      <defs>
-        <filter id="glitch-filter" x="-50%" width="200%"color-interpolation-filters="sRGB">
-          <feColorMatrix type="matrix"
-                         in="SourceGraphic"
-                         values="1 0 0 0 0
-                                 0 0 0 0 0
-                                 0 0 0 0 0
-                                 0 0 0 1 0" result="A1"/>
-          <feColorMatrix type="matrix"
-                         in="SourceGraphic"
-                         values="0 0 0 0 0
-                                 0 1 0 0 0
-                                 0 0 1 0 0
-                                 0 0 0 1 0" result="B1"/>
-          <feOffset id="filter-left" dx="0" dy="0" in="A1" result="A2"/>
-          <feOffset id="filter-right" dx="0" dy="0" in="B1" result="B2"/>
-          <feBlend in="A2" in2="B2" result="C" mode="multiply"/>
-        </filter>
-        <animate    id            = "glitch-left"
-                    attributeName = "dx"
-                    begin         = "0s"
-                    dur           = "0.1s"
-                    values        = "0;-0.3;-0.2;-0.5;0"
-                    keyTimes      = "0;0.25;0.5;0.75;1"
-                    repeatCount   = "indefinite"
-                    xlink:href    = "#filter-left"/>
-        <animate    id            = "glitch-right"
-                    attributeName = "dx"
-                    begin         = "0s"
-                    dur           = "0.1s"
-                    values        = "0;0.3;0.2;0.5;0"
-                    keyTimes      = "0;0.25;0.5;0.75;1"
-                    repeatCount   = "indefinite"
-                    xlink:href    = "#filter-right"/>
-      </defs>
     </svg>
     <img id="toggle-button" src="/plus.svg" onclick="toggleMenu()">
   </body>
