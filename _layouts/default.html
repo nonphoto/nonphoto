@@ -1,46 +1,39 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <script src="https://use.typekit.net/fid8byd.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <title>{% if page.title != 'About' %} {{ page.title }} - {% endif %} Jonas Luebbers</title>
-    <link rel="stylesheet" href="/style.css"/>
-    <script src="/script.js"></script>
-  </head>
-  <body>
-    <svg xmlns="http://www.w3.org/2000/svg" display="none" version="1.1">
-    </svg>
-    <div id="content">
-      <div class="title">
-        Jonas <br> Kent <br> Luebbers
-      </div>
-      {{ content }}
-    </div>
-    <div id="menu">
-      <div class="title">
-        Jonas <br> Kent <br> Luebbers
-      </div>
-      <ul>
-        <li><a href="mailto:contact@jonasluebbers.com" class="planet-link">Contact</a></li>
-        <li><a href="https://github.com/nonphoto" class="planet-link">Github</a></li>
-        <li><a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba" class="planet-link">LinkedIn</a></li>
-      </ul>
-      <ul>
-        {% for p in site.pages %}
-        <li>
-          <a href="{{ p.url }}" class="planet-link {% if p.title == 'About' %} about-link {% else %} project-link {% endif %} {% if p.title == page.title %} indicator {% endif %}">
-            {{ p.title }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    <!-- <div class="copyright"> &copy; 2015 <br> Jonas Luebbers </div> -->
-    <svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMinYMid meet">
-    </svg>
-    <img id="toggle-button" src="/plus.svg" onclick="toggleMenu()">
-  </body>
+<head>
+	<script src="https://use.typekit.net/fid8byd.js"></script>
+	<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+	<title>Jonas Luebbers - {{ page.title }}</title>
+
+	<!-- <link rel="stylesheet" href="/style.css"/> -->
+	<script src="/script.js"></script>
+</head>
+
+<body>
+	{{ content }}
+
+	<!-- <svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMinYMid meet"></svg> -->
+
+	<ul id="tag-list">
+		{% for tag in site.tags %}
+		{% assign name = tag | first %}
+		<li>
+			{{ name }}
+		</li>
+		{% endfor %}
+	</ul>
+
+	<ul id="post-list">
+		{% for post in site.posts %}
+		<li>
+			<a href="{{ post.url }}" class="{% for tag in post.tags %} tag-{{ tag }} {% endfor %}">{{ post.title }}</a>
+		</li>
+		{% endfor %}
+	</ul>
+</body>
 </html>

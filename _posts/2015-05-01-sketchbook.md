@@ -1,6 +1,9 @@
 ---
 layout: project
 title: Sketchbook
+tags:
+- architecture
+- drawing
 ---
 
 Here are some of my favorite pages from my architecture sketchbook. I decided not to erase anything while making these drawings, and I think it makes the results more interesting than they would have been otherwise.
