@@ -3,7 +3,7 @@ layout: project
 title: Monuments
 tags:
 - drawing
-- generative
+- code
 ---
 
 Technology takes over natural phenomena and repurposes them for further advancement. Materials are harvested and manipulated for the construction of machines and infrastructure, only to be abandoned, left behind to be dissolved back into their surroundings. There is a fascinating complexity to this process, an endless chain of cause and effect that builds objects from nothing and tears them down again.
