@@ -14,6 +14,8 @@ var planets = [];
 var menuIsOpen = false;
 var hovering = false;
 
+var tags = Object.create(null);
+
 function constructPlanet(link) {
 	var planet = {
 		x: 0,
@@ -91,15 +93,45 @@ function stopPlanets() {
 	cancelAnimationFrame(frameRequest);
 }
 
+function toggleButtonForTag(element, tag) {
+	element.classList.toggle("selected");
+	tags[tag] = element.classList.contains("selected");
+
+	var foundSelectedTag = false;
+	var postListItems = document.getElementById("post-list").getElementsByTagName("LI");
+
+	for (var i = 0; i < postListItems.length; i++) {
+		postListItems[i].style.display = "none";
+	}
+
+	for (var tag in tags) {
+		if (tags[tag]) {
+			foundSelectedTag = true;
+			for (var i = 0; i < postListItems.length; i++) {
+				var postListItem = postListItems[i];
+				if (postListItem.classList.contains("tag-" + tag)) {
+					postListItem.style.display = "block";
+				}
+			}
+		}
+	}
+
+	if (!foundSelectedTag) {
+		for (var i = 0; i < postListItems.length; i++) {
+			postListItems[i].style.display = "block";
+		}
+	}
+}
+
 window.onload = function() {
 	svg = document.getElementById("planet-svg");
 	width = svg.viewBox.baseVal.width;
 	height = svg.viewBox.baseVal.height;
 
-	var links = document.getElementsByClassName("planet-link");
-	for (var i = 0; i < links.length; i++) {
+	var postListItems = document.getElementById("post-list").getElementsByTagName("LI");
+	for (var i = 0; i < postListItems.length; i++) {
 		for (var j = 0; j < 10; j++) {
-			var p = constructPlanet(links[i]);
+			var p = constructPlanet(postListItems[i]);
 
 			// Assign random position within boundaries
 			p.x = width * Math.random() - (width / 2);
