@@ -12,9 +12,12 @@
 
 	<link rel="stylesheet" href="/style.css"/>
 	<script src="/script.js"></script>
+
 </head>
 
 <body>
+
+	{% capture assets %}{{ site.url }}/assets{% endcapture %}
 	{{ content }}
 
 	<svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMinYMid meet"></svg>
