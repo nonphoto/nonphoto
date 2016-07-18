@@ -1,4 +1,71 @@
 
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	background: black;
+}
+
+body {
+	font-family: 'nimbus-sans' sans-serif;
+	font-size: 14pt;
+	color: white;
+	line-height: 1.4;
+}
+
+article {
+	background: white;
+	color: black;
+	padding: 5rem;
+	min-height: 100vh;
+	margin-bottom: 100vh;
+}
+
+nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+}
+
+button {
+	font-family: inherit;
+	font-weight: normal;
+	font-size: inherit;
+	background: black;
+	border: none;
+	text-decoration: none;
+	color: white;
+	display: inline-block;
+	font-size: 16px;
+}
+
+button.selected {
+	background: white;
+	color: black;
+}
+
+#tag-list, #post-list {
+	margin: 5rem;
+	float: left;
+}
+
+a {
+	font-weight: normal;
+	color: inherit;
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 70vh;
+	margin: 5rem 0;
+}
+
 #planet-svg {
 	display: block;
 	width: 30%;
@@ -7,5 +74,5 @@
 
 svg {
 	overflow: visible;
-	fill: black;
+	fill: white;
 }
