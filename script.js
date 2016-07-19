@@ -5,7 +5,7 @@ var svg;
 var width;
 var height;
 
-var focalLength = 60;
+var focalLength = 100;
 var cameraDistance = 50;
 var rotationSpeed = 0.001;
 var planetRadius = 1;
@@ -16,7 +16,7 @@ var hovering = false;
 
 var tags = Object.create(null);
 
-function constructPlanet(link) {
+function constructPlanet() {
 	var planet = {
 		x: 0,
 		y: 0,
@@ -26,28 +26,6 @@ function constructPlanet(link) {
 
 	// Create a new svg element
 	var graphic = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-
-	var hoverOver = function() {
-		link.classList.add("hover");
-		graphic.classList.add("hover");
-		hovering = true;
-	}
-
-	link.onmouseover = hoverOver;
-	graphic.onmouseover = hoverOver;
-
-	var hoverOut = function() {
-		link.classList.remove("hover");
-		graphic.classList.remove("hover");
-		hovering = false;
-	}
-
-	link.onmouseout = hoverOut;
-	graphic.onmouseout = hoverOut;
-
-	graphic.onclick = function() {
-		window.location.href = link.href;
-	}
 
 	svg.appendChild(graphic);
 	planet.graphic = graphic;
@@ -128,18 +106,15 @@ window.onload = function() {
 	width = svg.viewBox.baseVal.width;
 	height = svg.viewBox.baseVal.height;
 
-	var postListItems = document.getElementById("post-list").getElementsByTagName("LI");
-	for (var i = 0; i < postListItems.length; i++) {
-		for (var j = 0; j < 10; j++) {
-			var p = constructPlanet(postListItems[i]);
+	for (var j = 0; j < 500; j++) {
+		var p = constructPlanet();
 
-			// Assign random position within boundaries
-			p.x = width * Math.random() - (width / 2);
-			p.y = height * Math.random() - (height / 2);
-			p.z = width * Math.random() - (width / 2);
+		// Assign random position within boundaries
+		p.x = width * Math.random() - (width / 2);
+		p.y = height * Math.random() - (height / 2);
+		p.z = width * Math.random() - (width / 2);
 
-			planets.push(p);
-		}
+		planets.push(p);
 	}
 
 	startPlanets();
