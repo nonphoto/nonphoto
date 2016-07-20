@@ -8,7 +8,7 @@ var height;
 var focalLength = 100;
 var cameraDistance = 50;
 var rotationSpeed = 0.001;
-var planetRadius = 1;
+var planetRadius = 0.5;
 
 var planets = [];
 var menuIsOpen = false;
@@ -18,9 +18,9 @@ var tags = Object.create(null);
 
 function constructPlanet() {
 	var planet = {
-		x: 0,
-		y: 0,
-		z: 0,
+		ax: 0,
+		ay: 0,
+		l: 0,
 		r: planetRadius
 	};
 
@@ -32,31 +32,25 @@ function constructPlanet() {
 	return planet;
 }
 
-// Convert 3D coordinates to 2D coordinates and scale, updates svg element
-function projectPlanet(planet) {
-	var perspective = focalLength / (focalLength + planet.z + cameraDistance);
-	var x = planet.x * perspective + (width / 2);
-	var y = planet.y * perspective + (height / 2);
-	var r = planet.r * perspective;
-
-	planet.graphic.setAttribute("cx", x);
-	planet.graphic.setAttribute("cy", y);
-	planet.graphic.setAttribute("r", r);
-}
-
 function update() {
 	// Rotate planet positions around Y axis
-	var cos = Math.cos(rotationSpeed);
-	var sin = Math.sin(rotationSpeed);
 	for (var i = 0; i < planets.length; i++) {
 		var p = planets[i];
-		var x = p.x * cos - p.z * sin;
-		var z = p.z * cos + p.x * sin;
-		p.x = x;
-		p.z = z;
+
+		if (p.l != 0) {
+			p.ay += rotationSpeed * (cameraDistance / p.l);
+	}
+
+		var x = Math.cos(p.ay) * Math.cos(p.ax) * p.l;
+		var y = Math.sin(p.ax) * p.l;
+		var z = Math.sin(p.ay) * Math.cos(p.ax) * p.l;
 
 		// Update element position and scale.
-		projectPlanet(p);
+		var perspective = focalLength / (focalLength + z + cameraDistance);
+
+		p.graphic.setAttribute("cx", x * perspective + (width / 2));
+		p.graphic.setAttribute("cy", y * perspective + (height / 2));
+		p.graphic.setAttribute("r", p.r * perspective);
 	}
 
 	// Continue animation
@@ -110,12 +104,14 @@ window.onload = function() {
 		var p = constructPlanet();
 
 		// Assign random position within boundaries
-		p.x = width * Math.random() - (width / 2);
-		p.y = height * Math.random() - (height / 2);
-		p.z = width * Math.random() - (width / 2);
+		p.ax = (Math.random() - 0.5) * Math.PI;
+		p.ay = Math.random() * 2 * Math.PI;
+		p.l = Math.random() * cameraDistance * 2;
 
 		planets.push(p);
 	}
+
+	planets.push(constructPlanet());
 
 	startPlanets();
 };
