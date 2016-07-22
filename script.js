@@ -110,7 +110,7 @@ window.onload = function() {
 	context.scale(scale, scale);
 	context.fillStyle = "#ffffff";
 
-	for (var j = 0; j < 1000; j++) {
+	for (var j = 0; j < 500; j++) {
 		var p = Object.create(planet);
 
 		// Assign random position within boundaries

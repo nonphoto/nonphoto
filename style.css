@@ -21,16 +21,12 @@ article {
 	color: black;
 	padding: 5rem;
 	min-height: 100vh;
-	margin-bottom: 100vh;
 }
 
 nav {
-	position: fixed;
-	top: 0;
-	left: 0;
+	background: none;
 	width: 100vw;
 	height: 100vh;
-	z-index: -1;
 }
 
 button {
@@ -51,7 +47,6 @@ button.selected {
 }
 
 #tag-list, #post-list {
-	display: none;
 	margin: 5rem;
 	float: left;
 }
@@ -68,18 +63,9 @@ img {
 	margin: 5rem 0;
 }
 
-#planet-svg {
-	display: block;
-	position: absolute;
-	width: 100vw;
-	height: 100vh;
-}
-
-svg {
-	overflow: visible;
-	fill: white;
-}
-
 #planet-canvas {
-	border: solid white 1px;
+	z-index: -1;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
