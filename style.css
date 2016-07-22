@@ -2,6 +2,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
 }
 
 html {
@@ -50,6 +51,7 @@ button.selected {
 }
 
 #tag-list, #post-list {
+	display: none;
 	margin: 5rem;
 	float: left;
 }
@@ -76,4 +78,8 @@ img {
 svg {
 	overflow: visible;
 	fill: white;
+}
+
+#planet-canvas {
+	border: solid white 1px;
 }
