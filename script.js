@@ -1,6 +1,7 @@
 "use strict";
 
 var frameRequest;
+var ctx;
 var svg;
 var width;
 var height;
@@ -16,41 +17,35 @@ var hovering = false;
 
 var tags = Object.create(null);
 
-function constructPlanet() {
-	var planet = {
-		ax: 0,
-		ay: 0,
-		l: 0,
-		r: planetRadius
-	};
+var planet = {
+	a: 0,
+	b: 0,
+	r: 0,
+	update: function() {
+		var x = this.r * Math.sin(this.b) * Math.cos(this.a);
+		var z = this.r * Math.sin(this.b) * Math.sin(this.a);
+		var y = this.r * Math.cos(this.b);
 
-	// Create a new svg element
-	var graphic = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+		var perspective = focalLength / (focalLength + z + cameraDistance);
 
-	svg.appendChild(graphic);
-	planet.graphic = graphic;
-	return planet;
-}
+		ctx.beginPath();
+		ctx.arc(x * perspective + 100, y * perspective + 100, planetRadius * perspective, 0, 2 * Math.PI)
+		ctx.fill();
+	}
+};
 
 function update() {
+	ctx.clearRect(0, 0, 1000, 750)
+
 	// Rotate planet positions around Y axis
 	for (var i = 0; i < planets.length; i++) {
 		var p = planets[i];
 
-		if (p.l != 0) {
-			p.ay += rotationSpeed * (cameraDistance / p.l);
-	}
+		if (p.r != 0) {
+			p.a += rotationSpeed * (cameraDistance / p.r);
+		}
 
-		var x = Math.cos(p.ay) * Math.cos(p.ax) * p.l;
-		var y = Math.sin(p.ax) * p.l;
-		var z = Math.sin(p.ay) * Math.cos(p.ax) * p.l;
-
-		// Update element position and scale.
-		var perspective = focalLength / (focalLength + z + cameraDistance);
-
-		p.graphic.setAttribute("cx", x * perspective + (width / 2));
-		p.graphic.setAttribute("cy", y * perspective + (height / 2));
-		p.graphic.setAttribute("r", p.r * perspective);
+		p.update();
 	}
 
 	// Continue animation
@@ -96,22 +91,30 @@ function toggleButtonForTag(element, tag) {
 }
 
 window.onload = function() {
-	svg = document.getElementById("planet-svg");
-	width = svg.viewBox.baseVal.width;
-	height = svg.viewBox.baseVal.height;
+	// svg = document.getElementById("planet-svg");
+	// width = svg.viewBox.baseVal.width;
+	// height = svg.viewBox.baseVal.height;
+
+	var canvas = document.getElementById('planet-canvas');
+	var s = window.devicePixelRatio
+	canvas.width = 1000;
+	canvas.height = 750;
+	canvas.style.width = "500px";
+	canvas.style.height = "375px";
+	ctx = canvas.getContext('2d');
+	ctx.scale(s, s);
+	ctx.fillStyle = "#ffffff";
 
 	for (var j = 0; j < 500; j++) {
-		var p = constructPlanet();
+		var p = Object.create(planet);
 
 		// Assign random position within boundaries
-		p.ax = (Math.random() - 0.5) * Math.PI;
-		p.ay = Math.random() * 2 * Math.PI;
-		p.l = Math.random() * cameraDistance * 2;
+		p.a = Math.random() * 2 * Math.PI
+		p.b = Math.random() * Math.PI;
+		p.r = Math.random() * cameraDistance * 2;
 
 		planets.push(p);
 	}
-
-	planets.push(constructPlanet());
 
 	startPlanets();
 };

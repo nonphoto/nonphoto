@@ -19,9 +19,10 @@
 
 	{% capture assets %}{{ site.url }}/assets/{{ page.slug }}{% endcapture %}
 	{{ content }}
-	
+
 	<nav>
-		<svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMinYMid meet"></svg>
+		<!-- <svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMinYMid meet"></svg> -->
+		<canvas id="planet-canvas"></canvas>
 
 		<ul id="tag-list">
 			{% for tag in site.tags %}
