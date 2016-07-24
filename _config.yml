@@ -1,4 +1,6 @@
 permalink: /:title
+
 collections:
-  projects:
-    output: true
+    projects:
+      tag: "code"
+      output: true
