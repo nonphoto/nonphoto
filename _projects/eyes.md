@@ -8,6 +8,7 @@ tags:
 
 Each print is the result of a [Processing sketch](https://github.com/nonphoto/processing/tree/master/independent) iterating on one of twelve original drawings. Step by step, a section of the drawing is cut out and overlayed back onto itself. After thousands of iterations, this produces a blackened image that abstracts the qualities of the original drawing. The images are inspired by a collection of early 20th century photographs held by the Library of Congress.
 
+</p>
 ![Photo 00]({{ site.url }}/assets/eyes/photo-00.jpg)
 ![Photo 01]({{ site.url }}/assets/eyes/photo-01.jpg)
 ![Photo 02]({{ site.url }}/assets/eyes/photo-02.jpg)
@@ -21,6 +22,7 @@ Each print is the result of a [Processing sketch](https://github.com/nonphoto/pr
 ![Photo 10]({{ site.url }}/assets/eyes/photo-10.jpg)
 ![Photo 11]({{ site.url }}/assets/eyes/photo-11.jpg)
 ![Photo 12]({{ site.url }}/assets/eyes/photo-12.jpg)
+<p>
 
 ![Drawing 00]({{ site.url }}/assets/eyes/drawing-00.jpg)
 ![Drawing 01]({{ site.url }}/assets/eyes/drawing-01.jpg)
