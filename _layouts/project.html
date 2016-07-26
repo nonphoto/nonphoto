@@ -2,15 +2,18 @@
 layout: default
 ---
 
-<article>
-  <header>
-    <div class="project-title">{{ page.title }}</div>
-    <div class="project-data">{{ page.date }}</div>
-  </header>
+<div class="project">
+	<header>
 
-  {{ content }}
+		Jonas<br>
+		Kent<br>
+		Luebbers<br>
 
-  <span class="project-end"></span>
+		<div class="project-title">{{ page.title }}</div>
+		<div class="project-data">{{ page.date }}</div>
+	</header>
 
-  <a id="scroll-button" href="#" onclick="window.scrollTo(0, 0)">&uarr;</a>
-</article>
+	<article>
+		{{ content }}
+	</article>
+</div>

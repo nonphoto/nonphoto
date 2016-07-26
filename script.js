@@ -6,11 +6,11 @@ var context;
 var width;
 var height;
 
-var focalLength = 200;
+var focalLength = 400;
 var cameraDistance = 2;
 var planetDistance = 300;
 var planetSize = 2;
-var rotationSpeed = 0.001;
+var rotationSpeed = 0.0001;
 
 var planets = [];
 var menuIsOpen = false;
@@ -25,7 +25,7 @@ var planet = {
 	update: function() {
 		var x = this.r * Math.sin(this.b) * Math.cos(this.a);
 		var z = this.r * Math.sin(this.b) * Math.sin(this.a);
-		var y = this.r * Math.cos(this.b) / 2;
+		var y = this.r * Math.cos(this.b);
 
 		var perspective = focalLength / (focalLength + z + cameraDistance);
 
@@ -33,7 +33,7 @@ var planet = {
 		context.beginPath();
 		context.translate(width / 2, height / 2);
 		// context.scale(perspective, perspective);
-		context.arc(x * perspective, y * perspective, planetSize, 0, 2 * Math.PI)
+		context.arc(x * perspective, y * perspective, planetSize * perspective, 0, 2 * Math.PI)
 		context.fill();
 		context.restore();
 	}
@@ -108,7 +108,7 @@ window.onload = function() {
 
 	context = canvas.getContext('2d');
 	context.scale(scale, scale);
-	context.fillStyle = "#ffffff";
+	context.fillStyle = "#555555";
 
 	for (var j = 0; j < 500; j++) {
 		var p = Object.create(planet);
