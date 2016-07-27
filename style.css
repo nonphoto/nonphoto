@@ -74,6 +74,7 @@ nav {
 	background: none;
 	width: 100vw;
 	height: 100vh;
+	padding: 5rem;
 }
 
 button {
@@ -93,9 +94,14 @@ button.selected {
 	color: black;
 }
 
+ul {
+	list-style-type: none;
+}
+
 #tag-list, #post-list {
-	margin: 5rem;
+	width: 50%;
 	float: left;
+	font-size: 1rem;
 }
 
 a {
