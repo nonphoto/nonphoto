@@ -8,13 +8,25 @@
 html {
 	background: #2261fd;
 	background: black;
+		font-size: 18px;
 }
 
 body {
 	font-family: 'nimbus-sans' sans-serif;
-	font-size: 18px;
+
 	color: white;
 	line-height: 1.4;
+}
+
+#menu-button {
+	position: fixed;
+	top: 4rem;
+	left: 0;
+	width: 5rem;
+	height: 5rem;
+	padding: 2rem;
+	margin: 0;
+	transition: transform 0.2s
 }
 
 .project {
@@ -25,8 +37,14 @@ body {
 	min-height: 100vh;
 }
 
-header {
+.title {
+	line-height: 1.2;
+	text-transform: uppercase;
+	letter-spacing: 0.2ch;
 	margin-bottom: 5rem;
+}
+
+header {
 	line-height: 1.2;
 	text-transform: uppercase;
 	letter-spacing: 0.2ch;

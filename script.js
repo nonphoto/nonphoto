@@ -8,7 +8,7 @@ var height;
 
 var focalLength = 400;
 var cameraDistance = 2;
-var planetDistance = 300;
+var planetDistance = 500;
 var planetSize = 2;
 var rotationSpeed = 0.0001;
 
@@ -25,15 +25,15 @@ var planet = {
 	update: function() {
 		var x = this.r * Math.sin(this.b) * Math.cos(this.a);
 		var z = this.r * Math.sin(this.b) * Math.sin(this.a);
-		var y = this.r * Math.cos(this.b);
+		var y = this.r * Math.cos(this.b) / 2;
 
 		var perspective = focalLength / (focalLength + z + cameraDistance);
 
 		context.save();
 		context.beginPath();
 		context.translate(width / 2, height / 2);
-		// context.scale(perspective, perspective);
-		context.arc(x * perspective, y * perspective, planetSize * perspective, 0, 2 * Math.PI)
+		context.scale(perspective, perspective);
+		context.arc(x, y, planetSize, 0, 2 * Math.PI)
 		context.fill();
 		context.restore();
 	}
