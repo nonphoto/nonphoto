@@ -108,7 +108,7 @@ window.onload = function() {
 
 	context = canvas.getContext('2d');
 	context.scale(scale, scale);
-	context.fillStyle = "#555555";
+	context.fillStyle = "rgba(255, 255, 255, 1.0)";
 
 	for (var j = 0; j < 500; j++) {
 		var p = Object.create(planet);

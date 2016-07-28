@@ -7,15 +7,26 @@
 
 html {
 	background: #2261fd;
-	background: black;
-		font-size: 18px;
+	font-size: 18px;
 }
 
 body {
-	font-family: 'nimbus-sans' sans-serif;
-
 	color: white;
+	font-size: 24px;
+	font-family: 'Space Mono' monospace;
 	line-height: 1.4;
+	letter-spacing: 0.1ch;
+	text-transform: uppercase;
+}
+
+p {
+	font-size: 18px;
+	font-family: 'nimbus-sans' sans-serif;
+	line-height: 1.4;
+	text-transform: none;
+	max-width: 30rem;
+	margin-bottom: 1rem;
+	letter-spacing: 0;
 }
 
 #menu-button {
@@ -25,8 +36,6 @@ body {
 	width: 5rem;
 	height: 5rem;
 	padding: 2rem;
-	margin: 0;
-	transition: transform 0.2s
 }
 
 .project {
@@ -37,17 +46,11 @@ body {
 	min-height: 100vh;
 }
 
-.title {
-	line-height: 1.2;
-	text-transform: uppercase;
-	letter-spacing: 0.2ch;
+#site-title {
 	margin-bottom: 5rem;
 }
 
 header {
-	line-height: 1.2;
-	text-transform: uppercase;
-	letter-spacing: 0.2ch;
 	margin-bottom: 5rem;
 }
 
@@ -56,18 +59,17 @@ article {
 }
 
 @media (min-width: 45rem) {
+	#site-title {
+		position: fixed;
+	}
 	header {
-		width: 30%;
 	}
 
 	article {
-		padding: 5rem;
+		padding-left: 30%;
 	}
-}
 
-p {
-	max-width: 35rem;
-	margin-bottom: 1rem;
+
 }
 
 nav {
@@ -99,9 +101,11 @@ ul {
 }
 
 #tag-list, #post-list {
+
+	font-family: 'Space Mono';
 	width: 50%;
 	float: left;
-	font-size: 1rem;
+	font-size: 24px;
 }
 
 a {
