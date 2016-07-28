@@ -19,7 +19,7 @@ body {
 	text-transform: uppercase;
 }
 
-p {
+p, ol, ul {
 	font-size: 18px;
 	font-family: 'nimbus-sans' sans-serif;
 	line-height: 1.4;
@@ -27,6 +27,14 @@ p {
 	max-width: 30rem;
 	margin-bottom: 1rem;
 	letter-spacing: 0;
+}
+
+li {
+	margin-bottom: 1rem;
+}
+
+ul {
+	list-style-type: none;
 }
 
 #menu-button {
@@ -68,8 +76,6 @@ article {
 	article {
 		padding-left: 30%;
 	}
-
-
 }
 
 nav {
@@ -100,12 +106,13 @@ ul {
 	list-style-type: none;
 }
 
-#tag-list, #post-list {
+ol {
 
-	font-family: 'Space Mono';
+}
+
+#tag-list, #post-list {
 	width: 50%;
 	float: left;
-	font-size: 24px;
 }
 
 a {
@@ -122,13 +129,13 @@ img {
 
 .grid-small {
 	width: 100%;
-	padding: 2rem;
+	margin: 3rem 0;
 }
 
 .grid-small img {
 	float: left;
 	width: 25%;
-	padding: 2rem;
+	padding: 1%;
 	margin: 0;
 }
 
