@@ -20,6 +20,24 @@ body {
 	text-transform: uppercase;
 }
 
+
+
+/**
+Project
+*/
+
+.project {
+	background: white;
+	color: black;
+	padding: 5rem;
+	padding-right: 2rem;
+	min-height: 100vh;
+}
+
+header {
+	margin-bottom: 5rem;
+}
+
 article {
 	font-size: 18px;
 	font-family: 'nimbus-sans' sans-serif;
@@ -30,77 +48,10 @@ article {
 	letter-spacing: 0;
 }
 
-li {
-	margin-bottom: 1rem;
-}
-
-ul {
-	list-style-type: none;
-}
-
-#menu-button {
-	position: fixed;
-	top: 4rem;
-	left: 0;
-	width: 5rem;
-	height: 5rem;
-	padding: 2rem;
-}
-
-.project {
-	background: white;
-	color: black;
-	padding: 5rem;
-	padding-right: 2rem;
-	min-height: 100vh;
-}
-
-#site-title {
-	margin-bottom: 5rem;
-}
-
-header {
-	margin-bottom: 5rem;
-}
-
-article {
-
-}
-
 @media (min-width: 45rem) {
-	#site-title {
-		position: fixed;
-	}
-	header {
-	}
-
 	article {
 		padding-left: 30%;
 	}
-}
-
-nav {
-	background: none;
-	width: 100vw;
-	height: 100vh;
-	padding: 5rem;
-}
-
-ul {
-	list-style-type: none;
-}
-
-ol {
-
-}
-
-#tag-list {
-	display: none;
-}
-
-#post-list a {
-	width: 100%;
-	float: left;
 }
 
 a {
@@ -115,22 +66,53 @@ img {
 	margin: 2rem 0;
 }
 
-.grid-small {
+li {
+	margin-bottom: 1rem;
+}
+
+ul {
+	list-style-type: none;
+}
+
+
+
+/**
+Navigation
+*/
+
+#site-title {
+	margin-bottom: 5rem;
+}
+
+@media (min-width: 45rem) {
+	#site-title {
+		position: fixed;
+	}
+}
+
+#menu-button {
+	position: fixed;
+	top: 4rem;
+	left: 0;
+	width: 5rem;
+	height: 5rem;
+	padding: 2rem;
+}
+
+nav {
+	background: none;
+	width: 100vw;
+	height: 100vh;
+	padding: 5rem;
+}
+
+#tag-list {
+	display: none;
+}
+
+#post-list a {
 	width: 100%;
-	margin: 3rem 0;
-}
-
-.grid-small img {
 	float: left;
-	width: 25%;
-	padding: 1%;
-	margin: 0;
-}
-
-.grid-small:after {
-	content: "";
-	display: table;
-	clear: both;
 }
 
 #planet-canvas {
@@ -140,4 +122,31 @@ img {
 	left: 0;
 	width: 100vw;
 	height: 100vh;
+}
+
+
+
+/**
+Grids
+*/
+
+.grid {
+	width: 100%;
+	margin: 3rem 0;
+}
+
+[class*='col-'] {
+	float: left;
+}
+
+.col-1-4 {
+	width: 25%;
+	padding: 1%;
+	margin: 0;
+}
+
+.grid:after {
+	content: "";
+	display: table;
+	clear: both;
 }
