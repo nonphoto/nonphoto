@@ -30,16 +30,11 @@
 			<li><button type="button" onclick="toggleButtonForTag(this, 'graphic')">graphic</button></li>
 			<li><button type="button" onclick="toggleButtonForTag(this, 'interface')">interface</button></li>
 			<li><button type="button" onclick="toggleButtonForTag(this, 'mobile')">mobile</button></li>
-			<li><button type="button" onclick="toggleButtonForTag(this, 'web')">web</button></li>
-			<li><button type="button" onclick="toggleButtonForTag(this, 'drawing')">drawing</button></li>
-			<li><button type="button" onclick="toggleButtonForTag(this, 'architecture')">architecture</button></li>
 		</ul>
 
 		<ul id="post-list">
 			{% for project in site.projects %}
-			<li class="{% for tag in project.tags %}tag-{{ tag }} {% endfor %}">
-				<a href="{{ project.url }}">{{ project.title }}</a>
-			</li>
+				<a href="{{ project.url }}" class="{% for tag in project.tags %}tag-{{ tag }} {% endfor %}">{{ project.title }}</a>
 			{% endfor %}
 		</ul>
 	</nav>

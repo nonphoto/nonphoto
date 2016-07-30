@@ -7,9 +7,9 @@ var width;
 var height;
 
 var focalLength = 400;
-var cameraDistance = 2;
+var cameraDistance = 10;
 var planetDistance = 500;
-var planetSize = 2;
+var planetSize = 3;
 var rotationSpeed = 0.0001;
 
 var planets = [];
@@ -32,8 +32,8 @@ var planet = {
 		context.save();
 		context.beginPath();
 		context.translate(width / 2, height / 2);
-		context.scale(perspective, perspective);
-		context.arc(x, y, planetSize, 0, 2 * Math.PI)
+		// context.scale(perspective, perspective);
+		context.arc(x * perspective, y * perspective, planetSize, 0, 2 * Math.PI)
 		context.fill();
 		context.restore();
 	}
@@ -97,18 +97,18 @@ function toggleButtonForTag(element, tag) {
 
 window.onload = function() {
 	canvas = document.getElementById('planet-canvas');
-	width = window.innerWidth;
-	height = window.innerHeight;
+	width = canvas.clientWidth;
+	height = canvas.clientHeight;
 	var scale = window.devicePixelRatio
 
 	canvas.width = width * scale;
 	canvas.height = height * scale;
-	canvas.style.width = width.toString() + "px";
-	canvas.style.height = height.toString() + "px";
+	// canvas.style.width = width.toString() + "px";
+	// canvas.style.height = height.toString() + "px";
 
 	context = canvas.getContext('2d');
 	context.scale(scale, scale);
-	context.fillStyle = "rgba(255, 255, 255, 1.0)";
+	context.fillStyle = "#333344";
 
 	for (var j = 0; j < 500; j++) {
 		var p = Object.create(planet);
