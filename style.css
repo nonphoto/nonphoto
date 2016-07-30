@@ -107,10 +107,34 @@ nav {
 }
 
 #tag-list {
-	display: none;
+	display: block;
+	margin-bottom: 1rem;
+}
+
+#tag-list button {
+	display: block;
+	float: left;
+	background: none;
+	color: white;
+	font-family: 'nimbus-sans' sans-serif;
+	font-size: 18px;
+	text-align: left;
+	border: solid white 2px;
+	padding-left: 0.2rem;
+	margin: 0 0.2rem;
+	margin-bottom: 2rem;
+	width: 22%;
+}
+
+#tag-list button.selected {
+	background: white;
+	color: black;
 }
 
 #post-list a {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	width: 100%;
 	float: left;
 }
@@ -137,6 +161,7 @@ Grids
 
 [class*='col-'] {
 	float: left;
+	min-width: 10rem;
 }
 
 .col-1-4 {

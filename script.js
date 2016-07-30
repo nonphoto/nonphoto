@@ -70,7 +70,7 @@ function toggleButtonForTag(element, tag) {
 	tags[tag] = element.classList.contains("selected");
 
 	var foundSelectedTag = false;
-	var postListItems = document.getElementById("post-list").getElementsByTagName("LI");
+	var postListItems = document.getElementById("post-list").getElementsByTagName("A");
 
 	for (var i = 0; i < postListItems.length; i++) {
 		postListItems[i].style.display = "none";
@@ -103,8 +103,6 @@ window.onload = function() {
 
 	canvas.width = width * scale;
 	canvas.height = height * scale;
-	// canvas.style.width = width.toString() + "px";
-	// canvas.style.height = height.toString() + "px";
 
 	context = canvas.getContext('2d');
 	context.scale(scale, scale);

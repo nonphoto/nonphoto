@@ -25,18 +25,18 @@
 		<!-- <svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMinYMid meet"></svg> -->
 		<canvas id="planet-canvas"></canvas>
 
-		<ul id="tag-list">
-			<li><button type="button" onclick="toggleButtonForTag(this, 'code')">code</button></li>
-			<li><button type="button" onclick="toggleButtonForTag(this, 'graphic')">graphic</button></li>
-			<li><button type="button" onclick="toggleButtonForTag(this, 'interface')">interface</button></li>
-			<li><button type="button" onclick="toggleButtonForTag(this, 'mobile')">mobile</button></li>
-		</ul>
+		<div id="tag-list">
+			<button type="button" onclick="toggleButtonForTag(this, 'code')">Code</button>
+			<button type="button" onclick="toggleButtonForTag(this, 'art')">Art</button>
+			<button type="button" onclick="toggleButtonForTag(this, 'design')">Design</button>
+			<button type="button" onclick="toggleButtonForTag(this, 'other')">Other</button>
+		</div>
 
-		<ul id="post-list">
+		<div id="post-list">
 			{% for project in site.projects %}
 				<a href="{{ project.url }}" class="{% for tag in project.tags %}tag-{{ tag }} {% endfor %}">{{ project.title }}</a>
 			{% endfor %}
-		</ul>
+		<div>
 	</nav>
 </body>
 </html>
