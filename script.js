@@ -10,11 +10,12 @@ var focalLength = 400;
 var cameraDistance = 10;
 var planetDistance = 500;
 var planetSize = 3;
-var rotationSpeed = 0.0001;
+var rotationSpeed = 0.0002;
 
 var planets = [];
+var planetCount = 500;
+var dimPlanetCount = 500;
 var menuIsOpen = false;
-var hovering = false;
 
 var tags = Object.create(null);
 
@@ -22,17 +23,20 @@ var planet = {
 	a: 0,
 	b: 0,
 	r: 0,
+	c: "#333344",
 	update: function() {
-		var x = this.r * Math.sin(this.b) * Math.cos(this.a);
-		var z = this.r * Math.sin(this.b) * Math.sin(this.a);
-		var y = this.r * Math.cos(this.b) / 2;
+		var s = 1 - ((document.body.offsetHeight - window.scrollY - window.innerHeight) / window.innerHeight);
+
+		var x = this.r * s * Math.sin(this.b) * Math.cos(this.a);
+		var z = this.r * s * Math.sin(this.b) * Math.sin(this.a);
+		var y = this.r * s * Math.cos(this.b);
 
 		var perspective = focalLength / (focalLength + z + cameraDistance);
 
 		context.save();
+		context.fillStyle = this.c;
 		context.beginPath();
 		context.translate(width / 2, height / 2);
-		// context.scale(perspective, perspective);
 		context.arc(x * perspective, y * perspective, planetSize, 0, 2 * Math.PI)
 		context.fill();
 		context.restore();
@@ -41,6 +45,8 @@ var planet = {
 
 function update() {
 	context.clearRect(0, 0, canvas.width, canvas.height)
+
+	var j = Math.floor(Math.random() * planetCount);
 
 	// Rotate planet positions around Y axis
 	for (var i = 0; i < planets.length; i++) {
@@ -57,12 +63,30 @@ function update() {
 	frameRequest = requestAnimationFrame(update);
 }
 
+function scrollToMenu() {
+	window.scrollTo(0,document.body.scrollHeight);
+}
+
 function startPlanets() {
 	frameRequest = requestAnimationFrame(update);
 }
 
 function stopPlanets() {
 	cancelAnimationFrame(frameRequest);
+}
+
+function openMenu() {
+	if (!menuIsOpen) {
+		menuIsOpen = true;
+		document.getElementById("menu").classList.add("open");
+	}
+}
+
+function closeMenu() {
+	if (menuIsOpen) {
+		menuIsOpen = false;
+		document.getElementById("menu").classList.remove("open");
+	}
 }
 
 function toggleButtonForTag(element, tag) {
@@ -106,9 +130,8 @@ window.onload = function() {
 
 	context = canvas.getContext('2d');
 	context.scale(scale, scale);
-	context.fillStyle = "#333344";
 
-	for (var j = 0; j < 500; j++) {
+	for (var j = 0; j < planetCount; j++) {
 		var p = Object.create(planet);
 
 		// Assign random position within boundaries
@@ -120,4 +143,14 @@ window.onload = function() {
 	}
 
 	startPlanets();
+	window.onscroll();
 };
+
+window.onscroll = function() {
+	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10 || window.scrollY < 0) {
+		openMenu();
+	}
+	else {
+		closeMenu();
+	}
+}

@@ -99,11 +99,17 @@ Navigation
 	padding: 2rem;
 }
 
-nav {
+#menu.open {
+	opacity: 1;
+}
+
+#menu {
+	opacity: 0;
 	background: none;
 	width: 100vw;
 	height: 100vh;
 	padding: 5rem;
+	transition: opacity 0.3s;
 }
 
 #tag-list {
@@ -121,7 +127,7 @@ nav {
 	text-align: left;
 	border: solid white 2px;
 	padding-left: 0.2rem;
-	margin: 0 0.2rem;
+	margin-right: 0.2rem;
 	margin-bottom: 2rem;
 	width: 22%;
 }
