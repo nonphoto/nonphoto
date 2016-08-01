@@ -147,7 +147,7 @@ window.onload = function() {
 };
 
 window.onscroll = function() {
-	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10 || window.scrollY < 0) {
+	if (window.scrollY >= document.body.offsetHeight - document.getElementById("menu").clientHeight - 10 || window.scrollY < 0) {
 		openMenu();
 	}
 	else {

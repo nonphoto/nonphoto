@@ -34,6 +34,12 @@ Project
 	min-height: 100vh;
 }
 
+@media (min-width: 45rem) {
+	.project {
+		padding-left: 30%;
+	}
+}
+
 header {
 	margin-bottom: 5rem;
 }
@@ -43,15 +49,13 @@ article {
 	font-family: 'nimbus-sans' sans-serif;
 	line-height: 1.4;
 	text-transform: none;
-	max-width: 30rem;
 	margin-bottom: 1rem;
 	letter-spacing: 0;
 }
 
-@media (min-width: 45rem) {
-	article {
-		padding-left: 30%;
-	}
+p {
+	max-width: 30rem;
+	margin: 1rem 0;
 }
 
 a {
@@ -60,7 +64,7 @@ a {
 	text-decoration: none;
 }
 
-img {
+article img {
 	max-width: 100%;
 	max-height: 80vh;
 	margin: 2rem 0;
@@ -87,16 +91,19 @@ Navigation
 @media (min-width: 45rem) {
 	#site-title {
 		position: fixed;
+		top: 5rem;
+		left: 5rem;
 	}
 }
 
 #menu-button {
 	position: fixed;
-	top: 4rem;
+	top: 5rem;
 	left: 0;
 	width: 5rem;
 	height: 5rem;
 	padding: 2rem;
+	margin: 0.25rem 0;
 }
 
 #menu.open {
@@ -104,17 +111,24 @@ Navigation
 }
 
 #menu {
+	display: inline-block;
 	opacity: 0;
 	background: none;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	min-height: 100vh;
 	padding: 5rem;
+	padding-right: 2rem;
 	transition: opacity 0.3s;
 }
 
+@media (min-width: 45rem) {
+	#menu {
+		padding-left: 30%;
+	}
+}
+
 #tag-list {
-	display: block;
-	margin-bottom: 1rem;
+	max-width: 30rem;
 }
 
 #tag-list button {
