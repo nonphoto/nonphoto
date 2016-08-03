@@ -18,26 +18,37 @@
 
 <body>
 
-	{% capture assets %}{{ site.url }}/assets/{{ page.slug }}{% endcapture %}
 	{{ content }}
 
 	<canvas id="planet-canvas"></canvas>
 
-	<nav id="menu">
-		<!-- <svg id="planet-svg" viewBox="0, 0, 100, 100" preserveAspectRatio="xMinYMid meet"></svg> -->
+	<div id="menu">
 
-		<div id="tag-list">
-			<button type="button" onclick="toggleButtonForTag(this, 'code')">Code</button>
-			<button type="button" onclick="toggleButtonForTag(this, 'art')">Art</button>
-			<button type="button" onclick="toggleButtonForTag(this, 'design')">Design</button>
-			<button type="button" onclick="toggleButtonForTag(this, 'other')">Other</button>
-		</div>
+		<nav>
+			<img class="menu-button" src="/plus-white.svg" onclick="scrollToMenu();">
 
-		<div id="post-list">
+			<div class="site-title">
+				Jonas<br>
+				Kent<br>
+				Luebbers<br>
+			</div>
+		</nav>
+
+		<div id="project-list">
 			{% for project in site.projects %}
-			<a href="{{ project.url }}" class="{% for tag in project.tags %}tag-{{ tag }} {% endfor %}">{{ project.title }}</a>
+			<a href="{{ project.url }}" class="{% for tag in project.tags %}tag-{{ tag }} {% endfor %}">
+				{{ project.title }}
+				<div class="project-info">{% for tag in project.tags %}{{ tag }} {% endfor %}{{ project.year }}</div>
+			</a>
 			{% endfor %}
 		</div>
-	</nav>
+
+		<div id="contact-list">
+			<a>+1 513 833 7419</a>
+			<a href="mailto:contact@jonasluebbers.com" class="planet-link">contact@jonasluebbers.com</a></li>
+			<a href="https://github.com/nonphoto" class="planet-link">github.com/nonphoto</a></li>
+			<a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba" class="planet-link">linkedin.com/in/jonas-luebbers-4145a0ba</a></li>
+		</div>
+	</div>
 </body>
 </html>

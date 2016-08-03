@@ -2,19 +2,20 @@
 layout: default
 ---
 
-<div class="project">
+<div id="project">
+	<nav>
+		<img class="menu-button" src="/plus-black.svg" onclick="scrollToMenu();">
 
-	<img id="menu-button" src="/plus.svg" onclick="scrollToMenu();">
-
-	<div id="site-title">
-		Jonas<br>
-		Kent<br>
-		Luebbers<br>
-	</div>
+		<div class="site-title">
+			Jonas<br>
+			Kent<br>
+			Luebbers<br>
+		</div>
+	</nav>
 
 	<header>
-		<div class="project-title">{{ page.title }}</div>
-		<div class="project-data">{{ page.date }}</div>
+		{{ page.title }}<br>
+		{{ page.date }}<br>
 	</header>
 
 	<article>

@@ -1,10 +1,11 @@
 "use strict";
 
-var frameRequest;
-var canvas
+var menu;
+var canvas;
 var context;
 var width;
 var height;
+var frameRequest;
 
 var focalLength = 400;
 var cameraDistance = 10;
@@ -13,19 +14,16 @@ var planetSize = 3;
 var rotationSpeed = 0.0002;
 
 var planets = [];
-var planetCount = 500;
-var dimPlanetCount = 500;
+var planetCount = 300;
 var menuIsOpen = false;
-
-var tags = Object.create(null);
 
 var planet = {
 	a: 0,
 	b: 0,
 	r: 0,
-	c: "#333344",
 	update: function() {
-		var s = 1 - ((document.body.offsetHeight - window.scrollY - window.innerHeight) / window.innerHeight);
+		// var s = 1 - ((document.body.offsetHeight - window.scrollY - window.innerHeight) / window.innerHeight);
+		var s = Math.max(0, Math.min(1, 1 - (document.body.offsetHeight - window.scrollY - window.innerHeight) / menu.clientHeight));
 
 		var x = this.r * s * Math.sin(this.b) * Math.cos(this.a);
 		var z = this.r * s * Math.sin(this.b) * Math.sin(this.a);
@@ -34,7 +32,6 @@ var planet = {
 		var perspective = focalLength / (focalLength + z + cameraDistance);
 
 		context.save();
-		context.fillStyle = this.c;
 		context.beginPath();
 		context.translate(width / 2, height / 2);
 		context.arc(x * perspective, y * perspective, planetSize, 0, 2 * Math.PI)
@@ -75,52 +72,11 @@ function stopPlanets() {
 	cancelAnimationFrame(frameRequest);
 }
 
-function openMenu() {
-	if (!menuIsOpen) {
-		menuIsOpen = true;
-		document.getElementById("menu").classList.add("open");
-	}
-}
-
-function closeMenu() {
-	if (menuIsOpen) {
-		menuIsOpen = false;
-		document.getElementById("menu").classList.remove("open");
-	}
-}
-
-function toggleButtonForTag(element, tag) {
-	element.classList.toggle("selected");
-	tags[tag] = element.classList.contains("selected");
-
-	var foundSelectedTag = false;
-	var postListItems = document.getElementById("post-list").getElementsByTagName("A");
-
-	for (var i = 0; i < postListItems.length; i++) {
-		postListItems[i].style.display = "none";
-	}
-
-	for (var tag in tags) {
-		if (tags[tag]) {
-			foundSelectedTag = true;
-			for (var i = 0; i < postListItems.length; i++) {
-				var postListItem = postListItems[i];
-				if (postListItem.classList.contains("tag-" + tag)) {
-					postListItem.style.display = "block";
-				}
-			}
-		}
-	}
-
-	if (!foundSelectedTag) {
-		for (var i = 0; i < postListItems.length; i++) {
-			postListItems[i].style.display = "block";
-		}
-	}
-}
-
 window.onload = function() {
-	canvas = document.getElementById('planet-canvas');
+	menu = document.getElementById("menu");
+	project = document.getElementById("project");
+	canvas = document.getElementById("planet-canvas");
+
 	width = canvas.clientWidth;
 	height = canvas.clientHeight;
 	var scale = window.devicePixelRatio
@@ -130,6 +86,7 @@ window.onload = function() {
 
 	context = canvas.getContext('2d');
 	context.scale(scale, scale);
+	context.fillStyle =	"#333344";
 
 	for (var j = 0; j < planetCount; j++) {
 		var p = Object.create(planet);
@@ -147,10 +104,16 @@ window.onload = function() {
 };
 
 window.onscroll = function() {
-	if (window.scrollY >= document.body.offsetHeight - document.getElementById("menu").clientHeight - 10 || window.scrollY < 0) {
-		openMenu();
+	if (window.scrollY >= document.body.offsetHeight - menu.clientHeight || window.scrollY < 0) {
+		if (!menuIsOpen) {
+			menuIsOpen = true;
+			menu.classList.add("open");
+		}
 	}
 	else {
-		closeMenu();
+		if (menuIsOpen) {
+			menuIsOpen = false;
+			menu.classList.remove("open");
+		}
 	}
 }

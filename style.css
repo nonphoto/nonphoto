@@ -26,7 +26,15 @@ body {
 Project
 */
 
-.project {
+#nav {
+	opacity: 1;
+}
+
+#nav.closed {
+	opacity: 0;
+}
+
+#project {
 	background: white;
 	color: black;
 	padding: 5rem;
@@ -35,9 +43,32 @@ Project
 }
 
 @media (min-width: 45rem) {
-	.project {
+	#project {
 		padding-left: 30%;
 	}
+}
+
+.site-title {
+	margin-bottom: 5rem;
+}
+
+@media (min-width: 45rem) {
+	.site-title {
+		position: fixed;
+		top: 5rem;
+		left: 5rem;
+	}
+}
+
+.menu-button {
+	position: fixed;
+	top: 5rem;
+	left: 0;
+	width: 5rem;
+	height: 5rem;
+	padding: 2rem;
+	margin: 0.25rem 0;
+	stroke: red;
 }
 
 header {
@@ -48,9 +79,9 @@ article {
 	font-size: 18px;
 	font-family: 'nimbus-sans' sans-serif;
 	line-height: 1.4;
+	letter-spacing: 0;
 	text-transform: none;
 	margin-bottom: 1rem;
-	letter-spacing: 0;
 }
 
 p {
@@ -81,29 +112,12 @@ ul {
 
 
 /**
-Navigation
+Menu
 */
 
-#site-title {
-	margin-bottom: 5rem;
-}
-
-@media (min-width: 45rem) {
-	#site-title {
-		position: fixed;
-		top: 5rem;
-		left: 5rem;
-	}
-}
-
-#menu-button {
-	position: fixed;
-	top: 5rem;
-	left: 0;
-	width: 5rem;
-	height: 5rem;
-	padding: 2rem;
-	margin: 0.25rem 0;
+#menu .menu-button {
+	stroke: white;
+	transform: rotate(45deg);
 }
 
 #menu.open {
@@ -124,39 +138,48 @@ Navigation
 @media (min-width: 45rem) {
 	#menu {
 		padding-left: 30%;
+		padding-right: 20%;
 	}
 }
 
-#tag-list {
-	max-width: 30rem;
+.project-info {
+	display: none;
+	float: right;
 }
 
-#tag-list button {
-	display: block;
-	float: left;
-	background: none;
-	color: white;
-	font-family: 'nimbus-sans' sans-serif;
-	font-size: 18px;
-	text-align: left;
-	border: solid white 2px;
-	padding-left: 0.2rem;
-	margin-right: 0.2rem;
-	margin-bottom: 2rem;
-	width: 22%;
+@media (min-width: 45rem) {
+	.project-info {
+		display: block;
+	}
 }
 
-#tag-list button.selected {
-	background: white;
-	color: black;
+#project-list {
+	margin-bottom: 5rem;
+	display: inline-block;
+	width: 100%;
 }
 
-#post-list a {
+#project-list a {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	width: 100%;
 	float: left;
+}
+
+#contact-list {
+	margin-bottom: 1rem;
+	display: inline-block;
+	width: 100%;
+}
+
+#contact-list a {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
+	float: left;
+	text-transform: lowercase;
 }
 
 #planet-canvas {
