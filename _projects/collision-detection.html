@@ -2,12 +2,12 @@
 layout: project
 title: Collision Detection
 slug: collision-detection
-tags:
-- code
+type: game development
+year: spring 2015
 ---
 
 <p>
-	Collision detection is a common problem in game development, but it has many solutions. In the 2D realm your options can lie anywhere between dead-simple <a href="https://en.wikipedia.org/wiki/Tile-based_video_game">tile-based detection</a> to all-purpose <a href"http://box2d.org">physics libraries</a>. However, I noticed that there were few solutions that handled slopes, gravity, and friction as well as a physics library, but were still relatively light-weight. Since I was planning on making a 2D platformer with a level-editor in Lua and <a href="https://love2d.org">L&ouml;ve</a>, I took this as an opportunity to roll my own.
+	Collision detection is a common problem in game development, but it has many solutions. In the 2D realm your options can lie anywhere between dead-simple <a href="https://en.wikipedia.org/wiki/Tile-based_video_game">tile-based detection</a> to all-purpose <a href="http://box2d.org">physics libraries</a>. However, I noticed that there were few solutions that handled slopes, gravity, and friction as well as a physics library, but were still relatively light-weight. Since I was planning on making a 2D platformer with a level-editor in Lua and <a href="https://love2d.org">L&ouml;ve</a>, I took this as an opportunity to roll my own.
 </p>
 
 <p>
@@ -17,7 +17,7 @@ tags:
 <img src="{{ site.url }}/assets/{{ page.slug }}/demo-00.gif" alt="Demo 00"></img>
 
 <p>
-	I give the player object inertia by doing some light physics simulation using <a href="https://en.wikipedia.org/wiki/Verlet_integration">verlet integration</href>. If the entity intersects with a line, the line moves the entity back outside the line in the direction of the line's normal. This is similar to the system used in one of my favorite 2D games, <a href="http://www.thewayoftheninja.org/nv2.html">N</a>, except their system checks against tiles, not lines.
+	I give the player object inertia by doing some light physics simulation using <a href="https://en.wikipedia.org/wiki/Verlet_integration">verlet integration</a>. If the entity intersects with a line, the line moves the entity back outside the line in the direction of the line's normal. This is similar to the system used in one of my favorite 2D games, <a href="http://www.thewayoftheninja.org/nv2.html">N</a>, except their system checks against tiles, not lines.
 </p>
 
 <img src="{{ site.url }}/assets/{{ page.slug }}/demo-01.gif" alt="Demo 01"></img>

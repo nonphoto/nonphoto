@@ -89,10 +89,20 @@ p {
 	margin: 1rem 0;
 }
 
+.subhead {
+	margin-left: 3.3ch;
+	text-transform: lowercase;
+}
+
 a {
 	font-weight: normal;
 	color: inherit;
 	text-decoration: none;
+}
+
+p a {
+	padding: 0 2px;
+	border-bottom: solid black 2px;
 }
 
 article img {
@@ -138,13 +148,32 @@ Menu
 @media (min-width: 45rem) {
 	#menu {
 		padding-left: 30%;
-		padding-right: 20%;
+		padding-right: 5rem;
 	}
+}
+
+#menu a {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100%;
+	float: left;
+	padding: 0 0.4rem;
+}
+
+#menu a:hover {
+	background: #333344;
+}
+
+#menu a:selected {
+	color: black;
+	background: white;
 }
 
 .project-info {
 	display: none;
 	float: right;
+	text-transform: lowercase;
 }
 
 @media (min-width: 45rem) {
@@ -153,32 +182,13 @@ Menu
 	}
 }
 
-#project-list {
+#project-list, #contact-list{
 	margin-bottom: 5rem;
 	display: inline-block;
 	width: 100%;
 }
 
-#project-list a {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	width: 100%;
-	float: left;
-}
-
 #contact-list {
-	margin-bottom: 1rem;
-	display: inline-block;
-	width: 100%;
-}
-
-#contact-list a {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	width: 100%;
-	float: left;
 	text-transform: lowercase;
 }
 

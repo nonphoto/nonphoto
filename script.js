@@ -14,7 +14,7 @@ var planetSize = 3;
 var rotationSpeed = 0.0002;
 
 var planets = [];
-var planetCount = 300;
+var planetCount = 250;
 var menuIsOpen = false;
 
 var planet = {
@@ -23,7 +23,7 @@ var planet = {
 	r: 0,
 	update: function() {
 		// var s = 1 - ((document.body.offsetHeight - window.scrollY - window.innerHeight) / window.innerHeight);
-		var s = Math.max(0, Math.min(1, 1 - (document.body.offsetHeight - window.scrollY - window.innerHeight) / menu.clientHeight));
+		var s = Math.max(0, 1 - (document.body.offsetHeight - window.scrollY - window.innerHeight) / menu.clientHeight);
 
 		var x = this.r * s * Math.sin(this.b) * Math.cos(this.a);
 		var z = this.r * s * Math.sin(this.b) * Math.sin(this.a);
@@ -74,7 +74,6 @@ function stopPlanets() {
 
 window.onload = function() {
 	menu = document.getElementById("menu");
-	project = document.getElementById("project");
 	canvas = document.getElementById("planet-canvas");
 
 	width = canvas.clientWidth;

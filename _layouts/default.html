@@ -38,7 +38,7 @@
 			{% for project in site.projects %}
 			<a href="{{ project.url }}" class="{% for tag in project.tags %}tag-{{ tag }} {% endfor %}">
 				{{ project.title }}
-				<div class="project-info">{% for tag in project.tags %}{{ tag }} {% endfor %}{{ project.year }}</div>
+				<div class="project-info">{{ project.type }}</div>
 			</a>
 			{% endfor %}
 		</div>
