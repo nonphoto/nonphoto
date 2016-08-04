@@ -21,5 +21,9 @@ year: fall 2014
 </p>
 
 <p>
-	Like the atmosphere, clouds are a semi-transparent volume. Unlike the atmosphere, clouds have a much greater variation in density. We didn't want to do any modeling, so we used a noise function to generate an infinite field of clouds. Clouds are translucent, but they are dense enough to cast shadows on themselves. For this reason, rays from the camera penetrate through the cloud, and each step along the ray calculates how much that point is in shadow.
+	Like the atmosphere, clouds are a semi-transparent volume. Unlike the atmosphere, clouds have a much greater variation in density. We didn't want to do any modeling, so we used a noise function to generate an infinite field of clouds. Clouds are translucent, but they are dense enough to cast shadows on themselves. For this reason, rays from the camera penetrate through the cloud, and each step along the ray calculates how much that point is in shadow with a secondary ray-cast.
+</p>
+
+<p>
+	We reuse the light color from the sky to make a gradient that colors the clouds, which creates some beautiful sunsets. There is no night segment in the shader, but the whole thing loops nicely because there's no light at all once the sun goes down. I haven't written any shaders since this project, but I would definitely like to get back into it at some point; some of the work on <a href="https://www.shadertoy.com">Shader Toy</a> is really inspiring.
 </p>
