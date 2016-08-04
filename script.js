@@ -16,6 +16,7 @@ var rotationSpeed = 0.0002;
 var planets = [];
 var planetCount = 250;
 var menuIsOpen = false;
+var previousScrollPosition = 0;
 
 var planet = {
 	a: 0,
@@ -61,7 +62,17 @@ function update() {
 }
 
 function scrollToMenu() {
-	window.scrollTo(0,document.body.scrollHeight);
+	if (menuIsOpen) {
+		window.scrollTo(0, previousScrollPosition);
+	}
+	else {
+		previousScrollPosition = window.scrollY;
+		window.scrollTo(0, document.body.offsetHeight - menu.clientHeight);
+	}
+}
+
+function scrollToPrevious() {
+
 }
 
 function startPlanets() {
@@ -85,7 +96,7 @@ window.onload = function() {
 
 	context = canvas.getContext('2d');
 	context.scale(scale, scale);
-	context.fillStyle =	"#333344";
+	context.fillStyle =	"#444466";
 
 	for (var j = 0; j < planetCount; j++) {
 		var p = Object.create(planet);
@@ -103,7 +114,7 @@ window.onload = function() {
 };
 
 window.onscroll = function() {
-	if (window.scrollY >= document.body.offsetHeight - menu.clientHeight || window.scrollY < 0) {
+	if (window.scrollY >= document.body.offsetHeight - menu.clientHeight || document.body.offsetHeight - menu.clientHeight <= 0) {
 		if (!menuIsOpen) {
 			menuIsOpen = true;
 			menu.classList.add("open");

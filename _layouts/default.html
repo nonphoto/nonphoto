@@ -36,7 +36,7 @@
 
 		<div id="project-list">
 			{% for project in site.projects %}
-			<a href="{{ project.url }}" class="{% for tag in project.tags %}tag-{{ tag }} {% endfor %}">
+			<a href="{{ project.url }}" class="{% if project.title == page.title %}selected{% endif %}">
 				{{ project.title }}
 				<div class="project-info">{{ project.type }}</div>
 			</a>
@@ -45,9 +45,9 @@
 
 		<div id="contact-list">
 			<a>+1 513 833 7419</a>
-			<a href="mailto:contact@jonasluebbers.com" class="planet-link">contact@jonasluebbers.com</a></li>
-			<a href="https://github.com/nonphoto" class="planet-link">github.com/nonphoto</a></li>
-			<a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba" class="planet-link">linkedin.com/in/jonas-luebbers-4145a0ba</a></li>
+			<a href="mailto:contact@jonasluebbers.com" class="planet-link">contact@jonasluebbers.com</a>
+			<a href="https://github.com/nonphoto" class="planet-link">github.com/nonphoto</a>
+			<a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba" class="planet-link">linkedin.com/in/jonas-luebbers-4145a0ba</a>
 		</div>
 	</div>
 </body>

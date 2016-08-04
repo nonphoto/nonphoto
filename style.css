@@ -21,18 +21,9 @@ body {
 }
 
 
-
 /**
 Project
 */
-
-#nav {
-	opacity: 1;
-}
-
-#nav.closed {
-	opacity: 0;
-}
 
 #project {
 	background: white;
@@ -68,7 +59,6 @@ Project
 	height: 5rem;
 	padding: 2rem;
 	margin: 0.25rem 0;
-	stroke: red;
 }
 
 header {
@@ -125,14 +115,6 @@ ul {
 Menu
 */
 
-#menu .menu-button {
-	stroke: white;
-	transform: rotate(45deg);
-}
-
-#menu.open {
-	opacity: 1;
-}
 
 #menu {
 	display: inline-block;
@@ -152,6 +134,15 @@ Menu
 	}
 }
 
+#menu.open {
+	opacity: 1;
+}
+
+#menu .menu-button {
+	stroke: white;
+	transform: rotate(45deg);
+}
+
 #menu a {
 	white-space: nowrap;
 	overflow: hidden;
@@ -162,10 +153,10 @@ Menu
 }
 
 #menu a:hover {
-	background: #333344;
+	background: #444466;
 }
 
-#menu a:selected {
+#menu a.selected {
 	color: black;
 	background: white;
 }
