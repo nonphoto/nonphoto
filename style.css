@@ -173,13 +173,15 @@ Menu
 	}
 }
 
-#project-list, #contact-list{
+#project-list {
 	margin-bottom: 5rem;
 	display: inline-block;
 	width: 100%;
 }
 
 #contact-list {
+	display: inline-block;
+	width: 100%;
 	text-transform: lowercase;
 }
 
