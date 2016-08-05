@@ -10,6 +10,8 @@ year: spring 2015
 	Collision detection is a common problem in game development, but it has many solutions. In the 2D realm your options can lie anywhere between dead-simple <a href="https://en.wikipedia.org/wiki/Tile-based_video_game">tile-based detection</a> to all-purpose <a href="https://github.com/erincatto/Box2D">physics libraries</a>. However, I noticed that there were few solutions that handled slopes, gravity, and friction as well as a physics library, but were still relatively light-weight. Since I was planning on making a 2D platformer with a level-editor in Lua and <a href="https://love2d.org">L&ouml;ve</a>, I took this as an opportunity to roll my own.
 </p>
 
+<h2>How it works</h2>
+
 <p>
 	I tried to think about the problem in a novel way. Instead of detecting collisions between arbitrary shapes, I only check rectangles against lines. This is a nice abstraction because most game entities are roughly rectangle-shaped, and most game levels are really just a collection of lines. Since I can construct any shape by drawing lines end to end, I actually have more descriptive power this way, and it's actually quite fast because the algorithm only checks against lines that are visible on-screen.
 </p>

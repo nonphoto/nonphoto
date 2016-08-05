@@ -19,35 +19,6 @@
 <body>
 
 	{{ content }}
-
-	<canvas id="planet-canvas"></canvas>
-
-	<div id="menu">
-
-		<nav>
-			<img class="menu-button" src="/plus-white.svg" onclick="scrollToMenu();">
-
-			<div class="site-title">
-				Jonas<br>
-				Kent<br>
-				Luebbers<br>
-			</div>
-		</nav>
-
-		<div id="project-list">
-			{% for project in site.projects %}
-			<a href="{{ project.url }}" class="{% if project.title == page.title %}selected{% endif %}">
-				{{ project.title }}<span class="project-info">{{ project.type }}</span>
-			</a>
-			{% endfor %}
-		</div>
-
-		<div id="contact-list">
-			<a>+1 513 833 7419</a>
-			<a href="mailto:contact@jonasluebbers.com" class="planet-link">contact@jonasluebbers.com</a>
-			<a href="https://github.com/nonphoto" class="planet-link">github.com/nonphoto</a>
-			<a href="https://www.linkedin.com/in/jonas-luebbers-4145a0ba" class="planet-link">linkedin.com/in/jonas-luebbers-4145a0ba</a>
-		</div>
-	</div>
+	
 </body>
 </html>
