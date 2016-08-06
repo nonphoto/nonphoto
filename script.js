@@ -1,34 +1,31 @@
 "use strict";
 
-var menu;
 var canvas;
 var context;
 var width;
 var height;
 var frameRequest;
 
-var focalLength = 400;
-var cameraDistance = 10;
-var planetDistance = 500;
+var focalLength = 100;
+var cameraDistance = 40;
+var planetDistance = 100;
 var planetSize = 3;
-var rotationSpeed = 0.0002;
+var planetCount = 50;
+var rotationSpeed = 0.005;
 
 var planets = [];
-var planetCount = 250;
+
 var menuIsOpen = false;
-var previousScrollPosition = 0;
+var rotationMultiplier = 0;
 
 var planet = {
 	a: 0,
 	b: 0,
 	r: 0,
 	update: function() {
-		// var s = 1 - ((document.body.offsetHeight - window.scrollY - window.innerHeight) / window.innerHeight);
-		var s = Math.max(0, 1 - (document.body.offsetHeight - window.scrollY - window.innerHeight) / menu.clientHeight);
-
-		var x = this.r * s * Math.sin(this.b) * Math.cos(this.a);
-		var z = this.r * s * Math.sin(this.b) * Math.sin(this.a);
-		var y = this.r * s * Math.cos(this.b);
+		var x = this.r * Math.sin(this.b) * Math.cos(this.a);
+		var z = this.r * Math.sin(this.b) * Math.sin(this.a);
+		var y = this.r * Math.cos(this.b);
 
 		var perspective = focalLength / (focalLength + z + cameraDistance);
 
@@ -51,7 +48,7 @@ function update() {
 		var p = planets[i];
 
 		if (p.r != 0) {
-			p.a += rotationSpeed * (planetDistance / p.r);
+			p.a += rotationSpeed * rotationMultiplier * (planetDistance / p.r);
 		}
 
 		p.update();
@@ -59,20 +56,6 @@ function update() {
 
 	// Continue animation
 	frameRequest = requestAnimationFrame(update);
-}
-
-function scrollToMenu() {
-	if (menuIsOpen) {
-		window.scrollTo(0, previousScrollPosition);
-	}
-	else {
-		previousScrollPosition = window.scrollY;
-		window.scrollTo(0, document.body.offsetHeight - menu.clientHeight);
-	}
-}
-
-function scrollToPrevious() {
-
 }
 
 function startPlanets() {
@@ -84,7 +67,6 @@ function stopPlanets() {
 }
 
 window.onload = function() {
-	menu = document.getElementById("menu");
 	canvas = document.getElementById("planet-canvas");
 
 	width = canvas.clientWidth;
@@ -96,7 +78,7 @@ window.onload = function() {
 
 	context = canvas.getContext('2d');
 	context.scale(scale, scale);
-	context.fillStyle =	"#444466";
+	context.fillStyle =	"#000000";
 
 	for (var j = 0; j < planetCount; j++) {
 		var p = Object.create(planet);
@@ -110,20 +92,8 @@ window.onload = function() {
 	}
 
 	startPlanets();
-	window.onscroll();
 };
 
-window.onscroll = function() {
-	if (window.scrollY >= document.body.offsetHeight - menu.clientHeight || document.body.offsetHeight - menu.clientHeight <= 0) {
-		if (!menuIsOpen) {
-			menuIsOpen = true;
-			menu.classList.add("open");
-		}
-	}
-	else {
-		if (menuIsOpen) {
-			menuIsOpen = false;
-			menu.classList.remove("open");
-		}
-	}
-}
+window.onmousemove = function(e) {
+	rotationMultiplier = (e.clientX / window.innerWidth * 2) - 1;
+};

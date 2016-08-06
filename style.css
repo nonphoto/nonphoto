@@ -13,12 +13,13 @@ body {
 	font-family: 'Work Sans' sans-serif;
 	font-size: 18px;
 	line-height: 1.4;
-	margin: 5rem 2rem;
 }
 
 canvas {
-	width: 5rem;
-	height: 5rem;
+	display: block;
+	width: 10rem;
+	height: 10rem;
+	margin: 1rem auto;
 }
 
 h1, h2, h3 {
@@ -27,12 +28,14 @@ h1, h2, h3 {
 	font-weight: normal;
 	text-transform: uppercase;
 	letter-spacing: 0.1ch;
+	margin: 0 2rem;
 }
 
 p {
-	color: #666;
+	color: #777;
 	margin: 1rem 0;
 	max-width: 25rem;
+	margin: 1rem 2rem;
 }
 
 p:last-child:after {
@@ -43,7 +46,7 @@ p:last-child:after {
 a {
 	color: black;
 	text-decoration: none;
-	border-bottom: solid #ccc 2px;
+	border-bottom: solid #aaa 2px;
 	transition: border 0.2s
 }
 
