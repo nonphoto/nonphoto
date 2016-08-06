@@ -10,14 +10,19 @@ html {
 }
 
 body {
-	font-family: 'nimbus-sans' sans-serif;
+	font-family: 'Work Sans' sans-serif;
 	font-size: 18px;
 	line-height: 1.4;
 	margin: 5rem 2rem;
 }
 
+canvas {
+	width: 5rem;
+	height: 5rem;
+}
+
 h1, h2, h3 {
-	font-family: 'Space Mono';
+	font-family: 'Space Mono' sans-serif;
 	font-size: 24px;
 	font-weight: normal;
 	text-transform: uppercase;
@@ -25,9 +30,8 @@ h1, h2, h3 {
 }
 
 p {
-	color: #555;
+	color: #666;
 	margin: 1rem 0;
-	width: 90%;
 	max-width: 25rem;
 }
 

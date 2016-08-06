@@ -13,25 +13,25 @@ year: spring 2015
 <h2>How it works</h2>
 
 <p>
-	I tried to think about the problem in a novel way. Instead of detecting collisions between arbitrary shapes, I only check rectangles against lines. This is a nice abstraction because most game entities are roughly rectangle-shaped, and most game levels are really just a collection of lines. Since I can construct any shape by drawing lines end to end, I actually have more descriptive power this way, and it's actually quite fast because the algorithm only checks against lines that are visible on-screen.
+	I tried to think about the problem in a novel way. Instead of detecting collisions between arbitrary shapes, I only check rectangles against lines. This is a nice abstraction because most game entities are roughly rectangle-shaped, and most game levels can be reduced to a collection of lines that define the boundaries of solid walls. Since you can construct just about any shape by drawing lines end to end, this system offers a lot of freedom when designing levels.
 </p>
 
 <img src="{{ site.url }}/assets/{{ page.slug }}/demo-00.gif" alt="Demo 00"></img>
 
 <p>
-	I give the player object inertia by doing some light physics simulation using <a href="https://en.wikipedia.org/wiki/Verlet_integration">verlet integration</a>. If the entity intersects with a line, the line moves the entity back outside the line in the direction of the line's normal. This is similar to the system used in one of my favorite 2D games, <a href="http://www.thewayoftheninja.org/nv2.html">N</a>, except their system checks against tiles, not lines.
+	I give the player-entity inertia by doing some light physics simulation using <a href="https://en.wikipedia.org/wiki/Verlet_integration">verlet integration</a>. If the entity intersects with a line, the line moves the entity back outside the line in the direction of the line's normal. This is similar to the system used in one of my favorite 2D games, <a href="http://www.thewayoftheninja.org/nv2.html">N</a>, except their system checks against tiles, not lines.
 </p>
 
 <img src="{{ site.url }}/assets/{{ page.slug }}/demo-01.gif" alt="Demo 01"></img>
 
 <p>
-	Notice that the entity will slide down slopes because diagonal lines will push the entity sideways as gravity pulls it downward. The collision only occurs in one direction, so if the entity intersects a line from below, it is not affected. This makes it easy to create one-way platforms.
+	 The collision only occurs in one direction, so if the entity intersects a line from below, it is not affected. This makes it easy to create one-way platforms.
 </p>
 
 <img src="{{ site.url }}/assets/{{ page.slug }}/demo-02.gif" alt="Demo 02"></img>
 
 <p>
-	You can also draw new lines in real-time!
+	You can also draw new lines in real-time! Notice also that the entity will slide down slopes because diagonal lines will push the entity sideways as gravity pulls it downward.
 </p>
 
 <img src="{{ site.url }}/assets/{{ page.slug }}/demo-03.gif" alt="Demo 03"></img>
@@ -43,5 +43,5 @@ year: spring 2015
 <img src="{{ site.url }}/assets/{{ page.slug }}/demo-04.gif" alt="Demo 04"></img>
 
 <p>
- I implemented line deletion by checking for intersections with another rectangle. The Lua <a href="https://github.com/nonphoto/denizen/blob/master/terrain.lua">source code</a> is available, but I haven't documented it, so it might be more helpful to check out the <a href="http://www.metanetsoftware.com/technique/tutorialA.html">N collision tutorials</a> if you're still curious.
+ I implemented line deletion by checking for intersections with another rectangle. The Lua <a href="https://github.com/nonphoto/denizen/blob/master/terrain.lua">source code</a> is available, but it's undocumented, so it might be more helpful to check out the <a href="http://www.metanetsoftware.com/technique/tutorialA.html">N collision tutorials</a> if you're still curious.
 </p>
