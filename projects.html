@@ -1,0 +1,17 @@
+---
+layout: default
+title: projects
+---
+
+<div class="project-list">
+	{% for project in site.projects %}
+	<a href="{{ project.url }}" class="project-link">
+		{{ project.title }}
+	</a>
+	{% for tag in project.tags %}
+	<span class="project-tag">
+		{{ tag }}
+	</span>
+	{% endfor %}
+	{% endfor %}
+</div>

@@ -39,7 +39,7 @@ p {
 
 p:last-child:after {
 	content: "\25CF";
-	color: black
+	color: black;
 }
 
 a {
@@ -63,12 +63,33 @@ b {
 	color: black;
 }
 
+/**
+Projects
+*/
+.project-list {
+	font-family: 'Space Mono' sans-serif;
+	font-size: 24px;
+	margin: 0 2rem;
+}
 
+.project-link {
+	text-transform: uppercase;
+	border-color: #fff;
+}
+
+.project-tag {
+	color: #ccc;
+	text-transform: lowercase;
+	/*font-style: italic;*/
+}
+
+.project-tag:after {
+	margin: 0;
+}
 
 /**
 Grids
 */
-
 .grid {
 	width: 100%;
 	margin: 3rem 0;

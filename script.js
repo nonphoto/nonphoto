@@ -9,26 +9,27 @@ var frameRequest;
 var focalLength = 100;
 var cameraDistance = 40;
 var planetDistance = 100;
-var planetSize = 2.5;
+var planetSize = 3;
 var planetCount = 50;
 var rotationSpeed = 0.005;
-
+var rotationMultiplier = 0;
 var planets = [];
 
-var menuIsOpen = false;
-var rotationMultiplier = 0;
-
+// A point with spherical coordinates
 var planet = {
 	a: 0,
 	b: 0,
 	r: 0,
 	update: function() {
+		// Convert to cartesian coordinates
 		var x = this.r * Math.sin(this.b) * Math.cos(this.a);
 		var z = this.r * Math.sin(this.b) * Math.sin(this.a);
 		var y = this.r * Math.cos(this.b);
 
+		// Project into two dimensional space
 		var perspective = focalLength / (focalLength + z + cameraDistance);
 
+		// Draw to the canvas
 		context.save();
 		context.beginPath();
 		context.translate(width / 2, height / 2);
@@ -41,9 +42,7 @@ var planet = {
 function update() {
 	context.clearRect(0, 0, canvas.width, canvas.height)
 
-	var j = Math.floor(Math.random() * planetCount);
-
-	// Rotate planet positions around Y axis
+	// Rotate planets around Y axis
 	for (var i = 0; i < planets.length; i++) {
 		var p = planets[i];
 
@@ -69,6 +68,7 @@ function stopPlanets() {
 window.onload = function() {
 	canvas = document.getElementById("planet-canvas");
 
+	// Rescale canvas by device pixel ratio
 	width = canvas.clientWidth;
 	height = canvas.clientHeight;
 	var scale = window.devicePixelRatio
@@ -80,20 +80,23 @@ window.onload = function() {
 	context.scale(scale, scale);
 	context.fillStyle =	"#000000";
 
+	// Construct planets
 	for (var j = 0; j < planetCount; j++) {
 		var p = Object.create(planet);
 
-		// Assign random position within boundaries
+		// Assign random coordinates within boundaries
 		p.a = Math.random() * 2 * Math.PI
 		p.b = Math.random() * Math.PI;
-		p.r = Math.random() * planetDistance;
+		p.r = Math.random() * planetDistance + 10;
 
 		planets.push(p);
 	}
 
+	// Start the animation
 	startPlanets();
 };
 
 window.onmousemove = function(e) {
+	// Rotate planets faster when the mouse nears the edges of the window
 	rotationMultiplier = (e.clientX / window.innerWidth * 2) - 1;
 };
