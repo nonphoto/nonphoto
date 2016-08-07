@@ -27,7 +27,6 @@ h1, h2, h3 {
 	font-size: 24px;
 	font-weight: normal;
 	text-transform: uppercase;
-	letter-spacing: 0.1ch;
 	margin: 0 2rem;
 }
 
@@ -46,7 +45,7 @@ p:last-child:after {
 a {
 	color: black;
 	text-decoration: none;
-	border-bottom: solid #aaa 2px;
+	border-bottom: solid #ccc 2px;
 	transition: border 0.2s
 }
 
@@ -58,6 +57,10 @@ img {
 	max-width: 100%;
 	max-height: 70vh;
 	margin: 1rem 0;
+}
+
+b {
+	color: black;
 }
 
 

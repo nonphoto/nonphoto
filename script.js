@@ -9,7 +9,7 @@ var frameRequest;
 var focalLength = 100;
 var cameraDistance = 40;
 var planetDistance = 100;
-var planetSize = 3;
+var planetSize = 2.5;
 var planetCount = 50;
 var rotationSpeed = 0.005;
 
