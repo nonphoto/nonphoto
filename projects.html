@@ -1,17 +1,17 @@
 ---
 layout: default
-title: projects
+title: Projects
 ---
 
 <div class="project-list">
 	{% for project in site.projects %}
-	<a href="{{ project.url }}" class="project-link">
-		{{ project.title }}
+	<a href="{{ project.url }}">
+		<div class="project-title">
+			{{ project.title }}
+		</div>
+		<div class="project-description">
+			{{ project.description }}, {{ project.year }}
+		</div>
 	</a>
-	{% for tag in project.tags %}
-	<span class="project-tag">
-		{{ tag }}
-	</span>
-	{% endfor %}
 	{% endfor %}
 </div>

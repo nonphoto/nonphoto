@@ -15,6 +15,12 @@ body {
 	line-height: 1.4;
 }
 
+@media (min-width: 32rem) {
+	body {
+		font-size: 22px;
+	}
+}
+
 canvas {
 	display: block;
 	width: 10rem;
@@ -22,19 +28,60 @@ canvas {
 	margin: 1rem auto;
 }
 
-h1, h2, h3 {
+h1, h2, p:first-child, .project-title {
 	font-family: 'Space Mono' sans-serif;
 	font-size: 24px;
+}
+
+@media (min-width: 32rem) {
+	h1, h2, p:first-child, .project-title {
+		font-size: 28px;
+	}
+}
+
+p, ol, ul {
+	color: #667;
+}
+
+p, ol, ul, h1, h2 {
+	max-width: 20rem;
+	margin: 1rem 2rem;
+}
+
+@media (min-width: 32rem) {
+	p, ol, ul, h1, h2 {
+		max-width: 28rem;
+		margin: 1rem auto;
+	}
+}
+
+h1, h2 {
 	font-weight: normal;
 	text-transform: uppercase;
-	margin: 0 2rem;
+	margin-top: 2rem;
+	margin-bottom: 0.5rem;
 }
 
 p {
-	color: #777;
-	margin: 1rem 0;
-	max-width: 25rem;
-	margin: 1rem 2rem;
+	margin-top: 0;
+}
+
+p:first-child {
+	max-width: 100%;
+	margin: 0 2rem;
+	margin-bottom: 3rem;
+}
+
+@media (min-width: 32rem) {
+	p:first-child {
+		margin: 0 3rem;
+		margin-bottom: 3rem;
+	}
+}
+
+p:first-child b {
+	font-weight: normal;
+	text-transform: uppercase;
 }
 
 p:last-child:after {
@@ -45,7 +92,7 @@ p:last-child:after {
 a {
 	color: black;
 	text-decoration: none;
-	border-bottom: solid #ccc 2px;
+	border-bottom: solid #bbd 2px;
 	transition: border 0.2s
 }
 
@@ -53,63 +100,114 @@ a:hover {
 	border-bottom: solid black 2px;
 }
 
+li {
+	margin: 1rem 0;
+}
+
 img {
 	max-width: 100%;
 	max-height: 70vh;
-	margin: 1rem 0;
+	margin: 3rem 0;
 }
 
 b {
 	color: black;
 }
 
+.copyright {
+	width: 100%;
+	text-align: center;
+	color: #667;
+	margin: 2rem 0;
+}
+
+
+
 /**
 Projects
 */
+
 .project-list {
-	font-family: 'Space Mono' sans-serif;
-	font-size: 24px;
-	margin: 0 2rem;
+	margin: 0 auto;
+	list-style-type: none;
+	max-width: 15rem;
 }
 
-.project-link {
-	text-transform: uppercase;
+@media (min-width: 32rem) {
+	.project-list {
+		max-width: 26rem;
+		column-count: 2;
+		column-gap: 2rem;
+	}
+}
+
+.project-list a {
+	display: inline-block;
 	border-color: #fff;
 }
 
-.project-tag {
-	color: #ccc;
-	text-transform: lowercase;
-	/*font-style: italic;*/
+.project-title {
+	text-transform: uppercase;
+	width: 100%;
 }
 
-.project-tag:after {
-	margin: 0;
+.project-description {
+	color: #667;
+	width: 100%;
+	margin-bottom: 1rem;
 }
+
+/**
+Navigation
+*/
+nav {
+	margin: 2rem;
+	margin-top: 5rem;
+}
+
+.projects-nav {
+	float: left;
+}
+
+.about-nav {
+	float: right;
+}
+
+
 
 /**
 Grids
 */
+
+@media (min-width: 32rem) {
+	.gallery {
+		max-width: 50%;
+		margin: 0 auto;
+	}
+}
+
 .grid {
 	width: 100%;
-	margin: 3rem 0;
+	margin-bottom: 3rem;
 }
 
 [class*='col-'] {
 	float: left;
-	min-width: 8rem;
+	padding: 0.5rem;
+	max-width: 100%;
+	margin: 0;
 }
 
 .col-1-4 {
-	width: 25%;
-	padding: 1%;
-	margin: 0;
+	max-width: 25%;
 }
 
 .col-1-3 {
-	width: 33.33%;
-	padding: 1%;
-	margin: 0;
+	max-width: 33.33%;
+}
+
+.col-1-2 {
+	max-width: 50%;
 }
 
 .grid:after {

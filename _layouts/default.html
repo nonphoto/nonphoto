@@ -8,7 +8,7 @@
 	<meta name="viewport" content="initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-	<title>Jonas Kent Luebbers - {{ page.title }}</title>
+	<title>Jonas Luebbers - {{ page.title }}</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Space+Mono:400,400i|Work+Sans:400,400i" rel="stylesheet">
 	<link rel="stylesheet" href="/style.css"/>
@@ -20,8 +20,15 @@
 
 	<canvas id="planet-canvas"></canvas>
 
-	{{ content }}
+	<article>
+		{{ content }}
+	</article>
 
-	&copy; {{ site.time | date: '%Y' }}, Jonas Luebbers
+	<nav>
+		<a href="/projects.html" class="projects-nav">Projects</a>
+		<a href="/" class="about-nav">About</a>
+		<div class="copyright">&copy; {{ site.time | date: '%Y' }}, JKL</div>
+	</nav>
+
 </body>
 </html>

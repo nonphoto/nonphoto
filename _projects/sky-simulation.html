@@ -5,26 +5,27 @@ slug: sky-simulation
 year: fall 2014
 tags:
 - computer graphics
+description: A GLSL shader that approximates the visual effects of atmospheric scattering and clouds
 ---
 
-<p>
-	This project is a GLSL shader that approximates the visual effects of atmospheric scattering and clouds. I completed this project with <a href="https://github.com/benjijones">Benji Jones</a> as a midterm assignment for Computational Graphics at Williams College. Graphics shaders and atmospheric scattering are both pretty complicated topics, but I'll try write a quick overview here. If you want more information, check out the <a href="https://github.com/nonphoto/atmospheric-scattering">source code</a>.
+<p class="big">
+	<b>{{ page.title }}</b> is a GLSL shader that approximates the visual effects of atmospheric scattering and clouds. I completed this project as a midterm assignment for Computational Graphics at Williams College. This is the simplified explanation of how it works. If you want more information, check out the <a href="https://github.com/nonphoto/atmospheric-scattering">source code</a>.
 </p>
 
 <img src="{{ site.url }}/assets/{{ page.slug }}/video.gif" alt="Animation"></img>
 
 <p>
-	The shader is composed of two parts: an atmosphere shader that works by simulating the scattering of light particles in the atmosphere, and a cloud shader that draws clouds by simulating how light from the atmosphere shader scatters in a density field. The shader produces an image with a technique called <a href="https://en.wikipedia.org/wiki/Volume_ray_casting">ray casting</a>, which projects a ray out from the focal point of a virtual camera for each pixel of the rendering surface, and calculates the color of light coming from equally spaced points along the ray.
+	The shader is composed of two parts: an atmosphere shader that simulates the scattering of light particles in the atmosphere, and a cloud shader that simulates how light from the atmosphere shader scatters in a density field. The shader produces an image with a technique called <a href="https://en.wikipedia.org/wiki/Volume_ray_casting">ray casting</a>, which projects a ray out from the focal point of a virtual camera for each pixel of the rendering surface, and calculates the color of light coming from equally spaced points along the ray.
 </p>
 
 <p>
-	Earth's atmosphere is composed of billions of tiny particles, and all of these particles scatter light to varying degrees. This is how we can see the sky; light from the sun enters the atmosphere and hits some point in the volume of the atmosphere that scatters it toward your eye. We do a primary ray-cast to calculate the light scattered toward the camera, and a secondary ray-cast to calculate the light that directly reaches each point in the first ray-cast.
+	Earth's atmosphere is composed of billions of tiny particles, and all of these particles scatter light to varying degrees. This is how we can see the sky; light from the sun enters the atmosphere and hits some point in the volume of the atmosphere that scatters it toward your eye in a process called <em>atmospheric scattering</em>. We do a primary ray cast to calculate the light scattered toward the camera, and a secondary ray cast to calculate the light that directly reaches each point in the first ray cast.
 </p>
 
 <p>
-	Like the atmosphere, clouds are a semi-transparent volume. Unlike the atmosphere, clouds have a much greater variation in density. We didn't want to do any modeling, so we used a noise function to generate an infinite field of clouds. Clouds are translucent, but they are dense enough to cast shadows on themselves. For this reason, rays from the camera penetrate through the cloud, and each step along the ray calculates how much that point is in shadow with a secondary ray-cast.
+	Like the atmosphere, clouds are a semi-transparent volume. Unlike the atmosphere, clouds have a much greater variation in density. We didn't want to make any 3D models for this project, so we used a <a href="https://en.wikipedia.org/wiki/Perlin_noise">noise function</a> to generate an infinite field of clouds. Clouds are translucent, but they are dense enough to cast shadows on themselves, so rays from the camera penetrate through the cloud. Each step along the ray calculates how much that point is in shadow with a secondary ray cast toward the sun.
 </p>
 
 <p>
-	We reuse the light color from the sky to make a gradient that colors the clouds, which creates some beautiful sunsets. There is no night segment in the shader, but the whole thing loops nicely because there's no light at all once the sun goes down. I haven't written any shaders since this project, but I would definitely like to get back into it at some point.
+	We reuse the light color from the sky to make a gradient that colors the clouds, which creates some beautiful sunsets. We didn't plan on the two parts of the shader interacting this way, it's just an interesting side-effect of combining the them. Another surprise was that, even though there's no moon, the whole thing loops nicely because everything goes black once the sun goes down.
 </p>
