@@ -25,8 +25,8 @@
 	</article>
 
 	<nav>
-		<a href="/projects.html" class="projects-nav">Projects</a>
-		<a href="/" class="about-nav">About</a>
+		<a href="/projects.html" class="projects-nav {% if page.title == 'Projects' %}disabled{% endif %}">Projects</a>
+		<a href="/" class="about-nav {% if page.title == 'About' %}disabled{% endif %}">About</a>
 		<div class="copyright">&copy; {{ site.time | date: '%Y' }}, JKL</div>
 	</nav>
 

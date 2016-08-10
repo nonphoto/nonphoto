@@ -12,7 +12,9 @@ description: A GLSL shader that approximates the visual effects of atmospheric s
 	<b>{{ page.title }}</b> is a GLSL shader that approximates the visual effects of atmospheric scattering and clouds. I completed this project as a midterm assignment for Computational Graphics at Williams College. This is the simplified explanation of how it works. If you want more information, check out the <a href="https://github.com/nonphoto/atmospheric-scattering">source code</a>.
 </p>
 
-<img src="{{ site.url }}/assets/{{ page.slug }}/video.gif" alt="Animation"></img>
+<div class="gallery">
+	<img src="{{ site.url }}/assets/{{ page.slug }}/video.gif" alt="Animation"></img>
+</div>
 
 <p>
 	The shader is composed of two parts: an atmosphere shader that simulates the scattering of light particles in the atmosphere, and a cloud shader that simulates how light from the atmosphere shader scatters in a density field. The shader produces an image with a technique called <a href="https://en.wikipedia.org/wiki/Volume_ray_casting">ray casting</a>, which projects a ray out from the focal point of a virtual camera for each pixel of the rendering surface, and calculates the color of light coming from equally spaced points along the ray.

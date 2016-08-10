@@ -174,12 +174,21 @@ nav {
 	margin-top: 5rem;
 }
 
+nav a {
+	padding: 0 0.1rem;
+}
+
+nav a.disabled {
+	text-decoration: line-through;
+	border-color: #fff;
+}
+
 .projects-nav {
-	float: left;
+	float: right;
 }
 
 .about-nav {
-	float: right;
+	float: left;
 }
 
 
