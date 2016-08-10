@@ -42,6 +42,12 @@ h1, h2, p:first-child, .project-title {
 	}
 }
 
+.contact-list {
+	font-family: monospace;
+	font-family: 'Space Mono';
+	margin-top: 3rem;
+}
+
 p, ol, ul {
 	color: #667;
 }
