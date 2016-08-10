@@ -12,7 +12,7 @@ var planetDistance = 100;
 var planetSize = 3;
 var planetCount = 50;
 var rotationSpeed = 0.005;
-var rotationMultiplier = 0;
+var rotationMultiplier = 0.5;
 var planets = [];
 
 // A point with spherical coordinates

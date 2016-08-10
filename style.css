@@ -1,4 +1,3 @@
-
 * {
 	margin: 0;
 	padding: 0;
@@ -10,9 +9,12 @@ html {
 }
 
 body {
-	font-family: 'Work Sans' sans-serif;
+	font-family: sans-serif;
+	font-family: 'Work Sans';
 	font-size: 18px;
 	line-height: 1.4;
+	animation-name: fade;
+	animation-duration: 0.5s;
 }
 
 @media (min-width: 32rem) {
@@ -29,7 +31,8 @@ canvas {
 }
 
 h1, h2, p:first-child, .project-title {
-	font-family: 'Space Mono' sans-serif;
+	font-family: monospace;
+	font-family: 'Space Mono';
 	font-size: 24px;
 }
 
@@ -214,4 +217,15 @@ Grids
 	content: "";
 	display: table;
 	clear: both;
+}
+
+@keyframes fade {
+	from {
+		opacity: 0;
+		transform: translateY(0.5rem);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
