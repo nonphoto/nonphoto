@@ -47,6 +47,7 @@ function update() {
 		var p = planets[i];
 
 		if (p.r != 0) {
+			// Planets closer to the origin rotate faster
 			p.a += rotationSpeed * rotationMultiplier * (planetDistance / p.r);
 		}
 
@@ -97,6 +98,6 @@ window.onload = function() {
 };
 
 window.onmousemove = function(e) {
-	// Rotate planets faster when the mouse nears the edges of the window
+	// Rotate planets faster as the mouse nears the edges of the window
 	rotationMultiplier = (e.clientX / window.innerWidth * 2) - 1;
 };
