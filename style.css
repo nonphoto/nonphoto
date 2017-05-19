@@ -48,6 +48,10 @@ h1, h2, p:first-child, .project-title {
 	margin-top: 3rem;
 }
 
+.contact-list:last-child:after {
+	content: "";
+}
+
 p, ol, ul {
 	color: #667;
 }
