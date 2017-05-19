@@ -30,6 +30,10 @@ canvas {
 	margin: 2rem auto;
 }
 
+article {
+	padding: 0 2rem;
+}
+
 h1, h2, p:first-child, .project-title {
 	font-family: monospace;
 	font-family: 'Space Mono';
@@ -58,7 +62,6 @@ p, ol, ul {
 
 p, ol, ul, h1, h2 {
 	max-width: 20rem;
-	margin: 1rem 2rem;
 }
 
 @media (min-width: 32rem) {
@@ -81,15 +84,8 @@ p {
 
 p:first-child {
 	max-width: 100%;
-	margin: 0 2rem;
+	margin: 0;
 	margin-bottom: 3rem;
-}
-
-@media (min-width: 32rem) {
-	p:first-child {
-		margin: 0 3rem;
-		margin-bottom: 3rem;
-	}
 }
 
 p:first-child b {
