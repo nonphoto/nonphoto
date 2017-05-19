@@ -27,7 +27,7 @@ canvas {
 	display: block;
 	width: 10rem;
 	height: 10rem;
-	margin: 1rem auto;
+	margin: 2rem auto;
 }
 
 h1, h2, p:first-child, .project-title {
@@ -138,21 +138,30 @@ Projects
 
 .project-list {
 	margin: 0 auto;
+	padding: 0 1rem;
 	list-style-type: none;
 	max-width: 15rem;
 }
 
-@media (min-width: 32rem) {
+@media (min-width: 60rem) {
 	.project-list {
-		max-width: 26rem;
-		column-count: 2;
-		column-gap: 2rem;
+		max-width: 60rem;
+		display: flex;
+		flex-wrap: wrap;
 	}
 }
 
 .project-list a {
 	display: inline-block;
 	border-color: #fff;
+	margin-bottom: 1rem;
+}
+
+@media (min-width: 60rem) {
+	.project-list a {
+		width: 33.33%;
+		padding: 0 1rem;
+	}
 }
 
 .project-title {
