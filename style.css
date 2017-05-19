@@ -147,9 +147,9 @@ Projects
 	max-width: 15rem;
 }
 
-@media (min-width: 60rem) {
+@media (min-width: 60em) {
 	.project-list {
-		max-width: 60rem;
+		max-width: 60em;
 		display: flex;
 		flex-wrap: wrap;
 	}
@@ -157,20 +157,29 @@ Projects
 
 .project-list a {
 	display: inline-block;
-	border-color: #fff;
 	margin-bottom: 1rem;
+	padding-top: 0.5rem;
+	border-bottom: none;
+	border-top: solid #bbd 2px;
+	transition: border 0.2s
 }
 
-@media (min-width: 60rem) {
+.project-list a:hover {
+	border-top: solid black 2px;
+}
+
+@media (min-width: 60em) {
 	.project-list a {
-		width: 33.33%;
-		padding: 0 1rem;
+		width: calc(33.33% - 2rem);
+		margin-left: 1rem;
+		margin-right: 1rem;
 	}
 }
 
 .project-title {
 	text-transform: uppercase;
 	width: 100%;
+	margin-bottom: 0.5rem;
 }
 
 .project-description {
