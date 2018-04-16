@@ -5,13 +5,69 @@ html, body {
 
 html {
 	font-family: sans-serif;
-	font-size: 18px;
+	font-size: 3vw;
 	color: black;
+}
+
+@media screen and (min-width: 600px) {
+	html {
+		font-size: 2vw;
+	}
 }
 
 body {
 	margin: 0;
 	padding: 0;
+}
+
+main {
+	font-family: 'Pantograph';
+	font-size: 3.8rem;
+	margin: 5rem 1rem;
+	line-height: 1.2em;
+}
+
+p {
+	margin: 0;
+}
+
+strong, a {
+	text-transform: uppercase;
+	font-weight: inherit;
+}
+
+@keyframes flash {
+	from {
+
+	}
+	to {
+		color: black;
+		background-color: white;
+	}
+}
+
+a {
+	color: black;
+	text-decoration: none;
+	border-bottom: solid black 0.06em;
+}
+
+a:hover {
+	color: white;
+	background-color: black;
+}
+
+ul {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+li {
+	display: block;
+	margin-right: 2rem;
 }
 
 #planet-canvas {
