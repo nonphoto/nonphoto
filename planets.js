@@ -6,10 +6,10 @@ var width;
 var height;
 var frameRequest;
 
-var focalLength = 100;
-var cameraDistance = 40;
-var planetDistance = 100;
-var planetSize = 3;
+var focalLength = 200;
+var cameraDistance = 0.1;
+var planetDistance = 200;
+var planetSize = 10;
 var planetCount = 50;
 var rotationSpeed = 0.005;
 var rotationMultiplier = 0.5;
@@ -79,7 +79,7 @@ window.onload = function() {
 
 	context = canvas.getContext('2d');
 	context.scale(scale, scale);
-	context.fillStyle =	"#000000";
+	context.fillStyle =	"rgb(0, 100, 255)";
 
 	// Construct planets
 	for (var j = 0; j < planetCount; j++) {
@@ -88,16 +88,11 @@ window.onload = function() {
 		// Assign random coordinates within boundaries
 		p.a = Math.random() * 2 * Math.PI
 		p.b = Math.random() * Math.PI;
-		p.r = Math.random() * planetDistance + 10;
+		p.r = Math.random() * planetDistance + 50;
 
 		planets.push(p);
 	}
 
 	// Start the animation
 	startPlanets();
-};
-
-window.onmousemove = function(e) {
-	// Rotate planets faster as the mouse nears the edges of the window
-	rotationMultiplier = (e.clientX / window.innerWidth * 2) - 1;
 };
