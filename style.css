@@ -5,14 +5,8 @@ html, body {
 
 html {
 	font-family: sans-serif;
-	font-size: 3vw;
+	font-size: 3.3vw;
 	color: rgba(0, 100, 255, 1.0);
-}
-
-@media screen and (min-width: 600px) {
-	html {
-		font-size: 2vw;
-	}
 }
 
 body {
@@ -22,18 +16,14 @@ body {
 
 main {
 	font-family: 'Avara';
-	font-size: 3.8rem;
+	font-size: 3.2rem;
 	margin: 0 1rem;
 	line-height: 1.2em;
 	font-style: italic;
 }
 
-strong {
-	text-transform: uppercase;
-}
-
 p {
-	margin: 2em 0;
+	margin: 3em 0;
 }
 
 a {
@@ -73,4 +63,14 @@ li a {
 	width: 100%;
 	height: 100%;
 	opacity: 0.3;
+}
+
+@media screen and (min-width: 600px) {
+	html {
+		font-size: 2.6vw;
+	}
+
+	p {
+		margin: 2em 0;
+	}
 }
