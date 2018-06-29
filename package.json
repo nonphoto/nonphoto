@@ -1,0 +1,19 @@
+{
+  "name": "nonphoto.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build.js",
+  "scripts": {
+    "test": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nonphoto/nonphoto.github.io.git"
+  },
+  "author": "Jonas Luebbers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nonphoto/nonphoto.github.io/issues"
+  },
+  "homepage": "https://github.com/nonphoto/nonphoto.github.io#readme"
+}
