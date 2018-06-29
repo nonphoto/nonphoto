@@ -1,6 +1,0 @@
-permalink: /:title
-
-collections:
-    projects:
-      tag: "code"
-      output: true
