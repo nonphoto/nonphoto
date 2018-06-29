@@ -1,20 +1,18 @@
 const fs = require('fs')
 const path = require('path')
+const createTemplate = require('lodash.template')
 
-const layoutsDirname = path.resolve(__dirname, 'assets/layouts')
-const pagesDirname = path.resolve(__dirname, 'assets/pages')
+const entriesDirname = path.resolve(__dirname, 'assets/entries')
 
-const layoutPaths = fs.readdirSync(layoutsDirname)
-const pagePaths = fs.readdirSync(pagesDirname)
+const entryPaths = fs.readdirSync(entriesDirname)
 
-const pages = pagePaths.map((pagePath) => {
-    const readPath = path.resolve(pagesDirname, pagePath)
-    return fs.readFileSync(readPath)
+const entries = entryPaths.map((entryPath) => {
+    const readPath = path.resolve(entriesDirname, entryPath)
+    const fileString = fs.readFileSync(readPath).toString()
+    const template = createTemplate(fileString)
+    return template({ 'inject': () => {
+        return 'hello'
+    } })
 })
 
-const layouts = layoutPaths.map((layoutPath) => {
-    const readPath = path.resolve(layoutsDirname, layoutPath)
-    return fs.readFileSync(readPath)
-})
-
-console.log(layouts.toString())
+console.log(entries)
