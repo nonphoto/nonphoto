@@ -2,19 +2,24 @@ const fs = require('fs')
 const path = require('path')
 const template = require('lodash.template')
 
-const entriesDirname = path.resolve(__dirname, 'assets/entries')
+const pagesDirname = path.resolve(__dirname, 'assets/pages')
 
-function read(templatePath) {
-    const readPath = path.resolve(__dirname, templatePath)
-    const fileString = fs.readFileSync(readPath).toString()
-    return template(fileString)({ read })
+function read(filePath) {
+    return fs.readFileSync(path.resolve(__dirname, filePath)).toString()
 }
 
-const entries = fs.readdirSync(entriesDirname).map(entry => {
-    const templatePath = path.resolve(entriesDirname, entry)
-    return read(templatePath)
+function evaluate(filePath) {
+    const file = read(filePath)
+    return template(file)({ evaluate })
+}
+
+const templateString = read('assets/template.html')
+
+const pages = fs.readdirSync(pagesDirname).map(pagePath => {
+    const content = evaluate(path.resolve(pagesDirname, pagePath))
+    return template(templateString)({ content })
 })
 
-for (let entry of entries) {
-    console.log(entry)
+for (let page of pages) {
+    console.log(page)
 }
