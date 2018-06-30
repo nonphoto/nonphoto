@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>Jonas Luebbers</title>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/avara" type="text/css"/>
+	<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+	---
+layout: project
+title: Public Record
+slug: public-record
+year: Spring 2016
+---
+
+<p>
+	Public Record is <a href="https://public-record.herokuapp.com">website</a> that keeps a text document in sync across multiple client connections. Each user's changes to the document cause the page to update in real-time for any other user on the page. I worked on this project with <a href="https://github.com/dmoon1221">David Moon</a> for the final Distributed Systems assignment at Williams College.
+</p>
+
+<p>
+	Collaborative text editors like these present some interesting design challenges. The user experience needs to be as smooth as possible, so the user's changes are updated in their own document right away, but network latency will cause the document state to diverge if multiple users edit the same part of the document simultaneously.
+</p>
+
+<p>
+	We solve this problem using a general technique for optimistic concurrency control called <a href="https://en.wikipedia.org/wiki/Operational_transformation">operational transformation</a>. The basic idea is that each change to the document is represented as an <em>operation</em>. You could think of the document as a long list of operations on an empty string. Pending operations made in one client are sent to the web server, which forwards them to every other connected client. If changes have been made to the document held by one of the destination clients, a transform function takes the sent operation and the operations that client produced locally, and decides what the resulting text should be.
+</p>
+
+<p>
+	The details of our implementation are examined in <a href="https://github.com/nonphoto/public-record/blob/master/writeup/writeup.pdf">the academic paper</a>, which I definitely recommend you take a look at. While there is a lot of writing on the theory of Operational Transformation (notably from Google), we try to explain the design of a real-world implementation while avoiding the obtuseness of most academic research papers.
+</p>
+
+</body>
