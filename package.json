@@ -4,7 +4,7 @@
   "description": "",
   "main": "build.js",
   "scripts": {
-    "test": "node build.js"
+    "start": "node build.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/nonphoto/nonphoto.github.io/issues"
   },
-  "homepage": "https://github.com/nonphoto/nonphoto.github.io#readme"
+  "homepage": "https://github.com/nonphoto/nonphoto.github.io#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
 }
