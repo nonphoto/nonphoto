@@ -18,5 +18,8 @@
   "homepage": "https://github.com/nonphoto/nonphoto.github.io#readme",
   "devDependencies": {
     "http-server": "^0.11.1"
+  },
+  "dependencies": {
+    "lodash.template": "^4.4.0"
   }
 }
