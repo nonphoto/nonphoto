@@ -762,19 +762,23 @@ var _rafLoop2 = _interopRequireDefault(_rafLoop);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var video = document.querySelector('.header-video');
 var canvas = document.querySelector('#header-canvas');
 var context = canvas.getContext('2d');
+
+video.play();
 
 canvas.width = canvas.clientWidth;
 canvas.height = canvas.clientHeight;
 
-var hue = 0;
+var scale = canvas.height / video.videoHeight;
+var width = video.videoWidth * scale;
+var cloneCount = canvas.width / width;
 
 (0, _rafLoop2.default)(function () {
-    hue += 1;
-    hue %= 360;
-    context.fillStyle = 'hsl(' + hue + 'deg, 100%, 50%)';
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < cloneCount; i++) {
+        context.drawImage(video, i * width, 0, width, canvas.height);
+    }
 }).start();
 },{"raf-loop":"node_modules/raf-loop/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
