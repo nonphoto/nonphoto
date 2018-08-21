@@ -4,7 +4,9 @@
   "description": "",
   "main": "build.js",
   "scripts": {
-    "start": "node build.js"
+    "start": "parcel -d _site index.html",
+    "watch": "parcel watch -d _site index.html",
+    "build": "parcel build -d _site index.html"
   },
   "repository": {
     "type": "git",
