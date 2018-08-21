@@ -1,2 +1,2 @@
-_site/
+.cache
 node_modules
