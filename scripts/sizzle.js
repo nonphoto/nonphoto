@@ -1,16 +1,21 @@
 import loop from 'raf-loop'
 
+const video = document.querySelector('.header-video')
 const canvas = document.querySelector('#header-canvas')
 const context = canvas.getContext('2d')
+
+video.play()
+
 
 canvas.width = canvas.clientWidth
 canvas.height = canvas.clientHeight
 
-let hue = 0
+const scale = canvas.height / video.videoHeight
+const width = video.videoWidth * scale
+const cloneCount = canvas.width / width
 
 loop(() => {
-    hue += 1
-    hue %= 360
-    context.fillStyle = `hsl(${hue}deg, 100%, 50%)`
-    context.fillRect(0, 0, canvas.width, canvas.height)
+    for (let i = 0; i < cloneCount; i++) {
+        context.drawImage(video, i * width, 0, width, canvas.height)
+    }
 }).start()
