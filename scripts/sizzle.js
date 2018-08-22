@@ -1,7 +1,8 @@
 import once from './once'
+import wrap from './wrap'
 import shuffle from 'lodash.shuffle'
 
-const scrollSpeed = 0.5
+const scrollSpeed = -0.5
 const viscosity = 0.05
 const mouseInfluence = 0.2
 
@@ -44,7 +45,7 @@ class SizzleClip {
         if (!this.canPlay) return
 
         const [w, h] = this.resolution
-        const x = offset % this.resolution[0] - w
+        const x = wrap(offset, this.resolution[0]) - w
 
         for (let i = 0; i < this.cloneCount; i++) {
             context.drawImage(this.video, x + (i * w), 0, w, h)
