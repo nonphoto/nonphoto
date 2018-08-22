@@ -11,7 +11,6 @@ html {
 body {
 	box-sizing: border-box;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
 	grid-gap: 1rem;
 	margin: 0;
 	padding: 1rem;
@@ -71,14 +70,72 @@ p {
 }
 
 #header-canvas {
-	min-height: 10vw;
-	height: 25vh;
+	min-height: 15vmax;
+	height: 100%;
 	width: 100%;
-	grid-column-start: 1;
-	grid-column-end: span 2;
 	border-radius: 0.5rem;
+	grid-column-start: 1;
+	grid-column-end: span 1;
 }
 
 .header-video {
 	display: none;
+}
+
+@media all and (min-width: 500px) {
+	body {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	#header-canvas {
+		grid-column-end: span 2;
+	}
+}
+
+@media all and (min-width: 1000px) {
+	html {
+		font-size: 22px;
+	}
+
+	body {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media all and (min-width: 1500px) {
+	html {
+		font-size: 24px;
+	}
+
+	body {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+@media all and (min-width: 2000px) {
+	html {
+		font-size: 28px;
+	}
+
+	body {
+		grid-template-columns: repeat(5, 1fr);
+	}
+
+	#header-canvas {
+		grid-column-end: span 3;
+	}
+}
+
+@media all and (min-width: 2500px) {
+	html {
+		font-size: 32px;
+	}
+
+	body {
+		grid-template-columns: repeat(5, 1fr);
+	}
+
+	#header-canvas {
+		grid-column-end: span 3;
+	}
 }
