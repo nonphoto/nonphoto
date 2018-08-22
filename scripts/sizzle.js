@@ -21,6 +21,17 @@ class SizzleClip {
         })
     }
 
+    start() {
+        if (!this.canPlay) return
+
+        this.video.currentTime = 0
+        this.video.play()
+    }
+
+    stop() {
+        this.video.pause()
+    }
+
     draw(context) {
         if (!this.canPlay) return
 
@@ -50,7 +61,9 @@ export default class SizzleCanvas {
     }
 
     next() {
+        this.currentClip.stop()
         this.clipIndex = (this.clipIndex + 1) % this.clips.length
+        this.currentClip.start()
     }
 
     draw(context) {

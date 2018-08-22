@@ -817,6 +817,19 @@ var SizzleClip = function () {
     }
 
     _createClass(SizzleClip, [{
+        key: 'start',
+        value: function start() {
+            if (!this.canPlay) return;
+
+            this.video.currentTime = 0;
+            this.video.play();
+        }
+    }, {
+        key: 'stop',
+        value: function stop() {
+            this.video.pause();
+        }
+    }, {
         key: 'draw',
         value: function draw(context) {
             if (!this.canPlay) return;
@@ -852,7 +865,9 @@ var SizzleCanvas = function () {
     _createClass(SizzleCanvas, [{
         key: 'next',
         value: function next() {
+            this.currentClip.stop();
             this.clipIndex = (this.clipIndex + 1) % this.clips.length;
+            this.currentClip.start();
         }
     }, {
         key: 'draw',
