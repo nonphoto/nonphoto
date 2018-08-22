@@ -1,4 +1,5 @@
 import once from './once'
+import shuffle from 'lodash.shuffle'
 
 class SizzleClip {
     constructor(video, canvasResolution) {
@@ -15,8 +16,6 @@ class SizzleClip {
 
             this.resolution = [width, canvasHeight]
             this.cloneCount = Math.ceil(canvasWidth / width)
-
-            this.video.play()
             this.canPlay = true
         })
     }
@@ -49,9 +48,9 @@ export default class SizzleCanvas {
         canvas.width = canvas.clientWidth
         canvas.height = canvas.clientHeight
 
-        this.clips = videos.map((video) => {
+        this.clips = shuffle(videos.map((video) => {
             return new SizzleClip(video, [canvas.width, canvas.height])
-        })
+        }))
 
         this.clipIndex = 0
     }
