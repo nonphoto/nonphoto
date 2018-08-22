@@ -74,9 +74,9 @@ p {
 	min-height: 10vw;
 	height: 25vh;
 	width: 100%;
-	background-color: black;
 	grid-column-start: 1;
 	grid-column-end: span 2;
+	border-radius: 0.5rem;
 }
 
 .header-video {

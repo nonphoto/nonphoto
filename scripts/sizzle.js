@@ -1,7 +1,9 @@
 import once from './once'
 import shuffle from 'lodash.shuffle'
 
-const scrollSpeed = 0.02
+const scrollSpeed = 0.5
+const viscosity = 0.05
+const mouseInfluence = 0.2
 
 class SizzleClip {
     constructor(video, canvasResolution) {
@@ -42,7 +44,7 @@ class SizzleClip {
         if (!this.canPlay) return
 
         const [w, h] = this.resolution
-        const x = offset % this.resolution[0]
+        const x = offset % this.resolution[0] - w
 
         for (let i = 0; i < this.cloneCount; i++) {
             context.drawImage(this.video, x + (i * w), 0, w, h)
@@ -61,10 +63,16 @@ export default class SizzleCanvas {
         }))
 
         this.clipIndex = 0
+        this.offset = 0
+        this.targetOffset = 0
     }
 
     get currentClip() {
         return this.clips[this.clipIndex]
+    }
+
+    handleMouseMove(velocity) {
+        this.targetOffset += velocity[0] * mouseInfluence
     }
 
     fit() {
@@ -83,7 +91,8 @@ export default class SizzleCanvas {
     }
 
     draw(context) {
-        const offset = (performance.now() * scrollSpeed) % this.canvas.width
-        this.currentClip.draw(context, -offset)
+        this.targetOffset += scrollSpeed
+        this.offset += (this.targetOffset - this.offset) * viscosity
+        this.currentClip.draw(context, this.offset)
     }
 }

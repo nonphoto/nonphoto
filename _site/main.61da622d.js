@@ -753,7 +753,686 @@ Engine.prototype.tick = function() {
     this.emit('tick', dt)
     this.last = time
 }
-},{"inherits":"node_modules/inherits/inherits_browser.js","events":"node_modules/events/events.js","right-now":"node_modules/right-now/browser.js","raf":"node_modules/raf/index.js"}],"scripts/once.js":[function(require,module,exports) {
+},{"inherits":"node_modules/inherits/inherits_browser.js","events":"node_modules/events/events.js","right-now":"node_modules/right-now/browser.js","raf":"node_modules/raf/index.js"}],"node_modules/gl-vec2/epsilon.js":[function(require,module,exports) {
+module.exports = 0.000001
+
+},{}],"node_modules/gl-vec2/create.js":[function(require,module,exports) {
+module.exports = create
+
+/**
+ * Creates a new, empty vec2
+ *
+ * @returns {vec2} a new 2D vector
+ */
+function create() {
+    var out = new Float32Array(2)
+    out[0] = 0
+    out[1] = 0
+    return out
+}
+},{}],"node_modules/gl-vec2/clone.js":[function(require,module,exports) {
+module.exports = clone
+
+/**
+ * Creates a new vec2 initialized with values from an existing vector
+ *
+ * @param {vec2} a vector to clone
+ * @returns {vec2} a new 2D vector
+ */
+function clone(a) {
+    var out = new Float32Array(2)
+    out[0] = a[0]
+    out[1] = a[1]
+    return out
+}
+},{}],"node_modules/gl-vec2/fromValues.js":[function(require,module,exports) {
+module.exports = fromValues
+
+/**
+ * Creates a new vec2 initialized with the given values
+ *
+ * @param {Number} x X component
+ * @param {Number} y Y component
+ * @returns {vec2} a new 2D vector
+ */
+function fromValues(x, y) {
+    var out = new Float32Array(2)
+    out[0] = x
+    out[1] = y
+    return out
+}
+},{}],"node_modules/gl-vec2/copy.js":[function(require,module,exports) {
+module.exports = copy
+
+/**
+ * Copy the values from one vec2 to another
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the source vector
+ * @returns {vec2} out
+ */
+function copy(out, a) {
+    out[0] = a[0]
+    out[1] = a[1]
+    return out
+}
+},{}],"node_modules/gl-vec2/set.js":[function(require,module,exports) {
+module.exports = set
+
+/**
+ * Set the components of a vec2 to the given values
+ *
+ * @param {vec2} out the receiving vector
+ * @param {Number} x X component
+ * @param {Number} y Y component
+ * @returns {vec2} out
+ */
+function set(out, x, y) {
+    out[0] = x
+    out[1] = y
+    return out
+}
+},{}],"node_modules/gl-vec2/equals.js":[function(require,module,exports) {
+module.exports = equals
+
+var EPSILON = require('./epsilon')
+
+/**
+ * Returns whether or not the vectors have approximately the same elements in the same position.
+ *
+ * @param {vec2} a The first vector.
+ * @param {vec2} b The second vector.
+ * @returns {Boolean} True if the vectors are equal, false otherwise.
+ */
+function equals(a, b) {
+  var a0 = a[0]
+  var a1 = a[1]
+  var b0 = b[0]
+  var b1 = b[1]
+  return (Math.abs(a0 - b0) <= EPSILON * Math.max(1.0, Math.abs(a0), Math.abs(b0)) &&
+          Math.abs(a1 - b1) <= EPSILON * Math.max(1.0, Math.abs(a1), Math.abs(b1)))
+}
+
+},{"./epsilon":"node_modules/gl-vec2/epsilon.js"}],"node_modules/gl-vec2/exactEquals.js":[function(require,module,exports) {
+module.exports = exactEquals
+
+/**
+ * Returns whether or not the vectors exactly have the same elements in the same position (when compared with ===)
+ *
+ * @param {vec2} a The first vector.
+ * @param {vec2} b The second vector.
+ * @returns {Boolean} True if the vectors are equal, false otherwise.
+ */
+function exactEquals(a, b) {
+  return a[0] === b[0] && a[1] === b[1]
+}
+
+},{}],"node_modules/gl-vec2/add.js":[function(require,module,exports) {
+module.exports = add
+
+/**
+ * Adds two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+function add(out, a, b) {
+    out[0] = a[0] + b[0]
+    out[1] = a[1] + b[1]
+    return out
+}
+},{}],"node_modules/gl-vec2/subtract.js":[function(require,module,exports) {
+module.exports = subtract
+
+/**
+ * Subtracts vector b from vector a
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+function subtract(out, a, b) {
+    out[0] = a[0] - b[0]
+    out[1] = a[1] - b[1]
+    return out
+}
+},{}],"node_modules/gl-vec2/sub.js":[function(require,module,exports) {
+module.exports = require('./subtract')
+
+},{"./subtract":"node_modules/gl-vec2/subtract.js"}],"node_modules/gl-vec2/multiply.js":[function(require,module,exports) {
+module.exports = multiply
+
+/**
+ * Multiplies two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+function multiply(out, a, b) {
+    out[0] = a[0] * b[0]
+    out[1] = a[1] * b[1]
+    return out
+}
+},{}],"node_modules/gl-vec2/mul.js":[function(require,module,exports) {
+module.exports = require('./multiply')
+
+},{"./multiply":"node_modules/gl-vec2/multiply.js"}],"node_modules/gl-vec2/divide.js":[function(require,module,exports) {
+module.exports = divide
+
+/**
+ * Divides two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+function divide(out, a, b) {
+    out[0] = a[0] / b[0]
+    out[1] = a[1] / b[1]
+    return out
+}
+},{}],"node_modules/gl-vec2/div.js":[function(require,module,exports) {
+module.exports = require('./divide')
+
+},{"./divide":"node_modules/gl-vec2/divide.js"}],"node_modules/gl-vec2/inverse.js":[function(require,module,exports) {
+module.exports = inverse
+
+/**
+ * Returns the inverse of the components of a vec2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a vector to invert
+ * @returns {vec2} out
+ */
+function inverse(out, a) {
+  out[0] = 1.0 / a[0]
+  out[1] = 1.0 / a[1]
+  return out
+}
+
+},{}],"node_modules/gl-vec2/min.js":[function(require,module,exports) {
+module.exports = min
+
+/**
+ * Returns the minimum of two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+function min(out, a, b) {
+    out[0] = Math.min(a[0], b[0])
+    out[1] = Math.min(a[1], b[1])
+    return out
+}
+},{}],"node_modules/gl-vec2/max.js":[function(require,module,exports) {
+module.exports = max
+
+/**
+ * Returns the maximum of two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec2} out
+ */
+function max(out, a, b) {
+    out[0] = Math.max(a[0], b[0])
+    out[1] = Math.max(a[1], b[1])
+    return out
+}
+},{}],"node_modules/gl-vec2/rotate.js":[function(require,module,exports) {
+module.exports = rotate
+
+/**
+ * Rotates a vec2 by an angle
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to rotate
+ * @param {Number} angle the angle of rotation (in radians)
+ * @returns {vec2} out
+ */
+function rotate(out, a, angle) {
+  var c = Math.cos(angle),
+      s = Math.sin(angle)
+  var x = a[0],
+      y = a[1]
+
+  out[0] = x * c - y * s
+  out[1] = x * s + y * c
+
+  return out
+}
+
+
+},{}],"node_modules/gl-vec2/floor.js":[function(require,module,exports) {
+module.exports = floor
+
+/**
+ * Math.floor the components of a vec2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a vector to floor
+ * @returns {vec2} out
+ */
+function floor(out, a) {
+  out[0] = Math.floor(a[0])
+  out[1] = Math.floor(a[1])
+  return out
+}
+
+},{}],"node_modules/gl-vec2/ceil.js":[function(require,module,exports) {
+module.exports = ceil
+
+/**
+ * Math.ceil the components of a vec2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a vector to ceil
+ * @returns {vec2} out
+ */
+function ceil(out, a) {
+  out[0] = Math.ceil(a[0])
+  out[1] = Math.ceil(a[1])
+  return out
+}
+
+},{}],"node_modules/gl-vec2/round.js":[function(require,module,exports) {
+module.exports = round
+
+/**
+ * Math.round the components of a vec2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a vector to round
+ * @returns {vec2} out
+ */
+function round(out, a) {
+  out[0] = Math.round(a[0])
+  out[1] = Math.round(a[1])
+  return out
+}
+
+},{}],"node_modules/gl-vec2/scale.js":[function(require,module,exports) {
+module.exports = scale
+
+/**
+ * Scales a vec2 by a scalar number
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to scale
+ * @param {Number} b amount to scale the vector by
+ * @returns {vec2} out
+ */
+function scale(out, a, b) {
+    out[0] = a[0] * b
+    out[1] = a[1] * b
+    return out
+}
+},{}],"node_modules/gl-vec2/scaleAndAdd.js":[function(require,module,exports) {
+module.exports = scaleAndAdd
+
+/**
+ * Adds two vec2's after scaling the second operand by a scalar value
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @param {Number} scale the amount to scale b by before adding
+ * @returns {vec2} out
+ */
+function scaleAndAdd(out, a, b, scale) {
+    out[0] = a[0] + (b[0] * scale)
+    out[1] = a[1] + (b[1] * scale)
+    return out
+}
+},{}],"node_modules/gl-vec2/distance.js":[function(require,module,exports) {
+module.exports = distance
+
+/**
+ * Calculates the euclidian distance between two vec2's
+ *
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {Number} distance between a and b
+ */
+function distance(a, b) {
+    var x = b[0] - a[0],
+        y = b[1] - a[1]
+    return Math.sqrt(x*x + y*y)
+}
+},{}],"node_modules/gl-vec2/dist.js":[function(require,module,exports) {
+module.exports = require('./distance')
+
+},{"./distance":"node_modules/gl-vec2/distance.js"}],"node_modules/gl-vec2/squaredDistance.js":[function(require,module,exports) {
+module.exports = squaredDistance
+
+/**
+ * Calculates the squared euclidian distance between two vec2's
+ *
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {Number} squared distance between a and b
+ */
+function squaredDistance(a, b) {
+    var x = b[0] - a[0],
+        y = b[1] - a[1]
+    return x*x + y*y
+}
+},{}],"node_modules/gl-vec2/sqrDist.js":[function(require,module,exports) {
+module.exports = require('./squaredDistance')
+
+},{"./squaredDistance":"node_modules/gl-vec2/squaredDistance.js"}],"node_modules/gl-vec2/length.js":[function(require,module,exports) {
+module.exports = length
+
+/**
+ * Calculates the length of a vec2
+ *
+ * @param {vec2} a vector to calculate length of
+ * @returns {Number} length of a
+ */
+function length(a) {
+    var x = a[0],
+        y = a[1]
+    return Math.sqrt(x*x + y*y)
+}
+},{}],"node_modules/gl-vec2/len.js":[function(require,module,exports) {
+module.exports = require('./length')
+
+},{"./length":"node_modules/gl-vec2/length.js"}],"node_modules/gl-vec2/squaredLength.js":[function(require,module,exports) {
+module.exports = squaredLength
+
+/**
+ * Calculates the squared length of a vec2
+ *
+ * @param {vec2} a vector to calculate squared length of
+ * @returns {Number} squared length of a
+ */
+function squaredLength(a) {
+    var x = a[0],
+        y = a[1]
+    return x*x + y*y
+}
+},{}],"node_modules/gl-vec2/sqrLen.js":[function(require,module,exports) {
+module.exports = require('./squaredLength')
+
+},{"./squaredLength":"node_modules/gl-vec2/squaredLength.js"}],"node_modules/gl-vec2/negate.js":[function(require,module,exports) {
+module.exports = negate
+
+/**
+ * Negates the components of a vec2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a vector to negate
+ * @returns {vec2} out
+ */
+function negate(out, a) {
+    out[0] = -a[0]
+    out[1] = -a[1]
+    return out
+}
+},{}],"node_modules/gl-vec2/normalize.js":[function(require,module,exports) {
+module.exports = normalize
+
+/**
+ * Normalize a vec2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a vector to normalize
+ * @returns {vec2} out
+ */
+function normalize(out, a) {
+    var x = a[0],
+        y = a[1]
+    var len = x*x + y*y
+    if (len > 0) {
+        //TODO: evaluate use of glm_invsqrt here?
+        len = 1 / Math.sqrt(len)
+        out[0] = a[0] * len
+        out[1] = a[1] * len
+    }
+    return out
+}
+},{}],"node_modules/gl-vec2/dot.js":[function(require,module,exports) {
+module.exports = dot
+
+/**
+ * Calculates the dot product of two vec2's
+ *
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {Number} dot product of a and b
+ */
+function dot(a, b) {
+    return a[0] * b[0] + a[1] * b[1]
+}
+},{}],"node_modules/gl-vec2/cross.js":[function(require,module,exports) {
+module.exports = cross
+
+/**
+ * Computes the cross product of two vec2's
+ * Note that the cross product must by definition produce a 3D vector
+ *
+ * @param {vec3} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @returns {vec3} out
+ */
+function cross(out, a, b) {
+    var z = a[0] * b[1] - a[1] * b[0]
+    out[0] = out[1] = 0
+    out[2] = z
+    return out
+}
+},{}],"node_modules/gl-vec2/lerp.js":[function(require,module,exports) {
+module.exports = lerp
+
+/**
+ * Performs a linear interpolation between two vec2's
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the first operand
+ * @param {vec2} b the second operand
+ * @param {Number} t interpolation amount between the two inputs
+ * @returns {vec2} out
+ */
+function lerp(out, a, b, t) {
+    var ax = a[0],
+        ay = a[1]
+    out[0] = ax + t * (b[0] - ax)
+    out[1] = ay + t * (b[1] - ay)
+    return out
+}
+},{}],"node_modules/gl-vec2/random.js":[function(require,module,exports) {
+module.exports = random
+
+/**
+ * Generates a random vector with the given scale
+ *
+ * @param {vec2} out the receiving vector
+ * @param {Number} [scale] Length of the resulting vector. If ommitted, a unit vector will be returned
+ * @returns {vec2} out
+ */
+function random(out, scale) {
+    scale = scale || 1.0
+    var r = Math.random() * 2.0 * Math.PI
+    out[0] = Math.cos(r) * scale
+    out[1] = Math.sin(r) * scale
+    return out
+}
+},{}],"node_modules/gl-vec2/transformMat2.js":[function(require,module,exports) {
+module.exports = transformMat2
+
+/**
+ * Transforms the vec2 with a mat2
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to transform
+ * @param {mat2} m matrix to transform with
+ * @returns {vec2} out
+ */
+function transformMat2(out, a, m) {
+    var x = a[0],
+        y = a[1]
+    out[0] = m[0] * x + m[2] * y
+    out[1] = m[1] * x + m[3] * y
+    return out
+}
+},{}],"node_modules/gl-vec2/transformMat2d.js":[function(require,module,exports) {
+module.exports = transformMat2d
+
+/**
+ * Transforms the vec2 with a mat2d
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to transform
+ * @param {mat2d} m matrix to transform with
+ * @returns {vec2} out
+ */
+function transformMat2d(out, a, m) {
+    var x = a[0],
+        y = a[1]
+    out[0] = m[0] * x + m[2] * y + m[4]
+    out[1] = m[1] * x + m[3] * y + m[5]
+    return out
+}
+},{}],"node_modules/gl-vec2/transformMat3.js":[function(require,module,exports) {
+module.exports = transformMat3
+
+/**
+ * Transforms the vec2 with a mat3
+ * 3rd vector component is implicitly '1'
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to transform
+ * @param {mat3} m matrix to transform with
+ * @returns {vec2} out
+ */
+function transformMat3(out, a, m) {
+    var x = a[0],
+        y = a[1]
+    out[0] = m[0] * x + m[3] * y + m[6]
+    out[1] = m[1] * x + m[4] * y + m[7]
+    return out
+}
+},{}],"node_modules/gl-vec2/transformMat4.js":[function(require,module,exports) {
+module.exports = transformMat4
+
+/**
+ * Transforms the vec2 with a mat4
+ * 3rd vector component is implicitly '0'
+ * 4th vector component is implicitly '1'
+ *
+ * @param {vec2} out the receiving vector
+ * @param {vec2} a the vector to transform
+ * @param {mat4} m matrix to transform with
+ * @returns {vec2} out
+ */
+function transformMat4(out, a, m) {
+    var x = a[0], 
+        y = a[1]
+    out[0] = m[0] * x + m[4] * y + m[12]
+    out[1] = m[1] * x + m[5] * y + m[13]
+    return out
+}
+},{}],"node_modules/gl-vec2/forEach.js":[function(require,module,exports) {
+module.exports = forEach
+
+var vec = require('./create')()
+
+/**
+ * Perform some operation over an array of vec2s.
+ *
+ * @param {Array} a the array of vectors to iterate over
+ * @param {Number} stride Number of elements between the start of each vec2. If 0 assumes tightly packed
+ * @param {Number} offset Number of elements to skip at the beginning of the array
+ * @param {Number} count Number of vec2s to iterate over. If 0 iterates over entire array
+ * @param {Function} fn Function to call for each vector in the array
+ * @param {Object} [arg] additional argument to pass to fn
+ * @returns {Array} a
+ * @function
+ */
+function forEach(a, stride, offset, count, fn, arg) {
+    var i, l
+    if(!stride) {
+        stride = 2
+    }
+
+    if(!offset) {
+        offset = 0
+    }
+    
+    if(count) {
+        l = Math.min((count * stride) + offset, a.length)
+    } else {
+        l = a.length
+    }
+
+    for(i = offset; i < l; i += stride) {
+        vec[0] = a[i]
+        vec[1] = a[i+1]
+        fn(vec, vec, arg)
+        a[i] = vec[0]
+        a[i+1] = vec[1]
+    }
+    
+    return a
+}
+},{"./create":"node_modules/gl-vec2/create.js"}],"node_modules/gl-vec2/index.js":[function(require,module,exports) {
+module.exports = {
+  EPSILON: require('./epsilon')
+  , create: require('./create')
+  , clone: require('./clone')
+  , fromValues: require('./fromValues')
+  , copy: require('./copy')
+  , set: require('./set')
+  , equals: require('./equals')
+  , exactEquals: require('./exactEquals')
+  , add: require('./add')
+  , subtract: require('./subtract')
+  , sub: require('./sub')
+  , multiply: require('./multiply')
+  , mul: require('./mul')
+  , divide: require('./divide')
+  , div: require('./div')
+  , inverse: require('./inverse')
+  , min: require('./min')
+  , max: require('./max')
+  , rotate: require('./rotate')
+  , floor: require('./floor')
+  , ceil: require('./ceil')
+  , round: require('./round')
+  , scale: require('./scale')
+  , scaleAndAdd: require('./scaleAndAdd')
+  , distance: require('./distance')
+  , dist: require('./dist')
+  , squaredDistance: require('./squaredDistance')
+  , sqrDist: require('./sqrDist')
+  , length: require('./length')
+  , len: require('./len')
+  , squaredLength: require('./squaredLength')
+  , sqrLen: require('./sqrLen')
+  , negate: require('./negate')
+  , normalize: require('./normalize')
+  , dot: require('./dot')
+  , cross: require('./cross')
+  , lerp: require('./lerp')
+  , random: require('./random')
+  , transformMat2: require('./transformMat2')
+  , transformMat2d: require('./transformMat2d')
+  , transformMat3: require('./transformMat3')
+  , transformMat4: require('./transformMat4')
+  , forEach: require('./forEach')
+}
+
+},{"./epsilon":"node_modules/gl-vec2/epsilon.js","./create":"node_modules/gl-vec2/create.js","./clone":"node_modules/gl-vec2/clone.js","./fromValues":"node_modules/gl-vec2/fromValues.js","./copy":"node_modules/gl-vec2/copy.js","./set":"node_modules/gl-vec2/set.js","./equals":"node_modules/gl-vec2/equals.js","./exactEquals":"node_modules/gl-vec2/exactEquals.js","./add":"node_modules/gl-vec2/add.js","./subtract":"node_modules/gl-vec2/subtract.js","./sub":"node_modules/gl-vec2/sub.js","./multiply":"node_modules/gl-vec2/multiply.js","./mul":"node_modules/gl-vec2/mul.js","./divide":"node_modules/gl-vec2/divide.js","./div":"node_modules/gl-vec2/div.js","./inverse":"node_modules/gl-vec2/inverse.js","./min":"node_modules/gl-vec2/min.js","./max":"node_modules/gl-vec2/max.js","./rotate":"node_modules/gl-vec2/rotate.js","./floor":"node_modules/gl-vec2/floor.js","./ceil":"node_modules/gl-vec2/ceil.js","./round":"node_modules/gl-vec2/round.js","./scale":"node_modules/gl-vec2/scale.js","./scaleAndAdd":"node_modules/gl-vec2/scaleAndAdd.js","./distance":"node_modules/gl-vec2/distance.js","./dist":"node_modules/gl-vec2/dist.js","./squaredDistance":"node_modules/gl-vec2/squaredDistance.js","./sqrDist":"node_modules/gl-vec2/sqrDist.js","./length":"node_modules/gl-vec2/length.js","./len":"node_modules/gl-vec2/len.js","./squaredLength":"node_modules/gl-vec2/squaredLength.js","./sqrLen":"node_modules/gl-vec2/sqrLen.js","./negate":"node_modules/gl-vec2/negate.js","./normalize":"node_modules/gl-vec2/normalize.js","./dot":"node_modules/gl-vec2/dot.js","./cross":"node_modules/gl-vec2/cross.js","./lerp":"node_modules/gl-vec2/lerp.js","./random":"node_modules/gl-vec2/random.js","./transformMat2":"node_modules/gl-vec2/transformMat2.js","./transformMat2d":"node_modules/gl-vec2/transformMat2d.js","./transformMat3":"node_modules/gl-vec2/transformMat3.js","./transformMat4":"node_modules/gl-vec2/transformMat4.js","./forEach":"node_modules/gl-vec2/forEach.js"}],"scripts/once.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1978,7 +2657,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var scrollSpeed = 0.02;
+var scrollSpeed = 0.5;
+var viscosity = 0.05;
+var mouseInfluence = 0.2;
 
 var SizzleClip = function () {
     function SizzleClip(video, canvasResolution) {
@@ -2034,7 +2715,7 @@ var SizzleClip = function () {
                 w = _resolution[0],
                 h = _resolution[1];
 
-            var x = offset % this.resolution[0];
+            var x = offset % this.resolution[0] - w;
 
             for (var i = 0; i < this.cloneCount; i++) {
                 context.drawImage(this.video, x + i * w, 0, w, h);
@@ -2060,9 +2741,16 @@ var SizzleCanvas = function () {
         }));
 
         this.clipIndex = 0;
+        this.offset = 0;
+        this.targetOffset = 0;
     }
 
     _createClass(SizzleCanvas, [{
+        key: 'handleMouseMove',
+        value: function handleMouseMove(velocity) {
+            this.targetOffset += velocity[0] * mouseInfluence;
+        }
+    }, {
         key: 'fit',
         value: function fit() {
             var _this3 = this;
@@ -2084,8 +2772,9 @@ var SizzleCanvas = function () {
     }, {
         key: 'draw',
         value: function draw(context) {
-            var offset = performance.now() * scrollSpeed % this.canvas.width;
-            this.currentClip.draw(context, -offset);
+            this.targetOffset += scrollSpeed;
+            this.offset += (this.targetOffset - this.offset) * viscosity;
+            this.currentClip.draw(context, this.offset);
         }
     }, {
         key: 'currentClip',
@@ -2105,6 +2794,10 @@ var _rafLoop = require('raf-loop');
 
 var _rafLoop2 = _interopRequireDefault(_rafLoop);
 
+var _glVec = require('gl-vec2');
+
+var _glVec2 = _interopRequireDefault(_glVec);
+
 var _sizzle = require('./sizzle');
 
 var _sizzle2 = _interopRequireDefault(_sizzle);
@@ -2117,18 +2810,28 @@ var context = canvas.getContext('2d');
 
 var sizzleCanvas = new _sizzle2.default(canvas, videos);
 
-var appLoop = (0, _rafLoop2.default)(function () {
-    sizzleCanvas.draw(context);
-});
-
-appLoop.start();
+var mousePosition = _glVec2.default.create();
 
 window.addEventListener('resize', function () {
     sizzleCanvas.fit();
 });
 
+window.addEventListener('mousemove', function (event) {
+    var nextMouse = _glVec2.default.fromValues(event.clientX, event.clientY);
+    var velocity = _glVec2.default.subtract([], nextMouse, mousePosition);
+    mousePosition = nextMouse;
+
+    sizzleCanvas.handleMouseMove(velocity);
+});
+
 window.setInterval(function () {
     sizzleCanvas.next();
 }, 2000);
-},{"raf-loop":"node_modules/raf-loop/index.js","./sizzle":"scripts/sizzle.js"}]},{},["scripts/main.js"], null)
+
+var appLoop = (0, _rafLoop2.default)(function () {
+    sizzleCanvas.draw(context);
+});
+
+appLoop.start();
+},{"raf-loop":"node_modules/raf-loop/index.js","gl-vec2":"node_modules/gl-vec2/index.js","./sizzle":"scripts/sizzle.js"}]},{},["scripts/main.js"], null)
 //# sourceMappingURL=/main.61da622d.map
