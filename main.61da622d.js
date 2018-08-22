@@ -760,26 +760,55 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var SizzleClip = function () {
+    function SizzleClip(video, canvasResolution) {
+        _classCallCheck(this, SizzleClip);
+
+        this.video = video;
+
+        var _canvasResolution = _slicedToArray(canvasResolution, 2),
+            canvasWidth = _canvasResolution[0],
+            canvasHeight = _canvasResolution[1];
+
+        var scale = canvasHeight / video.videoHeight;
+        var width = video.videoWidth * scale;
+
+        this.resolution = [width, canvasHeight];
+        this.cloneCount = Math.ceil(canvasWidth / width);
+    }
+
+    _createClass(SizzleClip, [{
+        key: 'draw',
+        value: function draw(context) {
+            var _resolution = _slicedToArray(this.resolution, 2),
+                w = _resolution[0],
+                h = _resolution[1];
+
+            for (var i = 0; i < this.cloneCount; i++) {
+                context.drawImage(this.video, i * w, 0, w, h);
+            }
+        }
+    }]);
+
+    return SizzleClip;
+}();
+
 var SizzleCanvas = function () {
     function SizzleCanvas(canvas, videos) {
-        var _this = this;
-
         _classCallCheck(this, SizzleCanvas);
 
         this.canvas = canvas;
         canvas.width = canvas.clientWidth;
         canvas.height = canvas.clientHeight;
 
-        this.clips = videos.map(function (element) {
-            var scale = _this.canvas.height / element.videoHeight;
-            var width = element.videoWidth * scale;
-            var cloneCount = Math.ceil(_this.canvas.width / width);
-
-            return { element: element, scale: scale, width: width, cloneCount: cloneCount };
+        this.clips = videos.map(function (video) {
+            return new SizzleClip(video, [canvas.width, canvas.height]);
         });
 
         this.clipIndex = 0;
@@ -789,16 +818,8 @@ var SizzleCanvas = function () {
 
     _createClass(SizzleCanvas, [{
         key: 'draw',
-        value: function draw() {
-            var _currentClip = this.currentClip,
-                element = _currentClip.element,
-                width = _currentClip.width,
-                cloneCount = _currentClip.cloneCount;
-
-
-            for (var i = 0; i < cloneCount; i++) {
-                this.context.drawImage(element, i * width, 0, width, this.canvas.height);
-            }
+        value: function draw(context) {
+            this.currentClip.draw(context);
         }
     }, {
         key: 'currentClip',
@@ -826,6 +847,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var video = document.querySelector('.header-video');
 var canvas = document.querySelector('#header-canvas');
+var context = canvas.getContext('2d');
 
 video.addEventListener('canplay', function () {
     video.play();
@@ -833,7 +855,7 @@ video.addEventListener('canplay', function () {
     var sizzleCanvas = new _sizzle2.default(canvas, [video]);
 
     var appLoop = (0, _rafLoop2.default)(function () {
-        sizzleCanvas.draw();
+        sizzleCanvas.draw(context);
     });
 
     appLoop.start();
