@@ -13,6 +13,10 @@ const appLoop = loop(() => {
 
 appLoop.start()
 
+window.addEventListener('resize', () => {
+    sizzleCanvas.fit()
+})
+
 window.setInterval(() => {
     sizzleCanvas.next()
 }, 2000)

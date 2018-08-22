@@ -1991,21 +1991,28 @@ var SizzleClip = function () {
         this.resolution = [0, 0];
         this.cloneCount = 1;
 
-        var _canvasResolution = _slicedToArray(canvasResolution, 2),
-            canvasWidth = _canvasResolution[0],
-            canvasHeight = _canvasResolution[1];
-
         (0, _once2.default)(this.video, 'canplaythrough').then(function () {
-            var scale = canvasHeight / video.videoHeight;
-            var width = video.videoWidth * scale;
-
-            _this.resolution = [width, canvasHeight];
-            _this.cloneCount = Math.ceil(canvasWidth / width) + 1;
             _this.canPlay = true;
+            _this.fit(canvasResolution);
         });
     }
 
     _createClass(SizzleClip, [{
+        key: 'fit',
+        value: function fit(canvasResolution) {
+            if (!this.canPlay) return;
+
+            var _canvasResolution = _slicedToArray(canvasResolution, 2),
+                canvasWidth = _canvasResolution[0],
+                canvasHeight = _canvasResolution[1];
+
+            var scale = canvasHeight / this.video.videoHeight;
+            var width = this.video.videoWidth * scale;
+
+            this.resolution = [width, canvasHeight];
+            this.cloneCount = Math.ceil(canvasWidth / width) + 1;
+        }
+    }, {
         key: 'start',
         value: function start() {
             if (!this.canPlay) return;
@@ -2040,20 +2047,34 @@ var SizzleClip = function () {
 
 var SizzleCanvas = function () {
     function SizzleCanvas(canvas, videos) {
+        var _this2 = this;
+
         _classCallCheck(this, SizzleCanvas);
 
         this.canvas = canvas;
-        canvas.width = canvas.clientWidth;
-        canvas.height = canvas.clientHeight;
+        this.canvas.width = this.canvas.clientWidth;
+        this.canvas.height = this.canvas.clientHeight;
 
         this.clips = (0, _lodash2.default)(videos.map(function (video) {
-            return new SizzleClip(video, [canvas.width, canvas.height]);
+            return new SizzleClip(video, [_this2.canvas.width, _this2.canvas.height]);
         }));
 
         this.clipIndex = 0;
     }
 
     _createClass(SizzleCanvas, [{
+        key: 'fit',
+        value: function fit() {
+            var _this3 = this;
+
+            this.canvas.width = this.canvas.clientWidth;
+            this.canvas.height = this.canvas.clientHeight;
+
+            this.clips.forEach(function (clip) {
+                clip.fit([_this3.canvas.width, _this3.canvas.height]);
+            });
+        }
+    }, {
         key: 'next',
         value: function next() {
             this.currentClip.stop();
@@ -2101,6 +2122,10 @@ var appLoop = (0, _rafLoop2.default)(function () {
 });
 
 appLoop.start();
+
+window.addEventListener('resize', function () {
+    sizzleCanvas.fit();
+});
 
 window.setInterval(function () {
     sizzleCanvas.next();

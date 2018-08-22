@@ -10,16 +10,21 @@ class SizzleClip {
         this.resolution = [0, 0]
         this.cloneCount = 1
 
-        const [canvasWidth, canvasHeight] = canvasResolution
-
         once(this.video, 'canplaythrough').then(() => {
-            const scale = canvasHeight / video.videoHeight
-            const width = video.videoWidth * scale
-
-            this.resolution = [width, canvasHeight]
-            this.cloneCount = Math.ceil(canvasWidth / width) + 1
             this.canPlay = true
+            this.fit(canvasResolution)
         })
+    }
+
+    fit(canvasResolution) {
+        if (!this.canPlay) return
+
+        const [canvasWidth, canvasHeight] = canvasResolution
+        const scale = canvasHeight / this.video.videoHeight
+        const width = this.video.videoWidth * scale
+
+        this.resolution = [width, canvasHeight]
+        this.cloneCount = Math.ceil(canvasWidth / width) + 1
     }
 
     start() {
@@ -48,11 +53,11 @@ class SizzleClip {
 export default class SizzleCanvas {
     constructor(canvas, videos) {
         this.canvas = canvas
-        canvas.width = canvas.clientWidth
-        canvas.height = canvas.clientHeight
+        this.canvas.width = this.canvas.clientWidth
+        this.canvas.height = this.canvas.clientHeight
 
         this.clips = shuffle(videos.map((video) => {
-            return new SizzleClip(video, [canvas.width, canvas.height])
+            return new SizzleClip(video, [this.canvas.width, this.canvas.height])
         }))
 
         this.clipIndex = 0
@@ -60,6 +65,15 @@ export default class SizzleCanvas {
 
     get currentClip() {
         return this.clips[this.clipIndex]
+    }
+
+    fit() {
+        this.canvas.width = this.canvas.clientWidth
+        this.canvas.height = this.canvas.clientHeight
+
+        this.clips.forEach((clip) => {
+            clip.fit([this.canvas.width, this.canvas.height])
+        })
     }
 
     next() {
