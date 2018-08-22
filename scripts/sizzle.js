@@ -1,6 +1,8 @@
 import once from './once'
 import shuffle from 'lodash.shuffle'
 
+const scrollSpeed = 0.02
+
 class SizzleClip {
     constructor(video, canvasResolution) {
         this.video = video
@@ -15,7 +17,7 @@ class SizzleClip {
             const width = video.videoWidth * scale
 
             this.resolution = [width, canvasHeight]
-            this.cloneCount = Math.ceil(canvasWidth / width)
+            this.cloneCount = Math.ceil(canvasWidth / width) + 1
             this.canPlay = true
         })
     }
@@ -31,13 +33,14 @@ class SizzleClip {
         this.video.pause()
     }
 
-    draw(context) {
+    draw(context, offset) {
         if (!this.canPlay) return
 
         const [w, h] = this.resolution
+        const x = offset % this.resolution[0]
 
         for (let i = 0; i < this.cloneCount; i++) {
-            context.drawImage(this.video, i * w, 0, w, h)
+            context.drawImage(this.video, x + (i * w), 0, w, h)
         }
     }
 }
@@ -66,6 +69,7 @@ export default class SizzleCanvas {
     }
 
     draw(context) {
-        this.currentClip.draw(context)
+        const offset = (performance.now() * scrollSpeed) % this.canvas.width
+        this.currentClip.draw(context, -offset)
     }
 }

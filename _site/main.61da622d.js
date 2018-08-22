@@ -1978,6 +1978,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var scrollSpeed = 0.02;
+
 var SizzleClip = function () {
     function SizzleClip(video, canvasResolution) {
         var _this = this;
@@ -1998,7 +2000,7 @@ var SizzleClip = function () {
             var width = video.videoWidth * scale;
 
             _this.resolution = [width, canvasHeight];
-            _this.cloneCount = Math.ceil(canvasWidth / width);
+            _this.cloneCount = Math.ceil(canvasWidth / width) + 1;
             _this.canPlay = true;
         });
     }
@@ -2018,15 +2020,17 @@ var SizzleClip = function () {
         }
     }, {
         key: 'draw',
-        value: function draw(context) {
+        value: function draw(context, offset) {
             if (!this.canPlay) return;
 
             var _resolution = _slicedToArray(this.resolution, 2),
                 w = _resolution[0],
                 h = _resolution[1];
 
+            var x = offset % this.resolution[0];
+
             for (var i = 0; i < this.cloneCount; i++) {
-                context.drawImage(this.video, i * w, 0, w, h);
+                context.drawImage(this.video, x + i * w, 0, w, h);
             }
         }
     }]);
@@ -2059,7 +2063,8 @@ var SizzleCanvas = function () {
     }, {
         key: 'draw',
         value: function draw(context) {
-            this.currentClip.draw(context);
+            var offset = performance.now() * scrollSpeed % this.canvas.width;
+            this.currentClip.draw(context, -offset);
         }
     }, {
         key: 'currentClip',
