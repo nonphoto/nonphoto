@@ -9,7 +9,7 @@ class SizzleClip {
 
         const [canvasWidth, canvasHeight] = canvasResolution
 
-        once(this.video, 'canplay').then(() => {
+        once(this.video, 'canplaythrough').then(() => {
             const scale = canvasHeight / video.videoHeight
             const width = video.videoWidth * scale
 
@@ -50,7 +50,7 @@ export default class SizzleCanvas {
     }
 
     next() {
-
+        this.clipIndex = (this.clipIndex + 1) % this.clips.length
     }
 
     draw(context) {

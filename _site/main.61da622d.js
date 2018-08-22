@@ -804,7 +804,7 @@ var SizzleClip = function () {
             canvasWidth = _canvasResolution[0],
             canvasHeight = _canvasResolution[1];
 
-        (0, _once2.default)(this.video, 'canplay').then(function () {
+        (0, _once2.default)(this.video, 'canplaythrough').then(function () {
             var scale = canvasHeight / video.videoHeight;
             var width = video.videoWidth * scale;
 
@@ -851,7 +851,9 @@ var SizzleCanvas = function () {
 
     _createClass(SizzleCanvas, [{
         key: 'next',
-        value: function next() {}
+        value: function next() {
+            this.clipIndex = (this.clipIndex + 1) % this.clips.length;
+        }
     }, {
         key: 'draw',
         value: function draw(context) {
@@ -881,16 +883,20 @@ var _sizzle2 = _interopRequireDefault(_sizzle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var video = document.querySelector('.header-video');
+var videos = Array.from(document.querySelectorAll('.header-video'));
 var canvas = document.querySelector('#header-canvas');
 var context = canvas.getContext('2d');
 
-var sizzleCanvas = new _sizzle2.default(canvas, [video]);
+var sizzleCanvas = new _sizzle2.default(canvas, videos);
 
 var appLoop = (0, _rafLoop2.default)(function () {
     sizzleCanvas.draw(context);
 });
 
 appLoop.start();
+
+window.setInterval(function () {
+    sizzleCanvas.next();
+}, 2000);
 },{"raf-loop":"node_modules/raf-loop/index.js","./sizzle":"scripts/sizzle.js"}]},{},["scripts/main.js"], null)
 //# sourceMappingURL=/main.61da622d.map
