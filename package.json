@@ -4,7 +4,7 @@
   "description": "",
   "main": "build.js",
   "scripts": {
-    "start": "parcel -d _site index.html",
+    "start": "parcel -d _site index.html --no-hmr",
     "watch": "parcel watch -d _site index.html",
     "build": "parcel build -d _site index.html"
   },

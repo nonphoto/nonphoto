@@ -1,17 +1,29 @@
+import once from './once'
+
 class SizzleClip {
     constructor(video, canvasResolution) {
         this.video = video
+        this.canPlay = false
+        this.resolution = [0, 0]
+        this.cloneCount = 1
 
         const [canvasWidth, canvasHeight] = canvasResolution
 
-        const scale = canvasHeight / video.videoHeight
-        const width = video.videoWidth * scale
+        once(this.video, 'canplay').then(() => {
+            const scale = canvasHeight / video.videoHeight
+            const width = video.videoWidth * scale
 
-        this.resolution = [width, canvasHeight]
-        this.cloneCount = Math.ceil(canvasWidth / width)
+            this.resolution = [width, canvasHeight]
+            this.cloneCount = Math.ceil(canvasWidth / width)
+
+            this.video.play()
+            this.canPlay = true
+        })
     }
 
     draw(context) {
+        if (!this.canPlay) return
+
         const [w, h] = this.resolution
 
         for (let i = 0; i < this.cloneCount; i++) {
@@ -31,12 +43,14 @@ export default class SizzleCanvas {
         })
 
         this.clipIndex = 0
-
-        this.context = canvas.getContext('2d')
     }
 
     get currentClip() {
         return this.clips[this.clipIndex]
+    }
+
+    next() {
+
     }
 
     draw(context) {

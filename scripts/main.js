@@ -5,15 +5,10 @@ const video = document.querySelector('.header-video')
 const canvas = document.querySelector('#header-canvas')
 const context = canvas.getContext('2d')
 
+const sizzleCanvas = new SizzleCanvas(canvas, [video])
 
-video.addEventListener('canplay', () => {
-    video.play()
-
-    const sizzleCanvas = new SizzleCanvas(canvas, [video])
-
-    const appLoop = loop(() => {
-        sizzleCanvas.draw(context)
-    })
-
-    appLoop.start()
+const appLoop = loop(() => {
+    sizzleCanvas.draw(context)
 })
+
+appLoop.start()

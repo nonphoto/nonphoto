@@ -753,7 +753,24 @@ Engine.prototype.tick = function() {
     this.emit('tick', dt)
     this.last = time
 }
-},{"inherits":"node_modules/inherits/inherits_browser.js","events":"node_modules/events/events.js","right-now":"node_modules/right-now/browser.js","raf":"node_modules/raf/index.js"}],"scripts/sizzle.js":[function(require,module,exports) {
+},{"inherits":"node_modules/inherits/inherits_browser.js","events":"node_modules/events/events.js","right-now":"node_modules/right-now/browser.js","raf":"node_modules/raf/index.js"}],"scripts/once.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = once;
+function once(element, eventType) {
+    return new Promise(function (resolve) {
+        var callback = function callback(event) {
+            element.removeEventListener(eventType, callback);
+            resolve(event);
+        };
+
+        element.addEventListener(eventType, callback);
+    });
+}
+},{}],"scripts/sizzle.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -764,28 +781,46 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _once = require('./once');
+
+var _once2 = _interopRequireDefault(_once);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var SizzleClip = function () {
     function SizzleClip(video, canvasResolution) {
+        var _this = this;
+
         _classCallCheck(this, SizzleClip);
 
         this.video = video;
+        this.canPlay = false;
+        this.resolution = [0, 0];
+        this.cloneCount = 1;
 
         var _canvasResolution = _slicedToArray(canvasResolution, 2),
             canvasWidth = _canvasResolution[0],
             canvasHeight = _canvasResolution[1];
 
-        var scale = canvasHeight / video.videoHeight;
-        var width = video.videoWidth * scale;
+        (0, _once2.default)(this.video, 'canplay').then(function () {
+            var scale = canvasHeight / video.videoHeight;
+            var width = video.videoWidth * scale;
 
-        this.resolution = [width, canvasHeight];
-        this.cloneCount = Math.ceil(canvasWidth / width);
+            _this.resolution = [width, canvasHeight];
+            _this.cloneCount = Math.ceil(canvasWidth / width);
+
+            _this.video.play();
+            _this.canPlay = true;
+        });
     }
 
     _createClass(SizzleClip, [{
         key: 'draw',
         value: function draw(context) {
+            if (!this.canPlay) return;
+
             var _resolution = _slicedToArray(this.resolution, 2),
                 w = _resolution[0],
                 h = _resolution[1];
@@ -812,11 +847,12 @@ var SizzleCanvas = function () {
         });
 
         this.clipIndex = 0;
-
-        this.context = canvas.getContext('2d');
     }
 
     _createClass(SizzleCanvas, [{
+        key: 'next',
+        value: function next() {}
+    }, {
         key: 'draw',
         value: function draw(context) {
             this.currentClip.draw(context);
@@ -832,7 +868,7 @@ var SizzleCanvas = function () {
 }();
 
 exports.default = SizzleCanvas;
-},{}],"scripts/main.js":[function(require,module,exports) {
+},{"./once":"scripts/once.js"}],"scripts/main.js":[function(require,module,exports) {
 'use strict';
 
 var _rafLoop = require('raf-loop');
@@ -849,186 +885,12 @@ var video = document.querySelector('.header-video');
 var canvas = document.querySelector('#header-canvas');
 var context = canvas.getContext('2d');
 
-video.addEventListener('canplay', function () {
-    video.play();
+var sizzleCanvas = new _sizzle2.default(canvas, [video]);
 
-    var sizzleCanvas = new _sizzle2.default(canvas, [video]);
-
-    var appLoop = (0, _rafLoop2.default)(function () {
-        sizzleCanvas.draw(context);
-    });
-
-    appLoop.start();
+var appLoop = (0, _rafLoop2.default)(function () {
+    sizzleCanvas.draw(context);
 });
-},{"raf-loop":"node_modules/raf-loop/index.js","./sizzle":"scripts/sizzle.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
-var global = arguments[3];
-var OVERLAY_ID = '__parcel__error__overlay__';
 
-var OldModule = module.bundle.Module;
-
-function Module(moduleName) {
-  OldModule.call(this, moduleName);
-  this.hot = {
-    data: module.bundle.hotData,
-    _acceptCallbacks: [],
-    _disposeCallbacks: [],
-    accept: function (fn) {
-      this._acceptCallbacks.push(fn || function () {});
-    },
-    dispose: function (fn) {
-      this._disposeCallbacks.push(fn);
-    }
-  };
-
-  module.bundle.hotData = null;
-}
-
-module.bundle.Module = Module;
-
-var parent = module.bundle.parent;
-if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
-  var hostname = '' || location.hostname;
-  var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64303' + '/');
-  ws.onmessage = function (event) {
-    var data = JSON.parse(event.data);
-
-    if (data.type === 'update') {
-      console.clear();
-
-      data.assets.forEach(function (asset) {
-        hmrApply(global.parcelRequire, asset);
-      });
-
-      data.assets.forEach(function (asset) {
-        if (!asset.isNew) {
-          hmrAccept(global.parcelRequire, asset.id);
-        }
-      });
-    }
-
-    if (data.type === 'reload') {
-      ws.close();
-      ws.onclose = function () {
-        location.reload();
-      };
-    }
-
-    if (data.type === 'error-resolved') {
-      console.log('[parcel] ✨ Error resolved');
-
-      removeErrorOverlay();
-    }
-
-    if (data.type === 'error') {
-      console.error('[parcel] 🚨  ' + data.error.message + '\n' + data.error.stack);
-
-      removeErrorOverlay();
-
-      var overlay = createErrorOverlay(data);
-      document.body.appendChild(overlay);
-    }
-  };
-}
-
-function removeErrorOverlay() {
-  var overlay = document.getElementById(OVERLAY_ID);
-  if (overlay) {
-    overlay.remove();
-  }
-}
-
-function createErrorOverlay(data) {
-  var overlay = document.createElement('div');
-  overlay.id = OVERLAY_ID;
-
-  // html encode message and stack trace
-  var message = document.createElement('div');
-  var stackTrace = document.createElement('pre');
-  message.innerText = data.error.message;
-  stackTrace.innerText = data.error.stack;
-
-  overlay.innerHTML = '<div style="background: black; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; opacity: 0.85; font-family: Menlo, Consolas, monospace; z-index: 9999;">' + '<span style="background: red; padding: 2px 4px; border-radius: 2px;">ERROR</span>' + '<span style="top: 2px; margin-left: 5px; position: relative;">🚨</span>' + '<div style="font-size: 18px; font-weight: bold; margin-top: 20px;">' + message.innerHTML + '</div>' + '<pre>' + stackTrace.innerHTML + '</pre>' + '</div>';
-
-  return overlay;
-}
-
-function getParents(bundle, id) {
-  var modules = bundle.modules;
-  if (!modules) {
-    return [];
-  }
-
-  var parents = [];
-  var k, d, dep;
-
-  for (k in modules) {
-    for (d in modules[k][1]) {
-      dep = modules[k][1][d];
-      if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
-        parents.push(k);
-      }
-    }
-  }
-
-  if (bundle.parent) {
-    parents = parents.concat(getParents(bundle.parent, id));
-  }
-
-  return parents;
-}
-
-function hmrApply(bundle, asset) {
-  var modules = bundle.modules;
-  if (!modules) {
-    return;
-  }
-
-  if (modules[asset.id] || !bundle.parent) {
-    var fn = new Function('require', 'module', 'exports', asset.generated.js);
-    asset.isNew = !modules[asset.id];
-    modules[asset.id] = [fn, asset.deps];
-  } else if (bundle.parent) {
-    hmrApply(bundle.parent, asset);
-  }
-}
-
-function hmrAccept(bundle, id) {
-  var modules = bundle.modules;
-  if (!modules) {
-    return;
-  }
-
-  if (!modules[id] && bundle.parent) {
-    return hmrAccept(bundle.parent, id);
-  }
-
-  var cached = bundle.cache[id];
-  bundle.hotData = {};
-  if (cached) {
-    cached.hot.data = bundle.hotData;
-  }
-
-  if (cached && cached.hot && cached.hot._disposeCallbacks.length) {
-    cached.hot._disposeCallbacks.forEach(function (cb) {
-      cb(bundle.hotData);
-    });
-  }
-
-  delete bundle.cache[id];
-  bundle(id);
-
-  cached = bundle.cache[id];
-  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
-    cached.hot._acceptCallbacks.forEach(function (cb) {
-      cb();
-    });
-    return true;
-  }
-
-  return getParents(global.parcelRequire, id).some(function (id) {
-    return hmrAccept(global.parcelRequire, id);
-  });
-}
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","scripts/main.js"], null)
+appLoop.start();
+},{"raf-loop":"node_modules/raf-loop/index.js","./sizzle":"scripts/sizzle.js"}]},{},["scripts/main.js"], null)
 //# sourceMappingURL=/main.61da622d.map
