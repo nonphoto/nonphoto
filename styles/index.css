@@ -1,11 +1,9 @@
-html, body {
-	width: 100%;
-	height: 100%;
-}
-
 html {
 	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-	font-size: 20px;
+	font-size: 4.6vw;
+
+	width: 100%;
+	height: 100%;
 }
 
 body {
@@ -73,7 +71,7 @@ p {
 	min-height: 15vmax;
 	height: 100%;
 	width: 100%;
-	border-radius: 0.5rem;
+	border-radius: 0.4rem;
 	grid-column-start: 1;
 	grid-column-end: span 1;
 }
@@ -83,6 +81,10 @@ p {
 }
 
 @media all and (min-width: 500px) {
+	html {
+		font-size: 2.6vw;
+	}
+
 	body {
 		grid-template-columns: repeat(2, 1fr);
 	}
@@ -94,7 +96,7 @@ p {
 
 @media all and (min-width: 1000px) {
 	html {
-		font-size: 22px;
+		font-size: 1.6vw;
 	}
 
 	body {
@@ -104,7 +106,7 @@ p {
 
 @media all and (min-width: 1500px) {
 	html {
-		font-size: 24px;
+		font-size: 1.4vw;
 	}
 
 	body {
@@ -114,7 +116,7 @@ p {
 
 @media all and (min-width: 2000px) {
 	html {
-		font-size: 28px;
+		font-size: 1.2vw;
 	}
 
 	body {
@@ -126,16 +128,12 @@ p {
 	}
 }
 
-@media all and (min-width: 2500px) {
+@media all and (min-width: 3000px) {
 	html {
-		font-size: 32px;
+		font-size: 1vw;
 	}
 
 	body {
-		grid-template-columns: repeat(5, 1fr);
-	}
-
-	#header-canvas {
-		grid-column-end: span 3;
+		grid-template-columns: repeat(6, 1fr);
 	}
 }
