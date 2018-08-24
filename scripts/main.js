@@ -23,6 +23,7 @@ document.addEventListener('visibilitychange', () => {
         clock.stop()
     }
     else {
+        sizzleCanvas.next()
         clock.start()
     }
 })

@@ -40,15 +40,6 @@ p {
 	margin-bottom: 0.5rem;
 }
 
-.big {
-	font-family: 'Avara', serif;
-	font-style: italic;
-	font-size: 8vw;
-	text-decoration: none;
-	align-self: flex-end;
-	text-align: center;
-}
-
 .project-cell {
 	display: flex;
 	flex-direction: column;
@@ -69,6 +60,24 @@ p {
 	border-radius: 0.5rem;
 }
 
+.project-title {
+	align-self: end;
+	font-family: 'Avara', serif;
+	font-style: italic;
+	font-size: 8vw;
+	line-height: 1em;
+	margin: 0;
+
+	grid-column-start: 1;
+	grid-column-end: span 1;
+}
+
+.project-description {
+	align-self: end;
+	padding: 0;
+	margin: 0;
+}
+
 .header-canvas {
 	min-height: 15vmax;
 	height: 100%;
@@ -76,6 +85,11 @@ p {
 	border-radius: 0.4rem;
 	grid-column-start: 1;
 	grid-column-end: span 1;
+}
+
+img {
+	display: block;
+	width: 100%;
 }
 
 [data-sizzle-video] {

@@ -52,7 +52,7 @@ class SizzleClip extends EventEmitter {
         const x = wrap(offset, this.resolution[0]) - w
 
         for (let i = 0; i < this.cloneCount; i++) {
-            context.drawImage(this.video, x + (i * w), 0, w, h)
+            context.drawImage(this.video, x + (i * w), 0, w + 1, h)
         }
     }
 }
