@@ -753,7 +753,85 @@ Engine.prototype.tick = function() {
     this.emit('tick', dt)
     this.last = time
 }
-},{"inherits":"node_modules/inherits/inherits_browser.js","events":"node_modules/events/events.js","right-now":"node_modules/right-now/browser.js","raf":"node_modules/raf/index.js"}],"scripts/once.js":[function(require,module,exports) {
+},{"inherits":"node_modules/inherits/inherits_browser.js","events":"node_modules/events/events.js","right-now":"node_modules/right-now/browser.js","raf":"node_modules/raf/index.js"}],"scripts/clock.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+* A class for starting and stopping a time interval.
+*/
+var Clock = function () {
+
+  /**
+   * Create a new clock.
+   * @param {function} callback - The function to call when the interval fires.
+   * @param {Number} wait - The length of the interval.
+   */
+  function Clock(callback) {
+    var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
+
+    _classCallCheck(this, Clock);
+
+    this.wait = wait;
+
+    if (typeof callback === 'function') {
+      this.callback = callback;
+    } else {
+      this.callback = function () {};
+    }
+
+    this.interval = null;
+  }
+
+  /**
+   * Return true if the clock was started.
+   */
+
+
+  _createClass(Clock, [{
+    key: 'start',
+
+
+    /**
+    * Start the interval
+    */
+    value: function start() {
+      if (!this.interval) {
+        this.interval = window.setInterval(this.callback, this.wait);
+      }
+    }
+
+    /**
+    * Stop the interval.
+    */
+
+  }, {
+    key: 'stop',
+    value: function stop() {
+      if (this.interval) {
+        window.clearInterval(this.interval);
+        this.interval = null;
+      }
+    }
+  }, {
+    key: 'isRunning',
+    get: function get() {
+      return this.interval !== null;
+    }
+  }]);
+
+  return Clock;
+}();
+
+exports.default = Clock;
+},{}],"scripts/once.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2020,14 +2098,14 @@ var SizzleClip = function (_EventEmitter) {
         var _this = _possibleConstructorReturn(this, (SizzleClip.__proto__ || Object.getPrototypeOf(SizzleClip)).call(this));
 
         _this.video = video;
-        _this.canPlay = false;
+        _this.canStart = false;
         _this.resolution = [0, 0];
         _this.cloneCount = 1;
 
         (0, _once2.default)(_this.video, 'canplaythrough').then(function () {
-            _this.canPlay = true;
+            _this.canStart = true;
             _this.fit(canvasResolution);
-            _this.emit('canplaythrough');
+            _this.emit('canstart');
         });
         return _this;
     }
@@ -2035,7 +2113,7 @@ var SizzleClip = function (_EventEmitter) {
     _createClass(SizzleClip, [{
         key: 'fit',
         value: function fit(canvasResolution) {
-            if (!this.canPlay) return;
+            if (!this.canStart) return;
 
             var _canvasResolution = _slicedToArray(canvasResolution, 2),
                 canvasWidth = _canvasResolution[0],
@@ -2050,7 +2128,7 @@ var SizzleClip = function (_EventEmitter) {
     }, {
         key: 'start',
         value: function start() {
-            if (!this.canPlay) return;
+            if (!this.canStart) return;
 
             this.video.currentTime = 0;
             this.video.play();
@@ -2063,7 +2141,7 @@ var SizzleClip = function (_EventEmitter) {
     }, {
         key: 'draw',
         value: function draw(context, offset) {
-            if (!this.canPlay) return;
+            if (!this.canStart) return;
 
             var _resolution = _slicedToArray(this.resolution, 2),
                 w = _resolution[0],
@@ -2100,8 +2178,8 @@ var SizzleCanvas = function (_EventEmitter2) {
         _this2.offset = 0;
         _this2.targetOffset = 0;
 
-        _this2.currentClip.once('canplaythrough', function () {
-            _this2.emit('canplay');
+        _this2.currentClip.once('canstart', function () {
+            _this2.emit('canstart');
         });
         return _this2;
     }
@@ -2160,6 +2238,10 @@ var _rafLoop = require('raf-loop');
 
 var _rafLoop2 = _interopRequireDefault(_rafLoop);
 
+var _clock = require('./clock');
+
+var _clock2 = _interopRequireDefault(_clock);
+
 var _sizzle = require('./sizzle');
 
 var _sizzle2 = _interopRequireDefault(_sizzle);
@@ -2182,20 +2264,28 @@ window.addEventListener('mousemove', function (event) {
     sizzleCanvas.handleMouseMove(velocity);
 });
 
+document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+        clock.stop();
+    } else {
+        clock.start();
+    }
+});
+
 var appLoop = (0, _rafLoop2.default)(function () {
     sizzleCanvas.draw(context);
 });
 
-sizzleCanvas.on('canplay', function () {
+var clock = new _clock2.default(function () {
+    sizzleCanvas.next();
+}, 3000);
+
+sizzleCanvas.on('canstart', function () {
     sizzleCanvas.start();
-
-    window.setInterval(function () {
-        sizzleCanvas.next();
-    }, 3000);
-
     appLoop.start();
+    clock.start();
 });
-},{"raf-loop":"node_modules/raf-loop/index.js","./sizzle":"scripts/sizzle.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"raf-loop":"node_modules/raf-loop/index.js","./clock":"scripts/clock.js","./sizzle":"scripts/sizzle.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
