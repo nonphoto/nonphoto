@@ -1,3 +1,5 @@
+import cname from '../CNAME'
+
 import loop from 'raf-loop'
 import Clock from './clock'
 import SizzleCanvas from './sizzle'
