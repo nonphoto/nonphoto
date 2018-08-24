@@ -2166,8 +2166,8 @@ var _sizzle2 = _interopRequireDefault(_sizzle);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var videos = Array.from(document.querySelectorAll('.header-video'));
-var canvas = document.querySelector('#header-canvas');
+var videos = Array.from(document.querySelectorAll('[data-sizzle-video]'));
+var canvas = document.querySelector('[data-sizzle-canvas]');
 var context = canvas.getContext('2d');
 
 var sizzleCanvas = new _sizzle2.default(canvas, videos);

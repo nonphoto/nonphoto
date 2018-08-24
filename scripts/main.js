@@ -1,8 +1,8 @@
 import loop from 'raf-loop'
 import SizzleCanvas from './sizzle'
 
-const videos = Array.from(document.querySelectorAll('.header-video'))
-const canvas = document.querySelector('#header-canvas')
+const videos = Array.from(document.querySelectorAll('[data-sizzle-video]'))
+const canvas = document.querySelector('[data-sizzle-canvas]')
 const context = canvas.getContext('2d')
 
 const sizzleCanvas = new SizzleCanvas(canvas, videos)
