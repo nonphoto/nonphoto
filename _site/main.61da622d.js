@@ -2160,7 +2160,7 @@ window.addEventListener('mousemove', function (event) {
 
 window.setInterval(function () {
     sizzleCanvas.next();
-}, 2000);
+}, 3000);
 
 var appLoop = (0, _rafLoop2.default)(function () {
     sizzleCanvas.draw(context);

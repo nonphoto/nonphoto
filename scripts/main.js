@@ -19,7 +19,7 @@ window.addEventListener('mousemove', (event) => {
 
 window.setInterval(() => {
     sizzleCanvas.next()
-}, 2000)
+}, 3000)
 
 const appLoop = loop(() => {
     sizzleCanvas.draw(context)
