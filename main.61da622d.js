@@ -2150,7 +2150,7 @@ var SizzleClip = function (_EventEmitter) {
             var x = (0, _wrap2.default)(offset, this.resolution[0]) - w;
 
             for (var i = 0; i < this.cloneCount; i++) {
-                context.drawImage(this.video, x + i * w, 0, w, h);
+                context.drawImage(this.video, x + i * w, 0, w + 1, h);
             }
         }
     }]);
@@ -2268,6 +2268,7 @@ document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
         clock.stop();
     } else {
+        sizzleCanvas.next();
         clock.start();
     }
 });
