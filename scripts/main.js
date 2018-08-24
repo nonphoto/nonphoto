@@ -17,12 +17,16 @@ window.addEventListener('mousemove', (event) => {
     sizzleCanvas.handleMouseMove(velocity)
 })
 
-window.setInterval(() => {
-    sizzleCanvas.next()
-}, 3000)
-
 const appLoop = loop(() => {
     sizzleCanvas.draw(context)
 })
 
-appLoop.start()
+sizzleCanvas.on('canplay', () => {
+    sizzleCanvas.start()
+
+    window.setInterval(() => {
+        sizzleCanvas.next()
+    }, 3000)
+
+    appLoop.start()
+})

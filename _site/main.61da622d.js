@@ -1995,29 +1995,41 @@ var _lodash = require('lodash.shuffle');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _events = require('events');
+
+var _events2 = _interopRequireDefault(_events);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var scrollSpeed = -0.5;
 var viscosity = 0.05;
 var mouseInfluence = 0.2;
 
-var SizzleClip = function () {
-    function SizzleClip(video, canvasResolution) {
-        var _this = this;
+var SizzleClip = function (_EventEmitter) {
+    _inherits(SizzleClip, _EventEmitter);
 
+    function SizzleClip(video, canvasResolution) {
         _classCallCheck(this, SizzleClip);
 
-        this.video = video;
-        this.canPlay = false;
-        this.resolution = [0, 0];
-        this.cloneCount = 1;
+        var _this = _possibleConstructorReturn(this, (SizzleClip.__proto__ || Object.getPrototypeOf(SizzleClip)).call(this));
 
-        (0, _once2.default)(this.video, 'canplaythrough').then(function () {
+        _this.video = video;
+        _this.canPlay = false;
+        _this.resolution = [0, 0];
+        _this.cloneCount = 1;
+
+        (0, _once2.default)(_this.video, 'canplaythrough').then(function () {
             _this.canPlay = true;
             _this.fit(canvasResolution);
+            _this.emit('canplaythrough');
         });
+        return _this;
     }
 
     _createClass(SizzleClip, [{
@@ -2066,25 +2078,32 @@ var SizzleClip = function () {
     }]);
 
     return SizzleClip;
-}();
+}(_events2.default);
 
-var SizzleCanvas = function () {
+var SizzleCanvas = function (_EventEmitter2) {
+    _inherits(SizzleCanvas, _EventEmitter2);
+
     function SizzleCanvas(canvas, videos) {
-        var _this2 = this;
-
         _classCallCheck(this, SizzleCanvas);
 
-        this.canvas = canvas;
-        this.canvas.width = this.canvas.clientWidth;
-        this.canvas.height = this.canvas.clientHeight;
+        var _this2 = _possibleConstructorReturn(this, (SizzleCanvas.__proto__ || Object.getPrototypeOf(SizzleCanvas)).call(this));
 
-        this.clips = (0, _lodash2.default)(videos.map(function (video) {
+        _this2.canvas = canvas;
+        _this2.canvas.width = _this2.canvas.clientWidth;
+        _this2.canvas.height = _this2.canvas.clientHeight;
+
+        _this2.clips = (0, _lodash2.default)(videos.map(function (video) {
             return new SizzleClip(video, [_this2.canvas.width, _this2.canvas.height]);
         }));
 
-        this.clipIndex = 0;
-        this.offset = 0;
-        this.targetOffset = 0;
+        _this2.clipIndex = 0;
+        _this2.offset = 0;
+        _this2.targetOffset = 0;
+
+        _this2.currentClip.once('canplaythrough', function () {
+            _this2.emit('canplay');
+        });
+        return _this2;
     }
 
     _createClass(SizzleCanvas, [{
@@ -2103,6 +2122,11 @@ var SizzleCanvas = function () {
             this.clips.forEach(function (clip) {
                 clip.fit([_this3.canvas.width, _this3.canvas.height]);
             });
+        }
+    }, {
+        key: 'start',
+        value: function start() {
+            this.currentClip.start();
         }
     }, {
         key: 'next',
@@ -2126,10 +2150,10 @@ var SizzleCanvas = function () {
     }]);
 
     return SizzleCanvas;
-}();
+}(_events2.default);
 
 exports.default = SizzleCanvas;
-},{"./once":"scripts/once.js","./wrap":"scripts/wrap.js","lodash.shuffle":"node_modules/lodash.shuffle/index.js"}],"scripts/main.js":[function(require,module,exports) {
+},{"./once":"scripts/once.js","./wrap":"scripts/wrap.js","lodash.shuffle":"node_modules/lodash.shuffle/index.js","events":"node_modules/events/events.js"}],"scripts/main.js":[function(require,module,exports) {
 'use strict';
 
 var _rafLoop = require('raf-loop');
@@ -2158,14 +2182,188 @@ window.addEventListener('mousemove', function (event) {
     sizzleCanvas.handleMouseMove(velocity);
 });
 
-window.setInterval(function () {
-    sizzleCanvas.next();
-}, 3000);
-
 var appLoop = (0, _rafLoop2.default)(function () {
     sizzleCanvas.draw(context);
 });
 
-appLoop.start();
-},{"raf-loop":"node_modules/raf-loop/index.js","./sizzle":"scripts/sizzle.js"}]},{},["scripts/main.js"], null)
+sizzleCanvas.on('canplay', function () {
+    sizzleCanvas.start();
+
+    window.setInterval(function () {
+        sizzleCanvas.next();
+    }, 3000);
+
+    appLoop.start();
+});
+},{"raf-loop":"node_modules/raf-loop/index.js","./sizzle":"scripts/sizzle.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var global = arguments[3];
+var OVERLAY_ID = '__parcel__error__overlay__';
+
+var OldModule = module.bundle.Module;
+
+function Module(moduleName) {
+  OldModule.call(this, moduleName);
+  this.hot = {
+    data: module.bundle.hotData,
+    _acceptCallbacks: [],
+    _disposeCallbacks: [],
+    accept: function (fn) {
+      this._acceptCallbacks.push(fn || function () {});
+    },
+    dispose: function (fn) {
+      this._disposeCallbacks.push(fn);
+    }
+  };
+
+  module.bundle.hotData = null;
+}
+
+module.bundle.Module = Module;
+
+var parent = module.bundle.parent;
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+  var hostname = '' || location.hostname;
+  var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49825' + '/');
+  ws.onmessage = function (event) {
+    var data = JSON.parse(event.data);
+
+    if (data.type === 'update') {
+      console.clear();
+
+      data.assets.forEach(function (asset) {
+        hmrApply(global.parcelRequire, asset);
+      });
+
+      data.assets.forEach(function (asset) {
+        if (!asset.isNew) {
+          hmrAccept(global.parcelRequire, asset.id);
+        }
+      });
+    }
+
+    if (data.type === 'reload') {
+      ws.close();
+      ws.onclose = function () {
+        location.reload();
+      };
+    }
+
+    if (data.type === 'error-resolved') {
+      console.log('[parcel] ✨ Error resolved');
+
+      removeErrorOverlay();
+    }
+
+    if (data.type === 'error') {
+      console.error('[parcel] 🚨  ' + data.error.message + '\n' + data.error.stack);
+
+      removeErrorOverlay();
+
+      var overlay = createErrorOverlay(data);
+      document.body.appendChild(overlay);
+    }
+  };
+}
+
+function removeErrorOverlay() {
+  var overlay = document.getElementById(OVERLAY_ID);
+  if (overlay) {
+    overlay.remove();
+  }
+}
+
+function createErrorOverlay(data) {
+  var overlay = document.createElement('div');
+  overlay.id = OVERLAY_ID;
+
+  // html encode message and stack trace
+  var message = document.createElement('div');
+  var stackTrace = document.createElement('pre');
+  message.innerText = data.error.message;
+  stackTrace.innerText = data.error.stack;
+
+  overlay.innerHTML = '<div style="background: black; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; opacity: 0.85; font-family: Menlo, Consolas, monospace; z-index: 9999;">' + '<span style="background: red; padding: 2px 4px; border-radius: 2px;">ERROR</span>' + '<span style="top: 2px; margin-left: 5px; position: relative;">🚨</span>' + '<div style="font-size: 18px; font-weight: bold; margin-top: 20px;">' + message.innerHTML + '</div>' + '<pre>' + stackTrace.innerHTML + '</pre>' + '</div>';
+
+  return overlay;
+}
+
+function getParents(bundle, id) {
+  var modules = bundle.modules;
+  if (!modules) {
+    return [];
+  }
+
+  var parents = [];
+  var k, d, dep;
+
+  for (k in modules) {
+    for (d in modules[k][1]) {
+      dep = modules[k][1][d];
+      if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
+        parents.push(k);
+      }
+    }
+  }
+
+  if (bundle.parent) {
+    parents = parents.concat(getParents(bundle.parent, id));
+  }
+
+  return parents;
+}
+
+function hmrApply(bundle, asset) {
+  var modules = bundle.modules;
+  if (!modules) {
+    return;
+  }
+
+  if (modules[asset.id] || !bundle.parent) {
+    var fn = new Function('require', 'module', 'exports', asset.generated.js);
+    asset.isNew = !modules[asset.id];
+    modules[asset.id] = [fn, asset.deps];
+  } else if (bundle.parent) {
+    hmrApply(bundle.parent, asset);
+  }
+}
+
+function hmrAccept(bundle, id) {
+  var modules = bundle.modules;
+  if (!modules) {
+    return;
+  }
+
+  if (!modules[id] && bundle.parent) {
+    return hmrAccept(bundle.parent, id);
+  }
+
+  var cached = bundle.cache[id];
+  bundle.hotData = {};
+  if (cached) {
+    cached.hot.data = bundle.hotData;
+  }
+
+  if (cached && cached.hot && cached.hot._disposeCallbacks.length) {
+    cached.hot._disposeCallbacks.forEach(function (cb) {
+      cb(bundle.hotData);
+    });
+  }
+
+  delete bundle.cache[id];
+  bundle(id);
+
+  cached = bundle.cache[id];
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    cached.hot._acceptCallbacks.forEach(function (cb) {
+      cb();
+    });
+    return true;
+  }
+
+  return getParents(global.parcelRequire, id).some(function (id) {
+    return hmrAccept(global.parcelRequire, id);
+  });
+}
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","scripts/main.js"], null)
 //# sourceMappingURL=/main.61da622d.map

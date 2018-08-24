@@ -1,13 +1,16 @@
 import once from './once'
 import wrap from './wrap'
 import shuffle from 'lodash.shuffle'
+import EventEmitter from 'events'
 
 const scrollSpeed = -0.5
 const viscosity = 0.05
 const mouseInfluence = 0.2
 
-class SizzleClip {
+class SizzleClip extends EventEmitter {
     constructor(video, canvasResolution) {
+        super()
+
         this.video = video
         this.canPlay = false
         this.resolution = [0, 0]
@@ -16,6 +19,7 @@ class SizzleClip {
         once(this.video, 'canplaythrough').then(() => {
             this.canPlay = true
             this.fit(canvasResolution)
+            this.emit('canplaythrough')
         })
     }
 
@@ -53,8 +57,10 @@ class SizzleClip {
     }
 }
 
-export default class SizzleCanvas {
+export default class SizzleCanvas extends EventEmitter {
     constructor(canvas, videos) {
+        super()
+
         this.canvas = canvas
         this.canvas.width = this.canvas.clientWidth
         this.canvas.height = this.canvas.clientHeight
@@ -66,6 +72,10 @@ export default class SizzleCanvas {
         this.clipIndex = 0
         this.offset = 0
         this.targetOffset = 0
+
+        this.currentClip.once('canplaythrough', () => {
+            this.emit('canplay')
+        })
     }
 
     get currentClip() {
@@ -83,6 +93,10 @@ export default class SizzleCanvas {
         this.clips.forEach((clip) => {
             clip.fit([this.canvas.width, this.canvas.height])
         })
+    }
+
+    start() {
+        this.currentClip.start()
     }
 
     next() {
