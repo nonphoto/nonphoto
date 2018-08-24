@@ -12,19 +12,19 @@ class SizzleClip extends EventEmitter {
         super()
 
         this.video = video
-        this.canPlay = false
+        this.canStart = false
         this.resolution = [0, 0]
         this.cloneCount = 1
 
         once(this.video, 'canplaythrough').then(() => {
-            this.canPlay = true
+            this.canStart = true
             this.fit(canvasResolution)
-            this.emit('canplaythrough')
+            this.emit('canstart')
         })
     }
 
     fit(canvasResolution) {
-        if (!this.canPlay) return
+        if (!this.canStart) return
 
         const [canvasWidth, canvasHeight] = canvasResolution
         const scale = canvasHeight / this.video.videoHeight
@@ -35,7 +35,7 @@ class SizzleClip extends EventEmitter {
     }
 
     start() {
-        if (!this.canPlay) return
+        if (!this.canStart) return
 
         this.video.currentTime = 0
         this.video.play()
@@ -46,7 +46,7 @@ class SizzleClip extends EventEmitter {
     }
 
     draw(context, offset) {
-        if (!this.canPlay) return
+        if (!this.canStart) return
 
         const [w, h] = this.resolution
         const x = wrap(offset, this.resolution[0]) - w
@@ -73,8 +73,8 @@ export default class SizzleCanvas extends EventEmitter {
         this.offset = 0
         this.targetOffset = 0
 
-        this.currentClip.once('canplaythrough', () => {
-            this.emit('canplay')
+        this.currentClip.once('canstart', () => {
+            this.emit('canstart')
         })
     }
 

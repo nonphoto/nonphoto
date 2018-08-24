@@ -1,4 +1,5 @@
 import loop from 'raf-loop'
+import Clock from './clock'
 import SizzleCanvas from './sizzle'
 
 const videos = Array.from(document.querySelectorAll('[data-sizzle-video]'))
@@ -17,16 +18,25 @@ window.addEventListener('mousemove', (event) => {
     sizzleCanvas.handleMouseMove(velocity)
 })
 
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        clock.stop()
+    }
+    else {
+        clock.start()
+    }
+})
+
 const appLoop = loop(() => {
     sizzleCanvas.draw(context)
 })
 
-sizzleCanvas.on('canplay', () => {
+const clock = new Clock(() => {
+    sizzleCanvas.next()
+}, 3000)
+
+sizzleCanvas.on('canstart', () => {
     sizzleCanvas.start()
-
-    window.setInterval(() => {
-        sizzleCanvas.next()
-    }, 3000)
-
     appLoop.start()
+    clock.start()
 })
