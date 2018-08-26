@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/nonphoto/nonphoto.github.io#readme",
   "devDependencies": {
-    "parcel-bundler": "^1.9.7"
+    "parcel-bundler": "^1.9.7",
+    "parcel-plugin-static-files-copy": "^1.1.0"
   },
   "dependencies": {
     "gl-vec2": "^1.2.0",
