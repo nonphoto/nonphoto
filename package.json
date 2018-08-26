@@ -4,11 +4,11 @@
   "description": "",
   "main": "build.js",
   "scripts": {
-    "start": "parcel -d _site index.html --no-hmr",
-    "hmr": "parcel -d _site index.html",
-    "watch": "parcel watch -d _site index.html",
-    "build": "parcel build -d _site index.html",
-    "deploy": "git subtree push --prefix _site origin master"
+    "start": "parcel index.html --no-hmr",
+    "hmr": "parcel index.html",
+    "watch": "parcel watch index.html",
+    "build": "parcel build index.html",
+    "deploy": "git subtree push --prefix dist origin master"
   },
   "repository": {
     "type": "git",
