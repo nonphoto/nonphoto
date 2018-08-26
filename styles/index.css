@@ -33,6 +33,7 @@ a:hover {
 	background-color: black;
 	color: white;
 	text-decoration: none;
+	border-radius: 0.2em;
 }
 
 p {
