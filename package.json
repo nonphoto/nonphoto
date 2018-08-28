@@ -1,14 +1,14 @@
 {
-  "name": "nonphoto.github.io",
+  "name": "nonphoto",
   "version": "1.0.0",
   "description": "",
-  "main": "build.js",
+  "main": "scripts/main.js",
   "scripts": {
     "start": "parcel index.html --no-hmr",
     "hmr": "parcel index.html",
     "watch": "parcel watch index.html",
     "build": "parcel build index.html",
-    "deploy": "git subtree push --prefix dist origin master"
+    "deploy": "now --public --name 'nonphoto' dist"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/nonphoto/nonphoto.github.io#readme",
   "devDependencies": {
+    "now": "^11.4.0",
     "parcel-bundler": "^1.9.7",
     "parcel-plugin-static-files-copy": "^1.1.0"
   },
