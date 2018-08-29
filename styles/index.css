@@ -1,6 +1,6 @@
 html {
-	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-	font-size: 4.6vw;
+	font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+	font-size: 4.5vw;
 
 	width: 100%;
 	height: 100%;
@@ -63,10 +63,12 @@ p {
 
 .project-title {
 	align-self: end;
-	font-family: 'Avara', serif;
-	font-style: italic;
-	font-size: 8vw;
-	line-height: 1em;
+	text-transform: uppercase;
+	font-family: 'Space Mono', -apple-system, BlinkMacSystemFont, sans-serif;
+	font-weight: 400;
+	font-size: 10vw;
+	line-height: 0.85em;
+	letter-spacing: -0.05ch;
 	margin: 0;
 
 	grid-column-start: 1;
@@ -98,7 +100,7 @@ img {
 
 @media all and (min-width: 500px) {
 	html {
-		font-size: 2.6vw;
+		font-size: 2.5vw;
 	}
 
 	body {
