@@ -8,6 +8,10 @@ const context = canvas.getContext('2d')
 
 const sizzleCanvas = new SizzleCanvas(canvas, videos)
 
+window.addEventListener('load', () => {
+    sizzleCanvas.fit()
+})
+
 window.addEventListener('resize', () => {
     sizzleCanvas.fit()
 })

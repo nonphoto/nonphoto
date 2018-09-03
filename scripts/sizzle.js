@@ -62,8 +62,6 @@ export default class SizzleCanvas extends EventEmitter {
         super()
 
         this.canvas = canvas
-        this.canvas.width = this.canvas.clientWidth
-        this.canvas.height = this.canvas.clientHeight
 
         this.clips = shuffle(videos.map((video) => {
             return new SizzleClip(video, [this.canvas.width, this.canvas.height])
