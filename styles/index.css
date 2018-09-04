@@ -14,19 +14,17 @@ body {
 	padding: 1rem;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	font-size: 1em;
+	font-weight: normal;
+}
+
 a {
 	color: inherit;
 	text-decoration: none;
 	padding-left: 0.1em;
 	padding-right: 0.1em;
 	border-bottom: solid black 0.1em;
-}
-
-.decoration-none {
-	text-decoration: none;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
 }
 
 a:hover {
@@ -41,13 +39,23 @@ p {
 	margin-bottom: 0.5rem;
 }
 
+.title {
+	text-transform: uppercase;
+	font-family: 'Space Mono', -apple-system, BlinkMacSystemFont, sans-serif;
+	font-weight: 400;
+	font-size: 5vw;
+	line-height: 0.85em;
+	letter-spacing: -0.05ch;
+	margin: 0;
+}
+
 .project-cell {
 	position: relative;
+	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	padding: 0;
-	margin: 0;
 
+	margin: 0;
 	padding-bottom: 0.5rem;
 	padding-top: 0.4rem;
 	padding-left: 0;
@@ -58,7 +66,6 @@ p {
 }
 
 .project-cell:hover {
-	background-color: black;
 	border-radius: 0.5rem;
 }
 
@@ -73,11 +80,6 @@ p {
 	background-color: black;
 	color: white;
 
-	text-transform: uppercase;
-	font-family: 'Space Mono', -apple-system, BlinkMacSystemFont, sans-serif;
-	font-weight: 400;
-	font-size: 5vw;
-	letter-spacing: -0.05ch;
 	line-height: 1em;
 }
 
@@ -87,20 +89,12 @@ p {
 
 .project-title {
 	align-self: end;
-	text-transform: uppercase;
-	font-family: 'Space Mono', -apple-system, BlinkMacSystemFont, sans-serif;
-	font-weight: 400;
-	font-size: 10vw;
-	line-height: 0.85em;
-	letter-spacing: -0.05ch;
-	margin: 0;
-
 	grid-column-start: 1;
 	grid-column-end: span 1;
+	margin: 0;
 }
 
 .project-description {
-	align-self: end;
 	padding: 0;
 	margin: 0;
 }
