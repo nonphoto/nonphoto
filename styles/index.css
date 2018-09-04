@@ -70,12 +70,16 @@ p {
 }
 
 .project-hover {
+	box-sizing: border-box;
+	align-items: center;
 	display: none;
 	position: absolute;
+
 	width: 100%;
 	height: 100%;
 	top: 0;
 	left: 0;
+    padding-bottom: 0.3rem;
 
 	background-color: black;
 	color: white;
