@@ -3,10 +3,6 @@ import wrap from './wrap'
 import shuffle from 'lodash.shuffle'
 import EventEmitter from 'events'
 
-const scrollSpeed = -0.5
-const viscosity = 0.05
-const mouseInfluence = 0.2
-
 class SizzleClip extends EventEmitter {
     constructor(video, canvasResolution) {
         super()
@@ -49,7 +45,7 @@ class SizzleClip extends EventEmitter {
         if (!this.canStart) return
 
         const [w, h] = this.resolution
-        const x = wrap(offset, this.resolution[0]) - w
+        const x = wrap(offset, w) - w
 
         for (let i = 0; i < this.cloneCount; i++) {
             context.drawImage(this.video, x + (i * w), 0, w + 1, h)
@@ -68,8 +64,6 @@ export default class SizzleCanvas extends EventEmitter {
         }))
 
         this.clipIndex = 0
-        this.offset = 0
-        this.targetOffset = 0
 
         this.currentClip.once('canstart', () => {
             this.emit('canstart')
@@ -78,10 +72,6 @@ export default class SizzleCanvas extends EventEmitter {
 
     get currentClip() {
         return this.clips[this.clipIndex]
-    }
-
-    handleMouseMove(velocity) {
-        this.targetOffset += velocity[0] * mouseInfluence
     }
 
     fit() {
@@ -103,9 +93,7 @@ export default class SizzleCanvas extends EventEmitter {
         this.currentClip.start()
     }
 
-    draw(context) {
-        this.targetOffset += scrollSpeed
-        this.offset += (this.targetOffset - this.offset) * viscosity
-        this.currentClip.draw(context, this.offset)
+    draw(context, offset) {
+        this.currentClip.draw(context, offset)
     }
 }
