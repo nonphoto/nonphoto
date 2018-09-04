@@ -1,12 +1,18 @@
 import loop from 'raf-loop'
 import Clock from './clock'
+import Marquee from './marquee'
 import SizzleCanvas from './sizzle'
 
+const marqueeContainers = Array.from(document.querySelectorAll('[data-marquee]'))
 const videos = Array.from(document.querySelectorAll('[data-sizzle-video]'))
 const canvas = document.querySelector('[data-sizzle-canvas]')
 const context = canvas.getContext('2d')
 
 const sizzleCanvas = new SizzleCanvas(canvas, videos)
+
+const marquees = marqueeContainers.map((container) => {
+    return new Marquee(container, container.dataset.marquee)
+})
 
 window.addEventListener('load', () => {
     sizzleCanvas.fit()
