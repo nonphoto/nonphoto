@@ -46,6 +46,10 @@ const appLoop = loop(() => {
     spring.moveBy(scrollSpeed)
     spring.update()
     sizzleCanvas.draw(context, spring.position)
+
+    for (let marquee of marquees) {
+        marquee.update(spring.position)
+    }
 })
 
 const clock = new Clock(() => {

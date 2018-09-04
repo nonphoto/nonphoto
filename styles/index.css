@@ -67,13 +67,15 @@ p {
 
 .project-cell:hover {
 	border-radius: 0.5rem;
+	color: black;
 }
 
 .project-hover {
 	box-sizing: border-box;
 	align-items: center;
-	display: none;
+	display: flex;
 	position: absolute;
+	visibility: hidden;
 
 	width: 100%;
 	height: 100%;
@@ -88,7 +90,7 @@ p {
 }
 
 .project-cell:hover .project-hover {
-	display: flex;
+	visibility: visible
 }
 
 .project-title {
