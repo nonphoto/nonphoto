@@ -8,7 +8,8 @@
     "hmr": "parcel index.html",
     "watch": "parcel watch index.html",
     "build": "parcel build index.html",
-    "deploy": "now --public --name 'nonphoto' dist"
+    "deploy": "now --public",
+    "alias": "now alias"
   },
   "repository": {
     "type": "git",
