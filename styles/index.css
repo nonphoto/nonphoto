@@ -107,6 +107,7 @@ p {
 
 .header-canvas {
 	height: 15vmax;
+	min-height: 10rem;
 	width: 100%;
 	border-radius: 0.4rem;
 	grid-column-start: 1;
