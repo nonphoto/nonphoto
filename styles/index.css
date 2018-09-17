@@ -83,14 +83,14 @@ p {
 	left: 0;
     padding-bottom: 0.3rem;
 
-	background-color: black;
+	background-color: transparent;
 	color: white;
 
 	line-height: 1em;
 }
 
 .project-cell:hover .project-hover {
-	visibility: visible
+	visibility: visible;
 }
 
 .project-title {
