@@ -1,11 +1,7 @@
 {
     "name": "nonphoto",
     "alias": [
-        "www.jonasluebbers.com",
-        "jonasluebbers.com"
+        "www.jonasluebbers.com"
     ],
-    "type": "static",
-    "static": {
-        "public": "dist"
-    }
+    "type": "static"
 }
