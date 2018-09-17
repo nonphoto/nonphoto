@@ -119,10 +119,6 @@ img {
 	width: 100%;
 }
 
-[data-sizzle-video] {
-	display: none;
-}
-
 @media all and (min-width: 500px) {
 	html {
 		font-size: 2.5vw;
