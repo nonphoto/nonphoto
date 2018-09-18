@@ -1,3 +1,5 @@
+import wrap from './wrap'
+
 export default class Marquee {
     constructor(container, text) {
         this.container = container
@@ -15,6 +17,7 @@ export default class Marquee {
         for (let i = 0; i < this.spanCount; i++) {
             const char = this.chars[i % this.chars.length]
             const child = document.createElement('span')
+            child.style.width = `${this.charWidth}px`
             child.innerText = char
             fragment.appendChild(child)
         }
@@ -27,7 +30,7 @@ export default class Marquee {
     }
 
     update(globalOffset) {
-        const offset = Math.floor(globalOffset % this.virtualWidth)
+        const offset = Math.floor(wrap(globalOffset, this.virtualWidth) - this.virtualWidth)
         this.container.style.transform = `translate3d(${offset}px, 0, 0)`
     }
 }
