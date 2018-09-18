@@ -20,10 +20,6 @@ const marquees = marqueeContainers.map((container) => {
     return new Marquee(container, container.dataset.marquee)
 })
 
-window.addEventListener('load', () => {
-    sizzleCanvas.fit()
-})
-
 window.addEventListener('resize', () => {
     sizzleCanvas.fit()
 })

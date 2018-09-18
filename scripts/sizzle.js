@@ -4,7 +4,7 @@ import shuffle from 'lodash.shuffle'
 import EventEmitter from 'events'
 
 class SizzleClip extends EventEmitter {
-    constructor(video, canvasResolution) {
+    constructor(video) {
         super()
 
         this.video = video
@@ -14,7 +14,6 @@ class SizzleClip extends EventEmitter {
 
         once(this.video, 'canplaythrough').then(() => {
             this.canStart = true
-            this.fit(canvasResolution)
             this.emit('canstart')
         })
     }
@@ -58,16 +57,29 @@ export default class SizzleCanvas extends EventEmitter {
         super()
 
         this.canvas = canvas
-
-        this.clips = shuffle(videos.map((video) => {
-            return new SizzleClip(video, [this.canvas.width, this.canvas.height])
-        }))
-
+        this.clips = []
         this.clipIndex = 0
+        this.canStart = false
 
-        this.currentClip.once('canstart', () => {
-            this.emit('canstart')
+        shuffle(videos).forEach((video) => {
+            const clip = new SizzleClip(video, this.resolution)
+
+            clip.once('canstart', () => {
+                clip.fit(this.resolution)
+                this.clips.push(clip)
+
+                if (this.clips.length <= 1) {
+                    this.canStart = true
+                    this.emit('canstart')
+                }
+            })
         })
+
+        this.fit()
+    }
+
+    get resolution() {
+        return [this.canvas.width, this.canvas.height]
     }
 
     get currentClip() {
@@ -79,7 +91,7 @@ export default class SizzleCanvas extends EventEmitter {
         this.canvas.height = this.canvas.clientHeight
 
         this.clips.forEach((clip) => {
-            clip.fit([this.canvas.width, this.canvas.height])
+            clip.fit(this.resolution)
         })
     }
 
