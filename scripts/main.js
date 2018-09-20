@@ -16,8 +16,19 @@ const spring = new Spring()
 
 const sizzleCanvas = new SizzleCanvas(canvas, videos)
 
-const marquees = marqueeContainers.map((container) => {
-    return new Marquee(container, container.dataset.marquee)
+let activeMarquee = null
+
+marqueeContainers.forEach((container) => {
+    const marquee = new Marquee(container, container.dataset.marquee)
+
+    container.addEventListener('mouseenter', () => {
+        activeMarquee = marquee
+        activeMarquee.update(spring.position)
+    })
+
+    container.addEventListener('mouseleave', () => {
+        activeMarquee = null
+    })
 })
 
 window.addEventListener('resize', () => {
@@ -43,8 +54,8 @@ const appLoop = loop(() => {
     spring.update()
     sizzleCanvas.draw(context, spring.position)
 
-    for (let marquee of marquees) {
-        marquee.update(spring.position)
+    if (activeMarquee) {
+        activeMarquee.update(spring.position)
     }
 })
 
