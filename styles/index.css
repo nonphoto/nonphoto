@@ -45,7 +45,6 @@ p {
 	font-weight: 400;
 	font-size: 3em;
 	line-height: 0.85em;
-	letter-spacing: -0.05ch;
 	margin: 0;
 }
 
@@ -63,7 +62,7 @@ p {
 	padding-right: 0;
 	border-top: solid black 0.1rem;
 	border-bottom: none;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 .project-cell:hover {
@@ -72,10 +71,10 @@ p {
 }
 
 .project-title {
-	align-self: end;
 	grid-column-start: 1;
 	grid-column-end: span 1;
 	margin: 0;
+	border-top: solid black 0.1rem;
 }
 
 .project-description {
@@ -112,7 +111,8 @@ img {
     padding-bottom: 0.3rem;
 
 	background-color: transparent;
-	color: white;
+	/* color: white; */
+	color: red;
 
 	line-height: 1em;
 }
