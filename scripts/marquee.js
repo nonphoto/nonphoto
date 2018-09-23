@@ -8,16 +8,16 @@ export default class Marquee {
         const testChar = document.createElement('span')
         testChar.innerText = '?'
         container.appendChild(testChar)
-        this.charWidth = testChar.clientWidth
+        this.charWidth = Math.max(testChar.clientWidth)
         container.removeChild(testChar)
 
-        this.spanCount = Math.ceil(container.clientWidth / this.charWidth) * 2
+        this.spanCount = this.chars.length + Math.ceil(container.clientWidth / this.charWidth) + 1
 
         const fragment = document.createDocumentFragment()
         for (let i = 0; i < this.spanCount; i++) {
             const char = this.chars[i % this.chars.length]
-            const child = document.createElement('span')
-            child.style.width = `${this.charWidth}px`
+            const child = document.createElement('div')
+            child.style.minWidth = `${this.charWidth}px`
             child.innerText = char
             fragment.appendChild(child)
         }

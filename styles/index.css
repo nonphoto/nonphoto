@@ -45,7 +45,6 @@ p {
 	font-weight: 400;
 	font-size: 3em;
 	line-height: 0.85em;
-	letter-spacing: -0.05ch;
 	margin: 0;
 }
 
@@ -72,10 +71,10 @@ p {
 }
 
 .project-title {
-	align-self: end;
 	grid-column-start: 1;
 	grid-column-end: span 1;
 	margin: 0;
+	border-top: solid black 0.1rem;
 }
 
 .project-description {
