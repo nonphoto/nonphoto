@@ -20,14 +20,17 @@ let activeMarquee = null
 
 marqueeContainers.forEach((container) => {
     const marquee = new Marquee(container, container.dataset.marquee)
+    const parent = container.parentElement
 
-    container.addEventListener('mouseenter', () => {
+    parent.addEventListener('mouseenter', () => {
         activeMarquee = marquee
         activeMarquee.update(spring.position)
+        container.classList.add('is-visible')
     })
 
-    container.addEventListener('mouseleave', () => {
+    parent.addEventListener('mouseleave', () => {
         activeMarquee = null
+        container.classList.remove('is-visible')
     })
 })
 

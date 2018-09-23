@@ -43,7 +43,7 @@ p {
 	text-transform: uppercase;
 	font-family: 'Space Mono', -apple-system, BlinkMacSystemFont, sans-serif;
 	font-weight: 400;
-	font-size: 5vw;
+	font-size: 3em;
 	line-height: 0.85em;
 	letter-spacing: -0.05ch;
 	margin: 0;
@@ -55,6 +55,7 @@ p {
 	display: flex;
 	flex-direction: column;
 
+	min-height: 6rem;
 	margin: 0;
 	padding-bottom: 0.5rem;
 	padding-top: 0.4rem;
@@ -68,29 +69,6 @@ p {
 .project-cell:hover {
 	border-radius: 0.5rem;
 	color: black;
-}
-
-.project-hover {
-	box-sizing: border-box;
-	align-items: center;
-	display: flex;
-	position: absolute;
-	visibility: hidden;
-
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-    padding-bottom: 0.3rem;
-
-	background-color: transparent;
-	color: white;
-
-	line-height: 1em;
-}
-
-.project-cell:hover .project-hover {
-	visibility: visible;
 }
 
 .project-title {
@@ -117,6 +95,30 @@ p {
 img {
 	display: block;
 	width: 100%;
+}
+
+[data-marquee] {
+	user-select: none;
+	box-sizing: border-box;
+	align-items: center;
+	display: flex;
+	position: absolute;
+	visibility: hidden;
+
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+    padding-bottom: 0.3rem;
+
+	background-color: transparent;
+	color: white;
+
+	line-height: 1em;
+}
+
+[data-marquee].is-visible {
+	visibility: visible;
 }
 
 @media all and (min-width: 500px) {
