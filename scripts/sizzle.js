@@ -38,6 +38,7 @@ class SizzleClip extends EventEmitter {
 
     stop() {
         this.video.pause()
+        this.video.currentTime = 0
     }
 
     draw(context, offset) {
