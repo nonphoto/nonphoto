@@ -4,14 +4,26 @@ export default class Marquee {
     constructor(container, text) {
         this.container = container
         this.chars = text.replace(/\s/g, '').split('')
+    }
 
+    get virtualWidth() {
+        return this.chars.length * this.charWidth
+    }
+
+    clear() {
+        while(this.container.firstChild) {
+            this.container.removeChild(this.container.firstChild)
+        }
+    }
+
+    inject() {
         const testChar = document.createElement('span')
         testChar.innerText = '?'
-        container.appendChild(testChar)
+        this.container.appendChild(testChar)
         this.charWidth = Math.max(testChar.clientWidth)
-        container.removeChild(testChar)
+        this.container.removeChild(testChar)
 
-        this.spanCount = this.chars.length + Math.ceil(container.clientWidth / this.charWidth) + 1
+        this.spanCount = this.chars.length + Math.ceil(this.container.clientWidth / this.charWidth) + 1
 
         const fragment = document.createDocumentFragment()
         for (let i = 0; i < this.spanCount; i++) {
@@ -22,11 +34,7 @@ export default class Marquee {
             fragment.appendChild(child)
         }
 
-        container.appendChild(fragment)
-    }
-
-    get virtualWidth() {
-        return this.chars.length * this.charWidth
+        this.container.appendChild(fragment)
     }
 
     update(globalOffset) {

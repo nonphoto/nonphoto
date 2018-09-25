@@ -24,11 +24,13 @@ marqueeContainers.forEach((container) => {
 
     parent.addEventListener('mouseenter', () => {
         activeMarquee = marquee
+        activeMarquee.inject()
         activeMarquee.update(spring.position)
         container.classList.add('is-visible')
     })
 
     parent.addEventListener('mouseleave', () => {
+        activeMarquee.clear()
         activeMarquee = null
         container.classList.remove('is-visible')
     })
