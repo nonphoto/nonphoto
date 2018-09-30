@@ -62,7 +62,7 @@ p {
 	padding-right: 0;
 	border-top: solid black 0.1rem;
 	border-bottom: none;
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 
 .project-cell:hover {
@@ -111,8 +111,7 @@ img {
     padding-bottom: 0.3rem;
 
 	background-color: transparent;
-	/* color: white; */
-	color: red;
+	color: white;
 
 	line-height: 1em;
 }
