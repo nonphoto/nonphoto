@@ -1,4 +1,3 @@
-import once from './once'
 import wrap from './wrap'
 import shuffle from 'lodash.shuffle'
 import EventEmitter from 'events'
@@ -12,7 +11,7 @@ class SizzleClip extends EventEmitter {
         this.resolution = [0, 0]
         this.cloneCount = 1
 
-        once(this.video, 'canplaythrough').then(() => {
+        this.video.addEventListener('canplaythrough', () => {
             this.canStart = true
             this.emit('canstart')
         })
@@ -20,15 +19,12 @@ class SizzleClip extends EventEmitter {
 
     fit(canvasResolution) {
         if (!this.canStart) {
-            console.log('cant start')
             return
         }
 
         const [canvasWidth, canvasHeight] = canvasResolution
         const scale = canvasHeight / this.video.videoHeight
         const width = this.video.videoWidth * scale
-
-        console.log(`video: ${this.video.videoWidth}, ${this.video.videoHeight}`)
 
         this.resolution = [width, canvasHeight]
         this.cloneCount = Math.ceil(canvasWidth / width) + 1
