@@ -19,11 +19,16 @@ class SizzleClip extends EventEmitter {
     }
 
     fit(canvasResolution) {
-        if (!this.canStart) return
+        if (!this.canStart) {
+            console.log('cant start')
+            return
+        }
 
         const [canvasWidth, canvasHeight] = canvasResolution
         const scale = canvasHeight / this.video.videoHeight
         const width = this.video.videoWidth * scale
+
+        console.log(`video: ${this.video.videoWidth}, ${this.video.videoHeight}`)
 
         this.resolution = [width, canvasHeight]
         this.cloneCount = Math.ceil(canvasWidth / width) + 1
@@ -48,7 +53,10 @@ class SizzleClip extends EventEmitter {
         const x = wrap(offset, w) - w
 
         for (let i = 0; i < this.cloneCount; i++) {
-            context.drawImage(this.video, x + (i * w), 0, w + 1, h)
+            const dx = x + (i * w)
+            const vw = this.video.videoWidth
+            const vh = this.video.videoHeight
+            context.drawImage(this.video, 0, 0, vw, vh, dx, 0, w + 1, h + 1)
         }
     }
 }
@@ -61,6 +69,8 @@ export default class SizzleCanvas extends EventEmitter {
         this.clips = []
         this.clipIndex = 0
         this.canStart = false
+
+        this.fit()
 
         shuffle(videos).forEach((video) => {
             const clip = new SizzleClip(video, this.resolution)
@@ -75,8 +85,6 @@ export default class SizzleCanvas extends EventEmitter {
                 }
             })
         })
-
-        this.fit()
     }
 
     get resolution() {
