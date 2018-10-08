@@ -7,7 +7,7 @@
     "start": "parcel index.html --no-hmr",
     "hmr": "parcel index.html",
     "watch": "parcel watch index.html",
-    "build": "parcel build index.html",
+    "build": "rm -rf dist && parcel build index.html",
     "deploy": "now --public --name nonphoto dist",
     "alias": "now alias"
   },
