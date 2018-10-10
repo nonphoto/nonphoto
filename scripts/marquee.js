@@ -3,7 +3,7 @@ import wrap from './wrap'
 export default class Marquee {
     constructor(container, text) {
         this.container = container
-        this.chars = text.replace(/\s/g, '').split('')
+        this.chars = text.replace(/\s/g, '').split('').concat('•')
     }
 
     get virtualWidth() {
