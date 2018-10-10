@@ -15,7 +15,6 @@ class SizzleClip extends EventEmitter {
 
         this.video.addEventListener('canplaythrough', () => {
             this.canStart = true
-            console.log('canplaythrough')
             this.emit('canstart')
         })
     }
