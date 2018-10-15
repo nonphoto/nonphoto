@@ -3,12 +3,12 @@ import Clock from './clock'
 import Spring from './spring'
 import Marquee from './marquee'
 import SizzleCanvas from './sizzle'
-import videos from './videos'
 
 const scrollSpeed = -0.5
 const mouseInfluence = 0.2
 
 const marqueeContainers = Array.from(document.querySelectorAll('[data-marquee]'))
+const videos = Array.from(document.querySelectorAll('[data-sizzle-video]'))
 const canvas = document.querySelector('[data-sizzle-canvas]')
 const context = canvas.getContext('2d')
 
