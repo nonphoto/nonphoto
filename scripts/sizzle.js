@@ -11,6 +11,7 @@ class SizzleClip extends EventEmitter {
         this.cloneCount = 1
 
         this.video = document.createElement('video')
+        this.video.muted = 'true'
         this.video.src = src
 
         this.video.addEventListener('canplaythrough', () => {
