@@ -1,4 +1,5 @@
 import wrap from './wrap'
+import once from './once'
 import shuffle from 'lodash.shuffle'
 import EventEmitter from 'events'
 
@@ -11,7 +12,7 @@ class SizzleClip extends EventEmitter {
         this.resolution = [0, 0]
         this.cloneCount = 1
 
-        this.video.addEventListener('canplaythrough', () => {
+        once(this.video, 'canplaythrough').then(() => {
             this.canStart = true
             this.emit('canstart')
         })
