@@ -49,12 +49,6 @@ p {
 	margin: 0;
 }
 
-.meta {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 0.4em;
-}
-
 .project-cell {
 	position: relative;
 	box-sizing: border-box;
