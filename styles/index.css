@@ -108,6 +108,7 @@ img {
 	box-sizing: border-box;
 	align-items: center;
 	display: flex;
+	flex-wrap: nowrap;
 	position: absolute;
 	visibility: hidden;
 
@@ -121,6 +122,10 @@ img {
 	color: white;
 
 	line-height: 1em;
+}
+
+[data-marquee] > * {
+	flex-shrink: 0;
 }
 
 [data-marquee].is-visible {

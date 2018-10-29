@@ -3,42 +3,28 @@ import wrap from './wrap'
 export default class Marquee {
     constructor(container, text) {
         this.container = container
-        this.chars = text.replace(/\s/g, '').split('').concat('•')
-    }
-
-    get virtualWidth() {
-        return this.chars.length * this.charWidth
-    }
-
-    clear() {
-        while(this.container.firstChild) {
-            this.container.removeChild(this.container.firstChild)
-        }
+        this.cloneTemplate = document.createElement('div')
+        this.cloneTemplate.innerText = text.replace(/\W/g, '') + '•'
+        this.container.appendChild(this.cloneTemplate)
     }
 
     inject() {
-        const testChar = document.createElement('span')
-        testChar.innerText = '?'
-        this.container.appendChild(testChar)
-        this.charWidth = Math.max(testChar.clientWidth)
-        this.container.removeChild(testChar)
+        const documentFragment = document.createDocumentFragment()
 
-        this.spanCount = this.chars.length + Math.ceil(this.container.clientWidth / this.charWidth) + 1
+        this.cloneWidth = this.cloneTemplate.clientWidth
+        const cloneCount = Math.ceil(this.container.clientWidth / this.cloneWidth) + 1
+        const additionalCloneCount = Math.max(cloneCount - this.container.children.length, 0)
 
-        const fragment = document.createDocumentFragment()
-        for (let i = 0; i < this.spanCount; i++) {
-            const char = this.chars[i % this.chars.length]
-            const child = document.createElement('div')
-            child.style.minWidth = `${this.charWidth}px`
-            child.innerText = char
-            fragment.appendChild(child)
+        for (let i = 0; i < additionalCloneCount; i++) {
+            const clone = this.cloneTemplate.cloneNode(true)
+            documentFragment.appendChild(clone)
         }
 
-        this.container.appendChild(fragment)
+        this.container.appendChild(documentFragment)
     }
 
     update(globalOffset) {
-        const offset = Math.floor(wrap(globalOffset, this.virtualWidth) - this.virtualWidth)
+        const offset = Math.floor(wrap(globalOffset, this.cloneWidth) - this.cloneWidth)
         this.container.style.transform = `translate3d(${offset}px, 0, 0)`
     }
 }
