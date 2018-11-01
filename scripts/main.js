@@ -68,6 +68,7 @@ const clock = new Clock(() => {
 }, 3000)
 
 sizzleCanvas.on('canstart', () => {
+    sizzleCanvas.fit()
     sizzleCanvas.start()
     appLoop.start()
     clock.start()
