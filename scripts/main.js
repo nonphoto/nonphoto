@@ -30,7 +30,6 @@ marqueeContainers.forEach((container) => {
     })
 
     parent.addEventListener('mouseleave', () => {
-        activeMarquee.clear()
         activeMarquee = null
         container.classList.remove('is-visible')
     })

@@ -1,6 +1,6 @@
 html {
 	font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-	font-size: 4.5vw;
+	font-size: 18px;
 	font-feature-settings: "liga", "zero", "ss02", "ss05";
 
 	width: 100%;
@@ -47,12 +47,6 @@ p {
 	font-size: 3em;
 	line-height: 0.85em;
 	margin: 0;
-}
-
-.meta {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 0.4em;
 }
 
 .project-cell {
@@ -108,6 +102,7 @@ img {
 	box-sizing: border-box;
 	align-items: center;
 	display: flex;
+	flex-wrap: nowrap;
 	position: absolute;
 	visibility: hidden;
 
@@ -121,6 +116,10 @@ img {
 	color: white;
 
 	line-height: 1em;
+}
+
+[data-marquee] > * {
+	flex-shrink: 0;
 }
 
 [data-marquee].is-visible {
@@ -137,10 +136,6 @@ img {
 }
 
 @media all and (min-width: 500px) {
-	html {
-		font-size: 2.5vw;
-	}
-
 	body {
 		grid-template-columns: repeat(2, 1fr);
 	}
@@ -151,10 +146,6 @@ img {
 }
 
 @media all and (min-width: 1000px) {
-	html {
-		font-size: 1.6vw;
-	}
-
 	body {
 		grid-template-columns: repeat(3, 1fr);
 	}
@@ -162,7 +153,7 @@ img {
 
 @media all and (min-width: 1500px) {
 	html {
-		font-size: 1.4vw;
+		font-size: 22px;
 	}
 
 	body {
@@ -172,7 +163,13 @@ img {
 
 @media all and (min-width: 2000px) {
 	html {
-		font-size: 1.2vw;
+		font-size: 26px;
+	}
+}
+
+@media all and (min-width: 2500px) {
+	html {
+		font-size: 30px;
 	}
 
 	body {
@@ -181,15 +178,5 @@ img {
 
 	.header-canvas {
 		grid-column-end: span 3;
-	}
-}
-
-@media all and (min-width: 3000px) {
-	html {
-		font-size: 1vw;
-	}
-
-	body {
-		grid-template-columns: repeat(6, 1fr);
 	}
 }
