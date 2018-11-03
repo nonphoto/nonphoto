@@ -67,8 +67,17 @@ p {
 }
 
 .project-cell:hover {
+	color: inherit;
+	background-color: inherit;
+}
+
+.project-cell.hover {
 	border-radius: 0.5rem;
-	color: black;
+	background-color: black;
+}
+
+.project-cell.hover [data-marquee] {
+	visibility: visible;
 }
 
 .project-title {
@@ -112,7 +121,6 @@ img {
 	left: 0;
     padding-bottom: 0.3rem;
 
-	background-color: transparent;
 	color: white;
 
 	line-height: 1em;
@@ -120,10 +128,6 @@ img {
 
 [data-marquee] > * {
 	flex-shrink: 0;
-}
-
-[data-marquee].is-visible {
-	visibility: visible;
 }
 
 [data-sizzle-video] {

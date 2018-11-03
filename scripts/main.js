@@ -1,4 +1,5 @@
 import loop from 'raf-loop'
+import * as hover from './hover'
 import Clock from './clock'
 import Spring from './spring'
 import Marquee from './marquee'
@@ -22,16 +23,16 @@ marqueeContainers.forEach((container) => {
     const marquee = new Marquee(container, container.dataset.marquee)
     const parent = container.parentElement
 
-    parent.addEventListener('mouseenter', () => {
+    hover.onEnter(parent, () => {
         activeMarquee = marquee
         activeMarquee.inject()
         activeMarquee.update(spring.position)
-        container.classList.add('is-visible')
+        parent.classList.add('hover')
     })
 
-    parent.addEventListener('mouseleave', () => {
+    hover.onLeave(parent, () => {
         activeMarquee = null
-        container.classList.remove('is-visible')
+        parent.classList.remove('hover')
     })
 })
 
