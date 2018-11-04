@@ -130,15 +130,6 @@ img {
 	flex-shrink: 0;
 }
 
-[data-sizzle-video] {
-	visibility: hidden;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 256px;
-	height: auto;
-}
-
 @media all and (min-width: 500px) {
 	body {
 		grid-template-columns: repeat(2, 1fr);
