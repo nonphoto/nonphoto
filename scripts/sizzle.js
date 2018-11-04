@@ -4,97 +4,63 @@ import shuffle from 'lodash.shuffle'
 import EventEmitter from 'events'
 
 class SizzleClip extends EventEmitter {
-    constructor(video, shouldUseImage = false) {
+    constructor(video) {
         super()
 
-        this.mediaIsImage = shouldUseImage
+        this.video = video
         this.canStart = false
         this.resolution = [0, 0]
         this.cloneCount = 1
 
-        console.log('clip', this.mediaIsImage)
-
-        if (shouldUseImage) {
-            console.log('image')
-            this.media = document.createElement('img')
-            once(this.media, 'load').then(() => {
-                this.canStart = true
-                this.emit('canstart')
-            })
-
-            if (video.hasAttribute('poster')) {
-                const src = video.getAttribute('poster')
-                this.media.setAttribute('src', src)
-            }
-            else {
-                throw Error('Missing fallback poster for video')
-            }
-        }
-        else {
-            console.log('video')
-            this.media = video
-            once(this.media, 'canplaythrough').then(() => {
-                this.canStart = true
-                this.emit('canstart')
-            })
-        }
-    }
-
-    get mediaResolution() {
-        if (this.mediaIsImage) {
-            return [this.media.naturalWidth, this.media.naturalHeight]
-        }
-        else {
-            return [this.media.videoWidth, this.media.videoHeight]
-        }
+        once(this.video, 'canplaythrough').then(() => {
+            this.canStart = true
+            this.emit('canstart')
+        })
     }
 
     fit(canvasResolution) {
-        if (!this.canStart) return
+        if (!this.canStart) {
+            return
+        }
 
-        const [mw, mh] = this.mediaResolution
-        const [cw, ch] = canvasResolution
+        const [canvasWidth, canvasHeight] = canvasResolution
+        const scale = canvasHeight / this.video.videoHeight
+        const width = this.video.videoWidth * scale
 
-        const scale = ch / mh
-        const width = mw * scale
-
-        this.resolution = [width, ch]
-        this.cloneCount = Math.ceil(cw / width) + 1
+        this.resolution = [width, canvasHeight]
+        this.cloneCount = Math.ceil(canvasWidth / width) + 1
     }
 
     start() {
-        if (this.mediaIsImage || !this.canStart) return
+        if (!this.canStart) return
 
-        this.media.currentTime = 0
-        this.media.play()
+        this.video.currentTime = 0
+        this.video.play()
     }
 
     stop() {
-        if (this.mediaIsImage) return
-
-        this.media.pause()
-        this.media.currentTime = 0
+        this.video.pause()
+        this.video.currentTime = 0
     }
 
     draw(context, offset) {
         if (!this.canStart) return
 
         const [w, h] = this.resolution
-        const [mw, mh] = this.mediaResolution
         const x = wrap(offset, w) - w
 
         for (let i = 0; i < this.cloneCount; i++) {
             const dx = x + (i * w)
-            context.drawImage(this.media, 0, 0, mw, mh, dx, 0, w + 1, h + 1)
+            const vw = this.video.videoWidth
+            const vh = this.video.videoHeight
+            context.drawImage(this.video, 0, 0, vw, vh, dx, 0, w + 1, h + 1)
         }
     }
 }
 
 export default class SizzleCanvas extends EventEmitter {
-    constructor(canvas, videos, shouldUseImages = false) {
+    constructor(canvas, videos) {
         super()
-
-        console.log('canvas', shouldUseImages)
 
         this.canvas = canvas
         this.clips = []
@@ -104,10 +70,9 @@ export default class SizzleCanvas extends EventEmitter {
         this.fit()
 
         shuffle(videos).forEach((video) => {
-            const clip = new SizzleClip(video, shouldUseImages)
+            const clip = new SizzleClip(video, this.resolution)
 
             clip.once('canstart', () => {
-                console.log(clip)
                 clip.fit(this.resolution)
                 this.clips.push(clip)
 
@@ -117,7 +82,6 @@ export default class SizzleCanvas extends EventEmitter {
                 }
             })
         })
-
     }
 
     get resolution() {
