@@ -15,7 +15,8 @@ const context = canvas.getContext('2d')
 
 const spring = new Spring()
 
-const sizzleCanvas = new SizzleCanvas(canvas, videos)
+const shouldUseImages = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+const sizzleCanvas = new SizzleCanvas(canvas, videos, shouldUseImages)
 
 let activeMarquee = null
 
@@ -68,9 +69,5 @@ const clock = new Clock(() => {
     sizzleCanvas.next()
 }, 3000)
 
-sizzleCanvas.on('canstart', () => {
-    sizzleCanvas.fit()
-    sizzleCanvas.start()
-    appLoop.start()
-    clock.start()
-})
+appLoop.start()
+clock.start()
