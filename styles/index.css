@@ -84,7 +84,6 @@ p {
 	grid-column-start: 1;
 	grid-column-end: span 1;
 	margin: 0;
-	border-top: solid black 0.1rem;
 }
 
 .project-description {
