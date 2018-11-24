@@ -2,7 +2,6 @@ import videoButterfly from '../videos/butterfly.mp4'
 import videoCows from '../videos/cows.mp4'
 import videoEye from '../videos/eye.mp4'
 import videoFlare from '../videos/flare.mp4'
-import videoMusicBlog from '../videos/music-blog.mp4'
 import videoPlanets from '../videos/planets.mp4'
 import videoSky from '../videos/sky.mp4'
 import videoWater from '../videos/water.mp4'
@@ -11,14 +10,12 @@ import videoInterlace from '../videos/interlace.mp4'
 import videoChromatic from '../videos/chromatic.mp4'
 import videoSlice from '../videos/slice.mp4'
 import videoSphere from '../videos/sphere.mp4'
-import videoSlideshow from '../videos/slideshow.mp4'
 
 export default [
     videoButterfly,
     videoCows,
     videoEye,
     videoFlare,
-    videoMusicBlog,
     videoPlanets,
     videoSky,
     videoWater,
@@ -27,5 +24,4 @@ export default [
     videoChromatic,
     videoSlice,
     videoSphere,
-    videoSlideshow,
 ]
