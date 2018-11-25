@@ -1,6 +1,5 @@
 import wrap from './wrap'
 import once from './once'
-import waitForEach from './wait-for-each'
 import shuffle from 'lodash.shuffle'
 
 class SizzleClip  {
@@ -17,10 +16,8 @@ class SizzleClip  {
     }
 
     load() {
-        const promise = once(this.video, 'canplay').then(() => {
-            console.log('canplay', this.video.src)
+        const promise = once(this.video, 'canplaythrough').then(() => {
             this.loaded = true
-            return this
         })
 
         this.video.src = this.src
@@ -41,13 +38,11 @@ class SizzleClip  {
     }
 
     start() {
-        if (!this.loaded) return
         this.video.currentTime = 0
         this.video.play()
     }
 
     stop() {
-        if (!this.loaded) return
         this.video.pause()
         this.video.currentTime = 0
     }
@@ -72,7 +67,7 @@ export default class SizzleCanvas {
         this.loaded = false
         this.clips = shuffle(sources).map((src) => {
             return new SizzleClip(src)
-        })
+        }).slice(0, 4)
 
         this.fit()
     }
