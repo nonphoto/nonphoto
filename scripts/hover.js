@@ -9,12 +9,12 @@ export function onEnter(element, callback) {
         else {
             callback()
         }
-    })
+    }, { passive: true })
 
     element.addEventListener('touchstart', () => {
         element.setAttribute(touchAttribute, true)
         callback()
-    })
+    }, { passive: true })
 }
 
 export function onLeave(element, callback) {
