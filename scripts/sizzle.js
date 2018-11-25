@@ -2,34 +2,35 @@ import wrap from './wrap'
 import once from './once'
 import waitForEach from './wait-for-each'
 import shuffle from 'lodash.shuffle'
-import EventEmitter from 'events'
 
-class SizzleClip extends EventEmitter {
+class SizzleClip  {
     constructor(src) {
-        super()
-
-        this.canStart = false
+        this.src = src
+        this.loaded = false
         this.resolution = [0, 0]
         this.cloneCount = 1
 
         this.video = document.createElement('video')
         this.video.muted = true
+        this.video.loop = true
         this.video.playsinline = true
+    }
 
-        once(this.video, 'canplay').then(() => {
+    load() {
+        const promise = once(this.video, 'canplay').then(() => {
             console.log('canplay', this.video.src)
-            this.canStart = true
-            this.emit('canstart')
+            this.loaded = true
+            return this
         })
 
-        this.video.src = src
+        this.video.src = this.src
         this.video.load()
+
+        return promise
     }
 
     fit(canvasResolution) {
-        if (!this.canStart) {
-            return
-        }
+        if (!this.loaded) return
 
         const [canvasWidth, canvasHeight] = canvasResolution
         const scale = canvasHeight / this.video.videoHeight
@@ -40,21 +41,18 @@ class SizzleClip extends EventEmitter {
     }
 
     start() {
-        if (!this.canStart) return
-
-        console.log('play', this.video.src)
+        if (!this.loaded) return
         this.video.currentTime = 0
         this.video.play()
     }
 
     stop() {
+        if (!this.loaded) return
         this.video.pause()
         this.video.currentTime = 0
     }
 
     draw(context, offset) {
-        if (!this.canStart) return
-
         const [w, h] = this.resolution
         const x = wrap(offset, w) - w
 
@@ -67,33 +65,16 @@ class SizzleClip extends EventEmitter {
     }
 }
 
-export default class SizzleCanvas extends EventEmitter {
+export default class SizzleCanvas {
     constructor(canvas, sources) {
-        super()
-
         this.canvas = canvas
-        this.clips = []
         this.clipIndex = 0
-        this.canStart = false
+        this.loaded = false
+        this.clips = shuffle(sources).map((src) => {
+            return new SizzleClip(src)
+        })
 
         this.fit()
-
-        waitForEach(shuffle(sources), (src) => {
-            console.log('create', src)
-            const clip = new SizzleClip(src)
-
-            return new Promise((resolve) => {
-                clip.once('canstart', resolve)
-            }).then(() => {
-                clip.fit(this.resolution)
-                this.clips.push(clip)
-
-                if (this.clips.length <= 1) {
-                    this.canStart = true
-                    this.emit('canstart')
-                }
-            })
-        })
     }
 
     get resolution() {
@@ -110,6 +91,14 @@ export default class SizzleCanvas extends EventEmitter {
 
         this.clips.forEach((clip) => {
             clip.fit(this.resolution)
+        })
+    }
+
+    load() {
+        return Promise.all(this.clips.map((clip) => {
+            return clip.load()
+        })).then(() => {
+            this.loaded = true
         })
     }
 

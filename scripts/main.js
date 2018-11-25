@@ -12,9 +12,7 @@ const mouseInfluence = 0.2
 const marqueeContainers = Array.from(document.querySelectorAll('[data-marquee]'))
 const canvas = document.querySelector('[data-sizzle-canvas]')
 const context = canvas.getContext('2d')
-
 const spring = new Spring()
-
 const sizzleCanvas = new SizzleCanvas(canvas, videos)
 
 let activeMarquee = null
@@ -48,8 +46,8 @@ document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
         clock.stop()
     }
-    else {
-        sizzleCanvas.next()
+    else if (sizzleCanvas.loaded) {
+        sizzleCanvas.start()
         clock.start()
     }
 })
@@ -57,6 +55,7 @@ document.addEventListener('visibilitychange', () => {
 const appLoop = loop(() => {
     spring.moveBy(scrollSpeed)
     spring.update()
+
     sizzleCanvas.draw(context, spring.position)
 
     if (activeMarquee) {
@@ -64,13 +63,14 @@ const appLoop = loop(() => {
     }
 })
 
+appLoop.start()
+
 const clock = new Clock(() => {
     sizzleCanvas.next()
 }, 3000)
 
-sizzleCanvas.on('canstart', () => {
+sizzleCanvas.load().then(() => {
     sizzleCanvas.fit()
     sizzleCanvas.start()
-    appLoop.start()
     clock.start()
 })
