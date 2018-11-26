@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/nonphoto/nonphoto.github.io#readme",
   "devDependencies": {
-    "now": "^11.4.0",
+    "now": "12.1.5",
     "parcel-bundler": "^1.10.3",
     "parcel-plugin-static-files-copy": "^1.2.4"
   },
