@@ -1,7 +1,11 @@
 {
+    "version": 2,
     "name": "nonphoto",
     "alias": [
-        "jonasluebbers.com"
+        "jonasluebbers.com",
+        "www.jonasluebbers.com"
     ],
-    "type": "static"
+    "builds": [
+        { "src": "package.json", "use": "@now/static-build" }
+    ]
 }
