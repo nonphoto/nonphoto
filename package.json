@@ -6,9 +6,10 @@
   "scripts": {
     "start": "parcel index.html --no-hmr",
     "hmr": "parcel index.html",
+    "clean": "rm -rf dist .cache",
     "watch": "parcel watch index.html",
-    "build": "rm -rf dist && parcel build index.html",
-    "now-build": "parcel build index.html",
+    "build": "npm run clean && parcel build index.html",
+    "now-build": "npm run build",
     "deploy": "now",
     "alias": "now alias"
   },
