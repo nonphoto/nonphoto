@@ -7,7 +7,6 @@ class SizzleClip  {
         this.src = src
         this.loaded = false
         this.resolution = [0, 0]
-        this.cloneCount = 1
 
         this.video = document.createElement('video')
         this.video.muted = true
@@ -50,6 +49,8 @@ class SizzleClip  {
     draw(context, offset) {
         const [w, h] = this.resolution
         const x = wrap(offset, w) - w
+
+        if (!this.cloneCount) return
 
         for (let i = 0; i < this.cloneCount; i++) {
             const dx = x + (i * w)
