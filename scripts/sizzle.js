@@ -38,12 +38,11 @@ class SizzleClip  {
 
     start() {
         this.video.currentTime = 0
-        this.video.play()
-    }
-
-    stop() {
-        this.video.pause()
-        this.video.currentTime = 0
+        this.video.play().then(() => {
+            console.log(`resolved ${this.src}`)
+        }, () => {
+            console.log(`rejected ${this.src}`)
+        })
     }
 
     draw(context, offset) {
@@ -69,8 +68,6 @@ export default class SizzleCanvas {
         this.clips = shuffle(sources).map((src) => {
             return new SizzleClip(src)
         })
-
-        console.log(this.clips.map(clip => clip.src))
 
         this.fit()
     }
