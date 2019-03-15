@@ -15,7 +15,7 @@ class SizzleClip  {
     }
 
     load() {
-        const promise = once(this.video, 'canplaythrough').then(() => {
+        const promise = once(this.video, 'canplay').then(() => {
             this.loaded = true
         })
 
@@ -68,7 +68,9 @@ export default class SizzleCanvas {
         this.loaded = false
         this.clips = shuffle(sources).map((src) => {
             return new SizzleClip(src)
-        }).slice(0, 4)
+        })
+
+        console.log(this.clips.map(clip => clip.src))
 
         this.fit()
     }
@@ -103,7 +105,6 @@ export default class SizzleCanvas {
     }
 
     next() {
-        this.currentClip.stop()
         this.clipIndex = (this.clipIndex + 1) % this.clips.length
         this.currentClip.start()
     }
