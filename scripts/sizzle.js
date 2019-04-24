@@ -7,7 +7,6 @@ class SizzleClip  {
         this.src = src
         this.loaded = false
         this.resolution = [0, 0]
-        this.cloneCount = 1
 
         this.video = document.createElement('video')
         this.video.muted = true
@@ -16,7 +15,7 @@ class SizzleClip  {
     }
 
     load() {
-        const promise = once(this.video, 'canplaythrough').then(() => {
+        const promise = once(this.video, 'canplay').then(() => {
             this.loaded = true
         })
 
@@ -39,17 +38,18 @@ class SizzleClip  {
 
     start() {
         this.video.currentTime = 0
-        this.video.play()
-    }
-
-    stop() {
-        this.video.pause()
-        this.video.currentTime = 0
+        this.video.play().then(() => {
+            console.log(`resolved ${this.src}`)
+        }, () => {
+            console.log(`rejected ${this.src}`)
+        })
     }
 
     draw(context, offset) {
         const [w, h] = this.resolution
         const x = wrap(offset, w) - w
+
+        if (!this.cloneCount) return
 
         for (let i = 0; i < this.cloneCount; i++) {
             const dx = x + (i * w)
@@ -67,7 +67,7 @@ export default class SizzleCanvas {
         this.loaded = false
         this.clips = shuffle(sources).map((src) => {
             return new SizzleClip(src)
-        }).slice(0, 4)
+        })
 
         this.fit()
     }
@@ -102,7 +102,6 @@ export default class SizzleCanvas {
     }
 
     next() {
-        this.currentClip.stop()
         this.clipIndex = (this.clipIndex + 1) % this.clips.length
         this.currentClip.start()
     }
