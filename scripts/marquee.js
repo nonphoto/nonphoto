@@ -3,6 +3,7 @@ import wrap from './wrap'
 export default class Marquee {
     constructor(container, text) {
         this.container = container
+        this.parent = this.container.parentElement
         this.cloneTemplate = document.createElement('div')
         this.cloneTemplate.innerText = text.replace(/\W/g, '') + '•'
         this.container.appendChild(this.cloneTemplate)
@@ -12,7 +13,7 @@ export default class Marquee {
         const documentFragment = document.createDocumentFragment()
 
         this.cloneWidth = this.cloneTemplate.clientWidth
-        const cloneCount = Math.ceil(this.container.clientWidth / this.cloneWidth) + 1
+        const cloneCount = Math.ceil(this.parent.clientWidth / this.cloneWidth) + 1
         const additionalCloneCount = Math.max(cloneCount - this.container.children.length, 0)
 
         for (let i = 0; i < additionalCloneCount; i++) {
