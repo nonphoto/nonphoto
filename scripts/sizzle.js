@@ -1,6 +1,6 @@
-import wrap from './wrap'
-import once from './once'
-import shuffle from 'lodash.shuffle'
+import wrap from './wrap.js'
+import once from './once.js'
+import { shuffle } from '/web_modules/lodash-es.js'
 
 class SizzleClip  {
     constructor(src) {

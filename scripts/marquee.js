@@ -1,4 +1,4 @@
-import wrap from './wrap'
+import wrap from './wrap.js'
 
 export default class Marquee {
     constructor(container, text) {

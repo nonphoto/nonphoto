@@ -6,6 +6,13 @@
         "www.jonasluebbers.com"
     ],
     "builds": [
-        { "src": "package.json", "use": "@now/static-build" }
+        { "src": "fonts/**/*", "use": "@now/static" },
+        { "src": "pages/**/*", "use": "@now/static" },
+        { "src": "scripts/**/*", "use": "@now/static" },
+        { "src": "styles/**/*", "use": "@now/static" },
+        { "src": "videos/**/*", "use": "@now/static" },
+        { "src": "web_modules/**/*", "use": "@now/static" },
+        { "src": "favicon.ico", "use": "@now/static" },
+        { "src": "index.html", "use": "@now/static" }
     ]
 }

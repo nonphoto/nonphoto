@@ -1,10 +1,9 @@
-import loop from 'raf-loop'
-import * as hover from './hover'
-import Clock from './clock'
-import Spring from './spring'
-import Marquee from './marquee'
-import SizzleCanvas from './sizzle'
-import videos from './videos'
+import * as hover from './hover.js'
+import Clock from './clock.js'
+import Spring from './spring.js'
+import Marquee from './marquee.js'
+import SizzleCanvas from './sizzle.js'
+import videos from './videos.js'
 
 const scrollSpeed = -0.5
 const mouseInfluence = 0.2
@@ -52,7 +51,7 @@ document.addEventListener('visibilitychange', () => {
     }
 })
 
-const appLoop = loop(() => {
+function render() {
     spring.moveBy(scrollSpeed)
     spring.update()
 
@@ -61,9 +60,11 @@ const appLoop = loop(() => {
     if (activeMarquee) {
         activeMarquee.update(spring.position)
     }
-})
 
-appLoop.start()
+    requestAnimationFrame(render)
+}
+
+render()
 
 const clock = new Clock(() => {
     sizzleCanvas.next()
