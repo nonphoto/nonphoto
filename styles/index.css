@@ -64,6 +64,12 @@ p {
 	border-top: solid black 0.1rem;
 	border-bottom: none;
 	overflow: hidden;
+	transform: translate3d(0, 0, 0);
+}
+
+.project-cell:hover {
+	background-color: inherit;
+	color: inherit;
 }
 
 .project-cell.hover {
@@ -100,6 +106,7 @@ img {
 }
 
 [data-marquee] {
+	-moz-user-select: none;
 	user-select: none;
 	box-sizing: border-box;
 	align-items: center;
