@@ -1,117 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Jonas Luebbers-Moon</title>
-	<link rel="icon" href="./favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Space+Mono:400,700" />
-	<link rel="stylesheet" href="./styles/space-grotesk.css" />
-	<link rel="stylesheet" href="./styles/index.css" />
-	<script src="./scripts/main.js" type="module" defer></script>
-</head>
-
-<body>
-	<canvas class="header-canvas" data-sizzle-canvas></canvas>
-	<p>
-		I'm Jonas Luebbers-Moon, a creative developer living in New York. I currently build websites for <a href="https://frame.io">Frame.io</a>. You can find me
-		elsewhere on <a href="https://are.na/jonas-luebbers">Are.na</a>, <a href="https://github.com/nonphoto">Github</a>,
-		<a href="https://glitch.com/@nonphoto">Glitch</a>, and <a href="https://twitter.com/nonphotobloom">Twitter</a>.
-	</p>
-	<a class="project-cell" href="https://brand.squarespace.com">
-		<div class="title" data-marquee="Clarkson"></div>
-		<div>
-			Squarespace refreshed their brand in 2018 and created a new typeface to go with it. This is the press site I made
-			for the announcement.&nbsp;→
-		</div>
-	</a>
-	<a class="project-cell" href="https://www.squarespace.com">
-		<div class="title" data-marquee="Squarespace"></div>
-		<div>
-			Creative development for Squarespace including their public facing websites, homepage, and prototypes.&nbsp;→
-		</div>
-	</a>
-	<a class="project-cell" href="https://marbled-paper.glitch.me">
-		<div class="title" data-marquee="Marbled Paper"></div>
-		<div>
-			Marbled paper is a printing technique that creates intricate patterns in colored ink. I made a real-time
-			simulation using fragment shaders.&nbsp;→
-		</div>
-	</a>
-	<a class="project-cell" href="https://www.bensifel.com">
-		<div class="title" data-marquee="Ben Sifel"></div>
-		<div>
-			A portfolio site for designer Ben Sifel. Includes revolutionary 3D butterfly simulation technology.&nbsp;→
-		</div>
-	</a>
-	<a class="project-cell" href="https://www.juliemoon.info">
-		<div class="title" data-marquee="Julie Moon"></div>
-		<div>
-			A microsite I made for my wife, Julie.&nbsp;→
-		</div>
-	</a>
-	<a class="project-cell" href="https://nonphoto.github.io/shader-tutorial">
-		<div class="title" data-marquee="Shader Tutorial"></div>
-		<div>
-			This is a WebGL tutorial for JavaScript developers. I wrote and presented this introduction at Squarespace.&nbsp;→
-		</div>
-	</a>
-	<a class="project-cell" href="https://mark.luebbers.cc">
-		<div class="title" data-marquee="Mark Luebbers"></div>
-		<div>
-			My dad is a teacher and writes excellent poetry. I designed and built a site for his published works.&nbsp;→
-		</div>
-	</a>
-	<a class="project-cell" href="https://nonphoto.github.io/tumblr-grid">
-		<div class="title" data-marquee="Tumblr Grid"></div>
-		<div>
-			View all of your Tumblr likes at once.&nbsp;→
-		</div>
-	</a>
-	<a class="project-cell" href="https://github.com/nonphoto/public-record/blob/master/writeup/writeup.pdf">
-		<div class="title" data-marquee="Public Record"></div>
-		<div>
-			I implemented operational transformation&mdash;the same tech Google uses for Docs&mdash;for a distributed systems
-			research project.&nbsp;→
-		</div>
-	</a>
-	<a class="project-cell" href="https://github.com/nonphoto/midterm-sky">
-		<div class="title" data-marquee="Sky Simulation"></div>
-		<div>
-			A shader that simulates atmospheric scattering and its effect on clouds.&nbsp;→
-		</div>
-	</a>
-	<a class="project-cell" href="./pages/monuments/index.html">
-		<div class="title" data-marquee="Monuments"></div>
-		<div>
-			<em>Monuments</em> began with a script I wrote that generates random three-dimensional structures. I later drew
-			imaginary environments to surround them.
-		</div>
-	</a>
-	<a class="project-cell" href="https://nonphoto.github.io/cross-hatching">
-		<div class="title" data-marquee="Cross-Hatching"></div>
-		<div>
-			A script that draws images using cross-hatched lines.
-		</div>
-	</a>
-	<a class="project-cell" href="./pages/narrow-focus/index.html">
-		<div class="title" data-marquee="Narrow Focus"></div>
-		<div>
-			<em>Narrow Focus</em> is a digital collage of ink drawings. I used Lua to combine scenes I drew of Williamstown,
-			Massachusetts.
-		</div>
-	</a>
-	<a class="project-cell" href="./pages/eyes-through-a-car-window/index.html">
-		<div class="title" data-marquee="Eyes Through A Car Window"></div>
-		</div>
-		<em>Eyes Through A Car Window</em> is a grid of 120 drawings generated with code.
-		</div>
-	</a>
-	<a class="project-cell" href="./pages/sketchbook/index.html">
-		<div class="title" data-marquee="Sketchbook"></div>
-		<div>
-			This is the sketchbook I used while studying architecture in Copenhagen.
-		</div>
-	</a>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jonas Luebbers-Moon</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Space+Mono:400,700"
+    />
+    <link rel="stylesheet" href="./styles/space-grotesk.css" />
+    <link rel="stylesheet" href="./styles/index.css" />
+    <script src="./scripts/eye.js" defer></script>
+  </head>
+  <body>
+    <p>
+      I'm Jonas Luebbers-Moon, a creative developer living in New York. I have
+      built websites for <a href="https://frame.io">Frame.io</a> and
+      <a href="https://squarespace.com">Squarespace</a>, among others. You can
+      find me on <a href="https://are.na/jonas-luebbers">Are.na</a>,
+      <a href="https://github.com/nonphoto">Github</a>, and
+      <a href="https://twitter.com/nonphotobloom">Twitter</a>. This website is
+      in progress—check back soon for featured work.
+      <svg
+        id="eye"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewbox="0 20 100 60"
+      >
+        <defs>
+          <g id="lids-def">
+            <path id="lids-def-path" />
+          </g>
+          <clippath id="lids-clip" fill="white">
+            <use xlink:href="#lids-def-path"></use>
+          </clippath>
+        </defs>
+        <g clip-path="url(#lids-clip)">
+          <g id="pupil">
+            <circle cx="50" cy="50" r="16"></circle>
+            <circle cx="50" cy="50" r="8"></circle>
+          </g>
+        </g>
+        <animate
+          id="animation"
+          xlink:href="#lids-def-path"
+          attributeName="d"
+          attributeType="XML"
+          dur="100ms"
+          begin="indefinite"
+        />
+        <use xlink:href="#lids-def"></use>
+      </svg>
+    </p>
+  </body>
+</html>

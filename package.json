@@ -4,8 +4,7 @@
   "description": "",
   "main": "scripts/main.js",
   "scripts": {
-    "deploy": "now",
-    "prepare": "npx @pika/web"
+    "deploy": "now"
   },
   "repository": {
     "type": "git",
