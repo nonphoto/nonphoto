@@ -12,12 +12,13 @@
  */
 
 @font-face {
-    font-family: 'Pantograph';
-    src: url('fonts/pantograph-regular.eot');
-    src: url('fonts/pantograph-regular.eot?#iefix') format('embedded-opentype'),
-         url('fonts/pantograph-regular.woff') format('woff'),
-         url('fonts/pantograph-regular.woff2') format('woff2'),
-         url('fonts/pantograph-regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Pantograph";
+  src: url("/assets/fonts/pantograph-regular.eot");
+  src: url("/assets/fonts/pantograph-regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/pantograph-regular.woff") format("woff"),
+    url("/assets/fonts/pantograph-regular.woff2") format("woff2"),
+    url("/assets/fonts/pantograph-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }

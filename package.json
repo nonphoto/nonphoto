@@ -2,8 +2,9 @@
   "name": "nonphoto",
   "version": "1.0.0",
   "description": "",
-  "main": "scripts/main.js",
   "scripts": {
+    "build": "npx @11ty/eleventy",
+    "start": "npx @11ty/eleventy --serve",
     "deploy": "now"
   },
   "repository": {
@@ -15,12 +16,5 @@
   "bugs": {
     "url": "https://github.com/nonphoto/nonphoto/issues"
   },
-  "homepage": "https://www.jonasluebbers.com",
-  "devDependencies": {
-    "@pika/web": "^0.4.2",
-    "now": "12.1.5"
-  },
-  "dependencies": {
-    "lodash-es": "^4.17.14"
-  }
+  "homepage": "https://www.jonasluebbers.com"
 }
