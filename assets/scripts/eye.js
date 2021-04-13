@@ -110,6 +110,14 @@ function look() {
   }
 }
 
+function setRandomInterval(fn, min, max) {
+  const duration = min + Math.random() * (max - min);
+  setTimeout(() => {
+    fn();
+    setRandomInterval(fn, min, max);
+  }, duration);
+}
+
 requestAnimationFrame(draw);
-setInterval(look, 1000 + Math.random() * 5000);
-setInterval(blink, 3000 + Math.random() * 1000);
+setRandomInterval(look, 1000, 4000);
+setRandomInterval(blink, 3000, 4000);
