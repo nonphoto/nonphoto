@@ -70,10 +70,6 @@ module.exports = [
     isVideo: true,
   },
   {
-    src: "/assets/images/cows.mp4",
-    isVideo: true,
-  },
-  {
     src: "/assets/images/flare.mp4",
     isVideo: true,
   },

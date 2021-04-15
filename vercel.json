@@ -2,7 +2,7 @@
   "public": true,
   "routes": [
     {
-      "src": "/assets/images/(?<name>\\w+)\\.(?<ext>\\w+)$",
+      "src": "/assets/images/(?<name>.+)\\.(?<ext>\\w+)$",
       "dest": "https://media.githubusercontent.com/media/nonphoto/nonphoto/main/assets/images/$name.$ext"
     }
   ],
