@@ -5,6 +5,7 @@ html {
   line-height: 1.4;
   --foreground: black;
   --foreground-alpha: #00000088;
+  --foreground-very-alpha: #00000022;
   --background: white;
 
   color: var(--foreground);
@@ -15,6 +16,7 @@ html {
   html {
     --foreground: white;
     --foreground-alpha: #ffffff88;
+    --foreground-very-alpha: #ffffff22;
     --background: black;
   }
 }
@@ -31,6 +33,26 @@ body {
 
 p {
   max-width: 30rem;
+  margin-bottom: 3rem;
+}
+
+ul {
+  max-width: 40rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+li {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+li + li {
+  margin-top: 3rem;
 }
 
 a {
@@ -55,4 +77,13 @@ svg {
   stroke-linecap: round;
   stroke-linejoin: round;
   height: 1.5rem;
+}
+
+img,
+video {
+  max-width: 100%;
+  max-height: 80vh;
+  margin: 0 auto;
+  border: solid 1px var(--foreground-very-alpha);
+  overflow: hidden;
 }

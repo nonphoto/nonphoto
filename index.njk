@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jonas Luebbers</title>
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌑</text></svg>"
+    />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Space+Mono:400,700"
@@ -15,13 +18,16 @@
   </head>
   <body>
     <p>
-      I'm Jonas Luebbers, a creative developer living in New York. I've built
-      websites for <a href="https://frame.io">Frame.io</a> and
-      <a href="https://squarespace.com">Squarespace</a>. You can find me on
-      <a href="https://are.na/jonas-luebbers">Are.na</a>,
+      I'm a creative developer, fascinated by the beauty in computer interfaces,
+      simulations, architecture, generative art, and music. I have a background
+      in computer science and fine art, and I love solving design problems with
+      code. I've worked for
+      <a href="https://frame.io">Frame.io</a> and
+      <a href="https://squarespace.com">Squarespace</a>, among others. You can
+      find me on <a href="https://are.na/jonas-luebbers">Are.na</a>,
       <a href="https://github.com/nonphoto">Github</a>, and
-      <a href="https://twitter.com/nonphotobloom">Twitter</a>. This website is
-      in progress—check back soon for featured work. <svg
+      <a href="https://twitter.com/nonphotobloom">Twitter</a>.
+      <svg
         id="eye"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -52,5 +58,18 @@
         <use xlink:href="#lids-def"></use>
       </svg>
     </p>
+    <ul>
+      {%- for item in items -%}
+      <li>
+        {% if item.isVideo %}<video
+          src="{{ item.src }}"
+          muted
+          loop
+          autoplay
+        ></video
+        >{% else %} <img src="{{ item.src }}" />{% endif %}
+      </li>
+      {%- endfor -%}
+    </ul>
   </body>
 </html>
