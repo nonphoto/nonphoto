@@ -1,0 +1,16 @@
+{
+  "public": true,
+  "routes": [
+    {
+      "src": "/(?<filepath>.+)\\.(?<ext>\\w+)$",
+      "dest": "https://media.githubusercontent.com/media/nonphoto/nonphoto/main/$filepath.$ext",
+      "headers": {
+        "Cache-Control": "s-maxage=3600",
+        "X-JacobFord-Test": "hello-world"
+      }
+    }
+  ],
+  "github": {
+    "silent": true
+  }
+}
