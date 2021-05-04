@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   {
     src: "/assets/images/butterfly-final.mp4",
     isVideo: true,

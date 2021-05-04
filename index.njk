@@ -60,7 +60,7 @@
       </svg>
     </p>
     <ul>
-      {%- for item in items -%}
+      {%- for index, item in items -%}
       <li>
         {% if item.isVideo %}<video
           src="{{ item.src }}"
