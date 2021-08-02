@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jonas Luebbers</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌑</text></svg>"
+    />
+    <link rel="stylesheet" href="/styles/index.css" />
+    <script src="/main.js" defer></script>
+  </head>
+  <body>
+    <svg
+      id="eye"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewbox="0 20 100 60"
+    >
+      <defs>
+        <g id="lids-def">
+          <path id="lids-def-path" />
+        </g>
+        <clippath id="lids-clip" fill="white">
+          <use xlink:href="#lids-def-path"></use>
+        </clippath>
+      </defs>
+      <g clip-path="url(#lids-clip)">
+        <g id="pupil">
+          <circle cx="50" cy="50" r="16"></circle>
+          <circle cx="50" cy="50" r="8"></circle>
+        </g>
+      </g>
+      <animate
+        id="animation"
+        xlink:href="#lids-def-path"
+        attributeName="d"
+        attributeType="XML"
+        dur="100ms"
+        begin="indefinite"
+      />
+      <use xlink:href="#lids-def"></use>
+    </svg>
+    <h2>About</h2>
+    <p>
+      I'm a creative developer, fascinated by the beauty in computer interfaces,
+      simulations, architecture, generative art, and music.
+    </p>
+    <p>
+      I grew up in upstate New York and Cincinnati, Ohio. I have more than 10
+      years of programming experience and a dual degree in Computer Science and
+      Visual Art. I now live in New York City with my wife,
+      <a href="https://www.juliemoon.info">Julie Moon</a>.
+    </p>
+    <p>
+      i’m currently available for contract work in web development and design.
+      feel free to reach out if you’re interested in working together. While
+      this website is under construction work samples will be available on
+      request.
+    </p>
+    <h2>Career</h2>
+    <dl>
+      <dt>2019–2021</dt>
+      <dd>Frame.io</dd>
+      <dt>2017–2019</dt>
+      <dd>Squarespace</dd>
+      <dt>2016</dt>
+      <dd>Mindburner (Now Dropbox Passwords)</dd>
+      <dt>2012–2016</dt>
+      <dd>Williams College</dd>
+    </dl>
+    <h2>Contact</h2>
+    <dl>
+      <dt>Twitter</dt>
+      <dd><a href="https://twitter.com/nonphotobloom">@nonphotobloom</a></dd>
+      <dt>Github</dt>
+      <dd><a href="https://github.com/nonphoto">@nonphoto</a></dd>
+      <dt>Are.na</dt>
+      <dd><a href="https://www.are.na/jonas-luebbers">Jonas Luebbers</a></dd>
+      <dt>Email</dt>
+      <dd>
+        <a href="mailto:hello@jonasluebbers.com">hello@jonasluebbers.com</a>
+      </dd>
+    </dl>
+  </body>
+</html>
