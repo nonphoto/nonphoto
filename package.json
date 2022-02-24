@@ -1,0 +1,23 @@
+{
+  "name": "nonphoto",
+  "version": "1.0.0",
+  "devDependencies": {
+    "vite": "^2.4.2"
+  },
+  "scripts": {
+    "start": "npx vite",
+    "build": "npx vite build",
+    "preview": "npx vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nonphoto/nonphoto.git"
+  },
+  "author": "Jonas Luebbers",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/nonphoto/nonphoto/issues"
+  },
+  "homepage": "https://github.com/nonphoto/nonphoto#readme"
+}
