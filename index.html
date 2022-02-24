@@ -8,82 +8,84 @@
       rel="icon"
       href="data:image/svg+xml,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%227%22%20fill%3D%22%230000FF%22%2F%3E%3C%2Fsvg%3E"
     />
-    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="stylesheet" href="/main.css" />
     <script type="module" src="/main.js"></script>
   </head>
   <body>
-    <svg
-      id="eye"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-      viewbox="0 20 100 60"
-    >
-      <defs>
-        <g id="lids-def">
-          <path id="lids-def-path" />
+    <main>
+      <svg
+        id="eye"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewbox="0 20 100 60"
+      >
+        <defs>
+          <g id="lids-def">
+            <path id="lids-def-path" />
+          </g>
+          <clippath id="lids-clip" fill="white">
+            <use xlink:href="#lids-def-path"></use>
+          </clippath>
+        </defs>
+        <g clip-path="url(#lids-clip)">
+          <g id="pupil">
+            <circle cx="50" cy="50" r="16"></circle>
+            <circle cx="50" cy="50" r="8"></circle>
+          </g>
         </g>
-        <clippath id="lids-clip" fill="white">
-          <use xlink:href="#lids-def-path"></use>
-        </clippath>
-      </defs>
-      <g clip-path="url(#lids-clip)">
-        <g id="pupil">
-          <circle cx="50" cy="50" r="16"></circle>
-          <circle cx="50" cy="50" r="8"></circle>
-        </g>
-      </g>
-      <animate
-        id="animation"
-        xlink:href="#lids-def-path"
-        attributeName="d"
-        attributeType="XML"
-        dur="100ms"
-        begin="indefinite"
-      />
-      <use xlink:href="#lids-def"></use>
-    </svg>
-    <h1><span>Jonas Luebbers</span><span>Creative Developer</span></h1>
-    <h2>About</h2>
-    <p>
-      I'm fascinated by the beauty in computer interfaces, simulations,
-      architecture, generative art, and music. I am currently freelancing in web
-      development and design. I will be available for new projects summer 2022.
-      Please say hi if you’re interested in working together.
-    </p>
-    <h2>Recent Work</h2>
-    <ul>
-      <li><a href="https://prowlstud.io">PROWL</a></li>
-      <li><a href="https://regrocery.co">re_ grocery</a></li>
-      <li><a href="https://www.comnarchitects.com">COMN Architects</a></li>
-      <li><a href="http://www.juliemoon.info">Julie Moon</a></li>
-      <li><a href="https://bensifel.com">Ben Sifel</a></li>
-      <li><a href="https://www.frame.io/c2c/">www.frame.io</a></li>
-      <li><a href="https://www.squarespace.com/">www.squarespace.com</a></li>
-      <li><a href="http://marbled-paper.glitch.me">Marbled Paper Sim</a></li>
-    </ul>
-    <h2>Career</h2>
-    <dl>
-      <dt>2019–2021</dt>
-      <dd>Frame.io</dd>
-      <dt>2017–2019</dt>
-      <dd>Squarespace</dd>
-      <dt>2016</dt>
-      <dd>Mindburner (Dropbox Passwords)</dd>
-      <dt>2012–2016</dt>
-      <dd>Williams College</dd>
-    </dl>
-    <h2>Contact</h2>
-    <dl>
-      <dt>Twitter</dt>
-      <dd><a href="https://twitter.com/nonphotobloom">@nonphotobloom</a></dd>
-      <dt>Github</dt>
-      <dd><a href="https://github.com/nonphoto">@nonphoto</a></dd>
-      <dt>Are.na</dt>
-      <dd><a href="https://www.are.na/jonas-luebbers">Jonas Luebbers</a></dd>
-      <dt>Email</dt>
-      <dd>
-        <a href="mailto:hello@jonasluebbers.com">hello@jonasluebbers.com</a>
-      </dd>
-    </dl>
+        <animate
+          id="animation"
+          xlink:href="#lids-def-path"
+          attributeName="d"
+          attributeType="XML"
+          dur="100ms"
+          begin="indefinite"
+        />
+        <use xlink:href="#lids-def"></use>
+      </svg>
+      <h1><span>Jonas Luebbers</span><span>Creative Developer</span></h1>
+      <h2>About</h2>
+      <p>
+        I'm fascinated by the beauty in computer interfaces, simulations,
+        architecture, generative art, and music. I am currently freelancing in
+        web development and design. I will be available for new projects summer
+        2022. Please say hi if you’re interested in working together.
+      </p>
+      <h2>Recent Work</h2>
+      <ul>
+        <li><a href="https://prowlstud.io">PROWL</a></li>
+        <li><a href="https://regrocery.co">re_ grocery</a></li>
+        <li><a href="https://www.comnarchitects.com">COMN Architects</a></li>
+        <li><a href="http://www.juliemoon.info">Julie Moon</a></li>
+        <li><a href="https://bensifel.com">Ben Sifel</a></li>
+        <li><a href="https://www.frame.io/c2c/">www.frame.io</a></li>
+        <li><a href="https://www.squarespace.com/">www.squarespace.com</a></li>
+        <li><a href="http://marbled-paper.glitch.me">Marbled Paper Sim</a></li>
+      </ul>
+      <h2>Career</h2>
+      <dl>
+        <dt>2019–2021</dt>
+        <dd>Frame.io</dd>
+        <dt>2017–2019</dt>
+        <dd>Squarespace</dd>
+        <dt>2016</dt>
+        <dd>Mindburner (Dropbox Passwords)</dd>
+        <dt>2012–2016</dt>
+        <dd>Williams College</dd>
+      </dl>
+      <h2>Contact</h2>
+      <dl>
+        <dt>Twitter</dt>
+        <dd><a href="https://twitter.com/nonphotobloom">@nonphotobloom</a></dd>
+        <dt>Github</dt>
+        <dd><a href="https://github.com/nonphoto">@nonphoto</a></dd>
+        <dt>Are.na</dt>
+        <dd><a href="https://www.are.na/jonas-luebbers">Jonas Luebbers</a></dd>
+        <dt>Email</dt>
+        <dd>
+          <a href="mailto:hello@jonasluebbers.com">hello@jonasluebbers.com</a>
+        </dd>
+      </dl>
+    </main>
   </body>
 </html>
