@@ -13,36 +13,6 @@
   </head>
   <body>
     <main>
-      <svg
-        id="eye"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        viewbox="0 20 100 60"
-      >
-        <defs>
-          <g id="lids-def">
-            <path id="lids-def-path" />
-          </g>
-          <clippath id="lids-clip" fill="white">
-            <use xlink:href="#lids-def-path"></use>
-          </clippath>
-        </defs>
-        <g clip-path="url(#lids-clip)">
-          <g id="pupil">
-            <circle cx="50" cy="50" r="16"></circle>
-            <circle cx="50" cy="50" r="8"></circle>
-          </g>
-        </g>
-        <animate
-          id="animation"
-          xlink:href="#lids-def-path"
-          attributeName="d"
-          attributeType="XML"
-          dur="100ms"
-          begin="indefinite"
-        />
-        <use xlink:href="#lids-def"></use>
-      </svg>
       <h1><span>Jonas Luebbers</span><span>Creative Developer</span></h1>
       <h2>About</h2>
       <p>
@@ -86,6 +56,36 @@
           <a href="mailto:hello@jonasluebbers.com">hello@jonasluebbers.com</a>
         </dd>
       </dl>
+      <svg
+        id="eye"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewbox="0 20 100 60"
+      >
+        <defs>
+          <g id="lids-def">
+            <path id="lids-def-path" />
+          </g>
+          <clippath id="lids-clip" fill="white">
+            <use xlink:href="#lids-def-path"></use>
+          </clippath>
+        </defs>
+        <g clip-path="url(#lids-clip)">
+          <g id="pupil">
+            <circle cx="50" cy="50" r="16"></circle>
+            <circle cx="50" cy="50" r="8"></circle>
+          </g>
+        </g>
+        <animate
+          id="animation"
+          xlink:href="#lids-def-path"
+          attributeName="d"
+          attributeType="XML"
+          dur="100ms"
+          begin="indefinite"
+        />
+        <use xlink:href="#lids-def"></use>
+      </svg>
     </main>
   </body>
 </html>
