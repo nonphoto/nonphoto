@@ -103,7 +103,7 @@ li + li {
 }
 
 svg {
-  align-self: start;
+  align-self: end;
   display: block;
   flex-shrink: 0;
   fill: transparent;
