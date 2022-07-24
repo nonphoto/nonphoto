@@ -63,6 +63,7 @@ h1 {
   text-align: center;
   transform: scaleY(1.5);
   white-space: nowrap;
+  margin-bottom: -0.3em;
 }
 
 h2 {
@@ -179,7 +180,7 @@ svg {
   }
 
   h1 {
-    font-size: 5.8vw;
+    font-size: 5.9vw;
     flex-direction: row;
     grid-column: 1 / -1;
     max-width: none;
