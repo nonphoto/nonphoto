@@ -61,6 +61,7 @@ h1 {
   line-height: 1.5;
   text-align: center;
   transform: scaleY(1.5);
+  white-space: nowrap;
 }
 
 h2 {
