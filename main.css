@@ -28,7 +28,7 @@
 html {
   font-family: "Authentic Sans", sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: 0.01ch;
@@ -169,6 +169,10 @@ svg {
 }
 
 @media (min-width: 700px) {
+  html {
+    font-size: 14px;
+  }
+
   main {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     column-gap: 2rem;
