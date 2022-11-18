@@ -73,13 +73,6 @@ h2 {
   font-size: inherit;
 }
 
-h2::after {
-  content: "";
-  height: 1px;
-  background: blue;
-  flex-grow: 1;
-}
-
 a {
   color: inherit;
   font-weight: 500;
