@@ -110,7 +110,7 @@ img {
   max-width: 100%;
   border: solid 1px blue;
   aspect-ratio: 1.75 / 1;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .project {
