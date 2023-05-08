@@ -60,12 +60,11 @@ h1 {
   font-weight: 300;
   font-family: "Authentic Sans Condensed", sans-serif;
   font-size: 8.8vw;
-  line-height: 1.5;
-  text-align: center;
-  transform: scaleY(1.5) translateY(-0.225em);
+  line-height: 1;
+  transform: scaleY(1.5);
   transform-origin: top;
   white-space: nowrap;
-  margin-bottom: calc(4rem - 0.3em);
+  margin-bottom: calc(2em - 2rem);
 }
 
 h2 {
@@ -179,5 +178,6 @@ svg {
     flex-direction: row;
     grid-column: 1 / -1;
     max-width: none;
+    margin-bottom: 1em;
   }
 }
