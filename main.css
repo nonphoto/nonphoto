@@ -110,7 +110,7 @@ img {
   display: block;
   max-width: 100%;
   border: solid 1px blue;
-  aspect-ratio: 1.75 / 1;
+  aspect-ratio: 2880 / 1640;
   object-fit: cover;
 }
 
