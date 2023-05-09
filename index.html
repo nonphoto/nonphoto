@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="stylesheet" href="/main.css" />
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="/eye.js"></script>
   </head>
   <body>
     <main>
@@ -80,6 +80,10 @@
       </div>
       <h2>About</h2>
       <section>
+        <div class="eyes">
+          <eye-graphic></eye-graphic>
+          <eye-graphic></eye-graphic>
+        </div>
         <p>
           I build and design custom websites that are both playful and
           efficient, with meticulous attention to detail. My work has been
@@ -120,36 +124,49 @@
           <a href="mailto:hello@jonasluebbers.com">hello@jonasluebbers.com</a>
         </dd>
       </dl>
-      <svg
-        id="eye"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        viewbox="0 20 100 60"
-      >
-        <defs>
-          <g id="lids-def">
-            <path id="lids-def-path" />
+      <template id="eye-graphic-template">
+        <svg
+          data-id="eye"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewbox="0 20 100 60"
+        >
+          <style>
+            [data-id] {
+              fill: transparent;
+              stroke: currentColor;
+              stroke-width: 3px;
+              stroke-linecap: round;
+              stroke-linejoin: round;
+              height: 2rem;
+              line-height: 1;
+            }
+          </style>
+          <defs>
+            <g id="lids-def">
+              <path id="lids-def-path" data-id="lids" />
+            </g>
+            <clippath id="lids-clip" fill="white">
+              <use xlink:href="#lids-def-path"></use>
+            </clippath>
+          </defs>
+          <g clip-path="url(#lids-clip)">
+            <g data-id="pupil">
+              <circle cx="50" cy="50" r="16"></circle>
+              <circle cx="50" cy="50" r="8"></circle>
+            </g>
           </g>
-          <clippath id="lids-clip" fill="white">
-            <use xlink:href="#lids-def-path"></use>
-          </clippath>
-        </defs>
-        <g clip-path="url(#lids-clip)">
-          <g id="pupil">
-            <circle cx="50" cy="50" r="16"></circle>
-            <circle cx="50" cy="50" r="8"></circle>
-          </g>
-        </g>
-        <animate
-          id="animation"
-          xlink:href="#lids-def-path"
-          attributeName="d"
-          attributeType="XML"
-          dur="100ms"
-          begin="indefinite"
-        />
-        <use xlink:href="#lids-def"></use>
-      </svg>
+          <animate
+            data-id="animation"
+            xlink:href="#lids-def-path"
+            attributeName="d"
+            attributeType="XML"
+            dur="100ms"
+            begin="indefinite"
+          />
+          <use xlink:href="#lids-def"></use>
+        </svg>
+      </template>
     </main>
   </body>
 </html>

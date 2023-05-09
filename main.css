@@ -131,16 +131,10 @@ section {
   gap: 1rem;
 }
 
-svg {
-  align-self: end;
-  display: block;
-  flex-shrink: 0;
-  fill: transparent;
-  stroke: currentColor;
-  stroke-width: 3px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  height: 2rem;
+.eyes {
+  display: flex;
+  gap: 2rem;
+  margin: -0.1rem -0.25rem;
 }
 
 @media (min-width: 375px) {
