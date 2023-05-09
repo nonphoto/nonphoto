@@ -121,10 +121,6 @@ img {
   gap: 1rem 2rem;
 }
 
-.project > img {
-  margin-bottom: 1rem;
-}
-
 section {
   display: flex;
   flex-direction: column;
