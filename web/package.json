@@ -18,6 +18,7 @@
     "@nonphoto/css": "1.0.4",
     "@solidjs/meta": "^0.28.6",
     "@solidjs/router": "^0.8.3",
+    "clsx": "2.0.0",
     "groqd": "0.15.8",
     "picosanity": "4.0.0",
     "solid-js": "^1.7.9",

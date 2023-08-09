@@ -19,14 +19,16 @@ export default function HomePage() {
   const projects = useRouteData<typeof routeData>();
 
   return (
-    <ul>
-      <For each={projects()}>
-        {(project) => (
-          <li>
-            <a href={`/projects/${project.slug}`}>{project.title}</a>
-          </li>
-        )}
-      </For>
-    </ul>
+    <main>
+      <ul>
+        <For each={projects()}>
+          {(project) => (
+            <li>
+              <a href={`/projects/${project.slug}`}>{project.title}</a>
+            </li>
+          )}
+        </For>
+      </ul>
+    </main>
   );
 }
