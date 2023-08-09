@@ -1,19 +1,32 @@
-import { Title } from "solid-start";
-import Counter from "~/components/Counter";
+import { q } from "groqd";
+import { For, createResource } from "solid-js";
+import { useRouteData } from "solid-start";
+import { fetchQuery } from "~/lib/sanity";
 
-export default function Home() {
+export function routeData() {
+  const [projects] = createResource(() =>
+    fetchQuery(
+      q("*")
+        .filter("_type == 'project'")
+        .grab({ title: q.string(), slug: q.slug("slug") })
+    )
+  );
+
+  return projects;
+}
+
+export default function HomePage() {
+  const projects = useRouteData<typeof routeData>();
+
   return (
-    <main>
-      <Title>Hello World</Title>
-      <h1>Hello world!</h1>
-      <Counter />
-      <p>
-        Visit{" "}
-        <a href="https://start.solidjs.com" target="_blank">
-          start.solidjs.com
-        </a>{" "}
-        to learn how to build SolidStart apps.
-      </p>
-    </main>
+    <ul>
+      <For each={projects()}>
+        {(project) => (
+          <li>
+            <a href={`/projects/${project.slug}`}>{project.title}</a>
+          </li>
+        )}
+      </For>
+    </ul>
   );
 }

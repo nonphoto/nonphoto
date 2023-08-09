@@ -1,8 +1,6 @@
-import {defineCliConfig} from 'sanity/cli'
+import { defineCliConfig } from "sanity/cli";
+import config from "../sanity.config";
 
 export default defineCliConfig({
-  api: {
-    projectId: 'u6kimo2d',
-    dataset: 'production'
-  }
-})
+  api: config,
+});
