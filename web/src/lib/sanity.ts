@@ -9,13 +9,12 @@ const client = new PicoSanity({
   useCdn: true,
 });
 
-type QueryParams = Parameters<typeof client.fetch>[1];
-
 const safeQueryRunner = makeSafeQueryRunner(
-  (query: string, params: QueryParams = {}) => client.fetch(query, params)
+  (query: string, params: Record<string, unknown> = {}) =>
+    client.fetch(query, params)
 );
 
-export const fetchQuery = (...args: Parameters<typeof safeQueryRunner>) =>
+export const fetchQuery: typeof safeQueryRunner = (...args) =>
   safeQueryRunner(...args).catch((error) => {
     if (error instanceof GroqdParseError) {
       throw new ServerError(error.message);

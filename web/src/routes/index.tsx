@@ -8,7 +8,11 @@ export function routeData() {
     fetchQuery(
       q("*")
         .filter("_type == 'project'")
-        .grab({ title: q.string(), slug: q.slug("slug") })
+        .grab({
+          title: q.string(),
+          slug: q.slug("slug"),
+          backgroundColor: q.string(),
+        })
     )
   );
 
@@ -23,7 +27,11 @@ export default function HomePage() {
       <ul>
         <For each={projects()}>
           {(project) => (
-            <li>
+            <li
+              style={{
+                "background-color": project.backgroundColor,
+              }}
+            >
               <a href={`/projects/${project.slug}`}>{project.title}</a>
             </li>
           )}
