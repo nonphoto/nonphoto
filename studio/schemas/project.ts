@@ -17,5 +17,22 @@ export default defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     },
+    {
+      name: "pictures",
+      type: "array",
+      of: [
+        {
+          name: "picture",
+          type: "object",
+          fields: [
+            {
+              name: "image",
+              type: "image",
+            },
+            { name: "video", type: "mux.video" },
+          ],
+        },
+      ],
+    },
   ],
 });

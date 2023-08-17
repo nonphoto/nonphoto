@@ -16,12 +16,14 @@
   },
   "dependencies": {
     "@nonphoto/css": "1.0.4",
+    "@nonphoto/sanity-image": "0.1.1",
     "@solidjs/meta": "^0.28.6",
     "@solidjs/router": "^0.8.3",
     "clsx": "2.0.0",
     "groqd": "0.15.8",
     "picosanity": "4.0.0",
     "solid-js": "^1.7.9",
+    "solid-picture": "0.0.1",
     "solid-start": "^0.3.1",
     "undici": "^5.23.0"
   },

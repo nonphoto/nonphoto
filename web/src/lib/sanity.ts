@@ -3,7 +3,7 @@ import config from "~/../../sanity.config";
 import { GroqdParseError, makeSafeQueryRunner } from "groqd";
 import { ServerError } from "solid-start";
 
-const client = new PicoSanity({
+export const client = new PicoSanity({
   ...config,
   apiVersion: "2023-08-01",
   useCdn: true,

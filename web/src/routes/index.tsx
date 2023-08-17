@@ -1,10 +1,12 @@
 import clsx from "clsx";
 import classes from "./index.module.css";
-import { q } from "groqd";
-import { For, createResource } from "solid-js";
+import { q, sanityImage } from "groqd";
+import { For, createEffect, createResource } from "solid-js";
 import { useRouteData } from "solid-start";
-import { fetchQuery } from "~/lib/sanity";
+import { fetchQuery, client as sanityClient } from "~/lib/sanity";
 import { typography } from "~/lib/typography";
+import { Img } from "solid-picture";
+import { defaultWidths, imageProps } from "@nonphoto/sanity-image";
 
 export function routeData() {
   const [projects] = createResource(() =>
@@ -14,7 +16,12 @@ export function routeData() {
         .grab({
           title: q.string(),
           slug: q.slug("slug"),
-          backgroundColor: q.string(),
+          pictures: q("pictures")
+            .filter()
+            .grab({
+              image: sanityImage("image"),
+            })
+            .nullable(),
         })
     )
   );
@@ -31,14 +38,19 @@ export default function HomePage() {
         <For each={projects()}>
           {(project) => (
             <li>
-              <a
-                class={classes.project}
-                style={{
-                  "background-color": project.backgroundColor,
-                }}
-                href={`/projects/${project.slug}`}
-                title={project.title}
-              ></a>
+              <For each={project.pictures}>
+                {(picture) => (
+                  <Img
+                    {...imageProps({
+                      image: picture.image,
+                      client: sanityClient,
+                      widths: defaultWidths,
+                      quality: 90,
+                    })}
+                    sizes="100vw"
+                  />
+                )}
+              </For>
             </li>
           )}
         </For>
