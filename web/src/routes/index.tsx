@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import classes from "./index.module.css";
 import { q, sanityImage } from "groqd";
-import { For, createEffect, createResource } from "solid-js";
+import { For, Show, createEffect, createResource } from "solid-js";
 import { useRouteData } from "solid-start";
 import { fetchQuery, client as sanityClient } from "~/lib/sanity";
 import { typography } from "~/lib/typography";
-import { Img } from "solid-picture";
+import { Img, Picture, Source } from "solid-picture";
 import { defaultWidths, imageProps } from "@nonphoto/sanity-image";
 
 export function routeData() {
@@ -19,7 +19,13 @@ export function routeData() {
           pictures: q("pictures")
             .filter()
             .grab({
-              image: sanityImage("image"),
+              image: sanityImage("image").nullable(),
+              video: q("video.asset")
+                .deref()
+                .grab({
+                  playbackId: q.string(),
+                })
+                .nullable(),
             })
             .nullable(),
         })
@@ -40,15 +46,27 @@ export default function HomePage() {
             <li>
               <For each={project.pictures}>
                 {(picture) => (
-                  <Img
-                    {...imageProps({
-                      image: picture.image,
-                      client: sanityClient,
-                      widths: defaultWidths,
-                      quality: 90,
-                    })}
-                    sizes="100vw"
-                  />
+                  <Picture>
+                    <Show when={picture.video?.playbackId}>
+                      <Source
+                        src={picture.video?.playbackId}
+                        type="video/mux"
+                      />
+                    </Show>
+                    <Img
+                      {...imageProps({
+                        image: picture.image!,
+                        client: sanityClient,
+                        widths: defaultWidths,
+                        quality: 90,
+                      })}
+                      sizes="100vw"
+                      videoComponent={(props) => {
+                        console.log(JSON.stringify(props.src));
+                        return <video {...props} />;
+                      }}
+                    />
+                  </Picture>
                 )}
               </For>
             </li>
