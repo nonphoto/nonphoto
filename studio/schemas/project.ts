@@ -11,6 +11,7 @@ export default defineType({
       options: { source: "title" },
       validation: (Rule) => Rule.required(),
     },
+    { name: "date", type: "date", validation: (Rule) => Rule.required() },
     {
       name: "backgroundColor",
       type: "string",
