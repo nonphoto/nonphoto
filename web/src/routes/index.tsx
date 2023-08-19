@@ -1,12 +1,13 @@
 import clsx from "clsx";
 import classes from "./index.module.css";
-import { q, sanityImage } from "groqd";
-import { For, Show, createEffect, createResource } from "solid-js";
+import { q } from "groqd";
+import { For, createResource } from "solid-js";
 import { useRouteData } from "solid-start";
-import { fetchQuery, client as sanityClient } from "~/lib/sanity";
+import { fetchQuery } from "~/lib/sanity";
 import { typography } from "~/lib/typography";
-import { Img, Picture, Source } from "solid-picture";
-import { defaultWidths, imageProps } from "@nonphoto/sanity-image";
+import SanityPicture, {
+  sanityPictureSelection,
+} from "~/components/SanityPicture";
 
 export function routeData() {
   const [projects] = createResource(() =>
@@ -18,15 +19,7 @@ export function routeData() {
           slug: q.slug("slug"),
           pictures: q("pictures")
             .filter()
-            .grab({
-              image: sanityImage("image").nullable(),
-              video: q("video.asset")
-                .deref()
-                .grab({
-                  playbackId: q.string(),
-                })
-                .nullable(),
-            })
+            .grab(sanityPictureSelection)
             .nullable(),
         })
     )
@@ -45,29 +38,7 @@ export default function HomePage() {
           {(project) => (
             <li>
               <For each={project.pictures}>
-                {(picture) => (
-                  <Picture>
-                    <Show when={picture.video?.playbackId}>
-                      <Source
-                        src={picture.video?.playbackId}
-                        type="video/mux"
-                      />
-                    </Show>
-                    <Img
-                      {...imageProps({
-                        image: picture.image!,
-                        client: sanityClient,
-                        widths: defaultWidths,
-                        quality: 90,
-                      })}
-                      sizes="100vw"
-                      videoComponent={(props) => {
-                        console.log(JSON.stringify(props.src));
-                        return <video {...props} />;
-                      }}
-                    />
-                  </Picture>
-                )}
+                {(picture) => <SanityPicture {...picture} />}
               </For>
             </li>
           )}
