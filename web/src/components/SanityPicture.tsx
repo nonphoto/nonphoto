@@ -1,21 +1,21 @@
 import { defaultWidths, imageProps } from "@nonphoto/sanity-image";
-import { createHydratableSingletonRoot } from "@solid-primitives/rootless";
 import { TypeFromSelection, q, sanityImage } from "groqd";
-import {
-  ComponentProps,
-  Show,
-  createEffect,
-  createResource,
-  createSignal,
-  onCleanup,
-  onMount,
-  splitProps,
-} from "solid-js";
-import { Img, Picture, Source } from "solid-picture";
+import { Img } from "solid-picture";
 import { client as sanityClient } from "~/lib/sanity";
 
 export const sanityPictureSelection = {
   image: sanityImage("image").nullable(),
+  metadata: q("image.asset")
+    .deref()
+    .grab({
+      metadata: q("metadata").grab({
+        dimensions: q("dimensions").grab({
+          height: q.number(),
+          width: q.number(),
+        }),
+      }),
+    })
+    .nullable(),
   video: q("video.asset")
     .deref()
     .grab({
@@ -24,71 +24,30 @@ export const sanityPictureSelection = {
     .nullable(),
 };
 
-export const useHlsResource = createHydratableSingletonRoot(() => {
-  const [mounted, setMounted] = createSignal(false);
-  const [resource] = createResource(mounted, () => import("hls.js"));
-
-  onMount(() => {
-    setMounted(true);
-  });
-
-  return resource;
-});
-
-function Video(props: ComponentProps<"video">) {
-  const [localProps, otherProps] = splitProps(props, ["src"]);
-  const [element, setElement] = createSignal<HTMLVideoElement>();
-  const [ready, setReady] = createSignal(false);
-  const hlsResource = useHlsResource();
-
-  createEffect(() => {
-    if (hlsResource() && element() && localProps.src) {
-      const Hls = hlsResource()!.default;
-      const hls = new Hls();
-      hls.loadSource(localProps.src);
-      hls.attachMedia(element()!);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        setReady(true);
-      });
-      onCleanup(() => {
-        hls.destroy();
-      });
-    }
-  });
-
-  createEffect(() => {
-    if (ready() && element()) {
-      element()!.play();
-    }
-  });
-
-  return <video {...otherProps} ref={setElement} autoplay={false} />;
-}
-
 export default function SanityPicture(
   props: TypeFromSelection<typeof sanityPictureSelection>
 ) {
-  const hlsResource = useHlsResource();
+  const playbackId = () => props.video?.playbackId;
+  const size = () => props.metadata?.metadata.dimensions;
+  const imgProps = () =>
+    imageProps({
+      image: props.image!,
+      client: sanityClient,
+      widths: defaultWidths,
+    });
 
   return (
-    <Picture>
-      <Show when={hlsResource.state === "ready" && props.video?.playbackId}>
-        {(playbackId) => (
-          <Source
-            src={`https://stream.mux.com/${playbackId()}`}
-            type="video/mux"
-          />
-        )}
-      </Show>
-      <Img
-        {...imageProps({
-          image: props.image!,
-          client: sanityClient,
-          widths: defaultWidths,
-        })}
-        sizes="100vw"
-        videoComponent={Video}
-      />
-    </Picture>
+    <Img
+      srcset={imgProps()?.srcset}
+      naturalSize={
+        size() ? { width: size()!.width, height: size()!.height } : undefined
+      }
+      placeholderSrc={imgProps().src}
+      videoSrc={
+        playbackId() ? `https://stream.mux.com/${playbackId()}` : undefined
+      }
+      videoMode="hls"
+      width="400px"
+    />
   );
 }
