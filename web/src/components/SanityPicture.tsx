@@ -1,6 +1,6 @@
 import { defaultWidths, imageProps } from "@nonphoto/sanity-image";
 import { TypeFromSelection, q, sanityImage } from "groqd";
-import { createEffect, splitProps } from "solid-js";
+import { splitProps } from "solid-js";
 import { Img, MediaElementProps } from "solid-picture";
 import { client as sanityClient } from "~/lib/sanity";
 
@@ -9,10 +9,14 @@ export const sanityPictureSelection = {
   metadata: q("image.asset")
     .deref()
     .grab({
-      metadata: q("metadata").grab({
-        dimensions: q("dimensions").grab({
-          height: q.number(),
-          width: q.number(),
+      dimensions: q("metadata.dimensions").grab({
+        height: q.number(),
+        width: q.number(),
+      }),
+      palette: q("metadata.palette").grab({
+        dominant: q("dominant").grab({
+          background: q.string(),
+          foreground: q.string(),
         }),
       }),
     })
@@ -30,7 +34,7 @@ export default function SanityPicture(
 ) {
   const [, elementProps] = splitProps(props, ["video", "metadata", "image"]);
   const playbackId = () => props.video?.playbackId;
-  const size = () => props.metadata?.metadata.dimensions;
+  const size = () => props.metadata?.dimensions;
   const imgProps = () =>
     imageProps({
       image: props.image!,
@@ -50,6 +54,9 @@ export default function SanityPicture(
       naturalSize={
         size() ? { width: size()!.width, height: size()!.height } : undefined
       }
+      style={{
+        "background-color": props.metadata?.palette.dominant.background,
+      }}
     />
   );
 }

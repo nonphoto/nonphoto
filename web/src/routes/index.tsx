@@ -38,8 +38,10 @@ export default function HomePage() {
           {(project) => (
             <li class={classes.project}>
               <For each={project.pictures}>
-                {(picture) => (
-                  <SanityPicture {...picture} class={classes.picture} />
+                {(picture, index) => (
+                  <a href={`/project/${project.slug}#${index()}`}>
+                    <SanityPicture {...picture} class={classes.picture} />
+                  </a>
                 )}
               </For>
             </li>
