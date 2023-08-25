@@ -1,6 +1,7 @@
 import { defaultWidths, imageProps } from "@nonphoto/sanity-image";
 import { TypeFromSelection, q, sanityImage } from "groqd";
-import { Img } from "solid-picture";
+import { createEffect, splitProps } from "solid-js";
+import { Img, MediaElementProps } from "solid-picture";
 import { client as sanityClient } from "~/lib/sanity";
 
 export const sanityPictureSelection = {
@@ -25,8 +26,9 @@ export const sanityPictureSelection = {
 };
 
 export default function SanityPicture(
-  props: TypeFromSelection<typeof sanityPictureSelection>
+  props: TypeFromSelection<typeof sanityPictureSelection> & MediaElementProps
 ) {
+  const [, elementProps] = splitProps(props, ["video", "metadata", "image"]);
   const playbackId = () => props.video?.playbackId;
   const size = () => props.metadata?.metadata.dimensions;
   const imgProps = () =>
@@ -38,16 +40,16 @@ export default function SanityPicture(
 
   return (
     <Img
+      {...elementProps}
       srcset={imgProps()?.srcset}
-      naturalSize={
-        size() ? { width: size()!.width, height: size()!.height } : undefined
-      }
       placeholderSrc={imgProps().src}
       videoSrc={
         playbackId() ? `https://stream.mux.com/${playbackId()}` : undefined
       }
       videoMode="hls"
-      width="400px"
+      naturalSize={
+        size() ? { width: size()!.width, height: size()!.height } : undefined
+      }
     />
   );
 }

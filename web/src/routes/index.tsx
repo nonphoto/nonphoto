@@ -36,9 +36,11 @@ export default function HomePage() {
       <ul class={classes.projectList}>
         <For each={projects()}>
           {(project) => (
-            <li>
+            <li class={classes.project}>
               <For each={project.pictures}>
-                {(picture) => <SanityPicture {...picture} />}
+                {(picture) => (
+                  <SanityPicture {...picture} class={classes.picture} />
+                )}
               </For>
             </li>
           )}
