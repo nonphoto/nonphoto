@@ -12,10 +12,22 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     },
     { name: "date", type: "date", validation: (Rule) => Rule.required() },
+    { name: "roles", type: "array", of: [{ name: "role", type: "string" }] },
+    { name: "description", type: "array", of: [{ type: "block" }] },
     {
-      name: "backgroundColor",
-      type: "string",
-      validation: (Rule) => Rule.required(),
+      name: "credits",
+      type: "array",
+      of: [
+        {
+          name: "credit",
+          type: "object",
+          fields: [
+            { name: "role", type: "string" },
+            { name: "person", type: "string" },
+            { name: "url", type: "url" },
+          ],
+        },
+      ],
     },
     {
       name: "pictures",
@@ -31,8 +43,16 @@ export default defineType({
             },
             { name: "video", type: "mux.video" },
           ],
+          preview: {
+            select: {
+              media: "image",
+            },
+          },
         },
       ],
+      options: {
+        layout: "grid",
+      },
     },
   ],
 });

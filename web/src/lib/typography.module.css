@@ -2,4 +2,6 @@
   font-family: "Authentic Sans Condensed";
   font-weight: 300;
   text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: -0.2em;
 }

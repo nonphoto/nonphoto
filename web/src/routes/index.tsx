@@ -3,17 +3,17 @@ import classes from "./index.module.css";
 import { q } from "groqd";
 import { For, createResource } from "solid-js";
 import { useRouteData } from "solid-start";
-import { fetchQuery } from "~/lib/sanity";
-import { typography } from "~/lib/typography";
-import SanityPicture, {
-  sanityPictureSelection,
-} from "~/components/SanityPicture";
+import { fetchQuery } from "~/lib/sanity.js";
+import { typography } from "~/lib/typography.js";
+import ProjectPicture from "~/components/ProjectPicture.jsx";
+import { sanityPictureSelection } from "~/components/SanityPicture.jsx";
 
 export function routeData() {
   const [projects] = createResource(() =>
     fetchQuery(
       q("*")
         .filter("_type == 'project'")
+        .order("date desc")
         .grab({
           title: q.string(),
           slug: q.slug("slug"),
@@ -40,7 +40,11 @@ export default function HomePage() {
               <For each={project.pictures}>
                 {(picture, index) => (
                   <a href={`/project/${project.slug}#${index()}`}>
-                    <SanityPicture {...picture} class={classes.picture} />
+                    <ProjectPicture
+                      {...picture}
+                      class={classes.picture}
+                      background
+                    />
                   </a>
                 )}
               </For>

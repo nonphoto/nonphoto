@@ -5,14 +5,15 @@
     "esModuleInterop": true,
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "jsxImportSource": "solid-js",
     "jsx": "preserve",
     "strict": true,
     "types": ["solid-start/env"],
     "baseUrl": "./",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "@vec2": ["@chloranthy/gl-matrix/vec2"]
     }
   }
 }

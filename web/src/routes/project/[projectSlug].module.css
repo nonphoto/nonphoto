@@ -1,0 +1,14 @@
+.title {
+  font-size: 6rem;
+}
+
+.pictures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.picture {
+  height: 10rem;
+  flex: 0 0 auto;
+}
