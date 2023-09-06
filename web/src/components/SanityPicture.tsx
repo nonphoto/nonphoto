@@ -5,6 +5,7 @@ import { Img, MediaElementProps } from "solid-picture";
 import { client as sanityClient } from "~/lib/sanity";
 
 export const sanityPictureSelection = {
+  color: q.string().nullable(),
   image: sanityImage("image").nullable(),
   metadata: q("image.asset")
     .deref()
@@ -31,10 +32,16 @@ export default function SanityPicture(
   props: TypeFromSelection<typeof sanityPictureSelection> &
     MediaElementProps & { background?: boolean }
 ) {
-  const [, elementProps] = splitProps(props, ["video", "metadata", "image"]);
+  const [, elementProps] = splitProps(props, [
+    "video",
+    "metadata",
+    "image",
+    "color",
+  ]);
   const playbackId = () => props.video?.playbackId;
   const size = () => props.metadata?.dimensions;
-  const backgroundColor = () => props.metadata?.palette.background;
+  const backgroundColor = () =>
+    props.color ?? props.metadata?.palette.background;
   const imgProps = () =>
     imageProps({
       image: props.image!,

@@ -37,6 +37,7 @@ export default defineType({
           name: "picture",
           type: "object",
           fields: [
+            { name: "color", type: "string" },
             {
               name: "image",
               type: "image",
