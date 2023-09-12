@@ -3,11 +3,11 @@ import classes from "./[projectSlug].module.css";
 import { q } from "groqd";
 import { For, createResource } from "solid-js";
 import { useParams, useRouteData } from "solid-start";
-import SanityPicture, {
-  sanityPictureSelection,
-} from "~/components/SanityPicture";
 import { fetchQuery } from "~/lib/sanity";
 import { typography } from "~/lib/typography";
+import ProjectPicture, {
+  projectPictureSelection,
+} from "~/components/ProjectPicture";
 
 export function routeData() {
   const params = useParams();
@@ -21,7 +21,7 @@ export function routeData() {
           title: q.string(),
           pictures: q("pictures")
             .filter()
-            .grab(sanityPictureSelection)
+            .grab(projectPictureSelection)
             .nullable(),
         }),
       params
@@ -41,7 +41,7 @@ export default function ProjectPage() {
         <For each={project()?.pictures}>
           {(picture) => (
             <li>
-              <SanityPicture {...picture} class={classes.picture} />
+              <ProjectPicture {...picture} class={classes.picture} background />
             </li>
           )}
         </For>

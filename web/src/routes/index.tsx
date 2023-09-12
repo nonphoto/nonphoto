@@ -2,11 +2,12 @@ import clsx from "clsx";
 import classes from "./index.module.css";
 import { q } from "groqd";
 import { For, createResource } from "solid-js";
-import { useRouteData } from "solid-start";
+import { A, useRouteData } from "solid-start";
 import { fetchQuery } from "~/lib/sanity.js";
 import { typography } from "~/lib/typography.js";
-import ProjectPicture from "~/components/ProjectPicture.jsx";
-import { sanityPictureSelection } from "~/components/SanityPicture.jsx";
+import ProjectPicture, {
+  projectPictureSelection,
+} from "~/components/ProjectPicture.jsx";
 
 export function routeData() {
   const [projects] = createResource(() =>
@@ -19,7 +20,7 @@ export function routeData() {
           slug: q.slug("slug"),
           pictures: q("pictures")
             .filter()
-            .grab(sanityPictureSelection)
+            .grab(projectPictureSelection)
             .nullable(),
         })
     )
@@ -39,13 +40,13 @@ export default function HomePage() {
             <li class={classes.project}>
               <For each={project.pictures}>
                 {(picture, index) => (
-                  <a href={`/project/${project.slug}#${index()}`}>
+                  <A href={`/project/${project.slug}#${index()}`}>
                     <ProjectPicture
                       {...picture}
                       class={classes.picture}
                       background
                     />
-                  </a>
+                  </A>
                 )}
               </For>
             </li>

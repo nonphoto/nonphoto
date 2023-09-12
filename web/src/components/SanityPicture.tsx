@@ -53,8 +53,9 @@ export default function SanityPicture(
     <Show
       when={!props.background}
       fallback={
-        <div
+        <img
           {...elementProps}
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
           style={{ "background-color": backgroundColor() }}
         />
       }

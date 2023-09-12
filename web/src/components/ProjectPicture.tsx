@@ -1,4 +1,10 @@
-import { ComponentProps, createSignal } from "solid-js";
+import {
+  ComponentProps,
+  createEffect,
+  createMemo,
+  createSignal,
+  splitProps,
+} from "solid-js";
 import {
   rectPosition,
   rectSize,
@@ -6,35 +12,51 @@ import {
   rectFromPositionSize,
 } from "@chloranthy/core";
 import { vec2Create } from "@chloranthy/gl-matrix";
-import { useLayoutModel } from "@chloranthy/layout-model";
+import { SingletonMap, useLayoutModel } from "@chloranthy/layout-model";
 import {
   createMaybeMemo,
   createSetRect,
   createTransition,
 } from "@chloranthy/solid";
-import SanityPicture from "./SanityPicture.js";
+import SanityPicture, { sanityPictureSelection } from "./SanityPicture.js";
+import { TypeFromSelection, q } from "groqd";
+import { createHydratableSingletonRoot } from "@solid-primitives/rootless";
+
+export const projectPictureSelection = {
+  _key: q.string(),
+  ...sanityPictureSelection,
+};
+
+export const useRects = createHydratableSingletonRoot(() => {
+  const layoutModel = useLayoutModel();
+  return new SingletonMap(() => {
+    const [element, setElement] = createSignal<HTMLElement>();
+    const layoutRect = layoutModel.useRect(element);
+    const rect = createMemo<DOMRect | undefined>(
+      (prev) => layoutRect() ?? prev
+    );
+    const targetPosition = createMaybeMemo(rectPosition, vec2Create, rect);
+    const targetSize = createMaybeMemo(rectSize, vec2Create, rect);
+    const position = createTransition(targetPosition, 150);
+    const size = createTransition(targetSize, 300);
+    const transitionRect = createMaybeMemo(
+      rectFromPositionSize,
+      rectCreate,
+      () => position()?.p,
+      () => size()?.p
+    );
+    return { rect: transitionRect, element, setElement };
+  });
+});
 
 export default function ProjectPicture(
-  props: ComponentProps<typeof SanityPicture>
+  props: TypeFromSelection<typeof projectPictureSelection> &
+    ComponentProps<typeof SanityPicture>
 ) {
-  const [element, setElement] = createSignal<
-    HTMLImageElement | HTMLVideoElement
-  >();
+  const [, elementProps] = splitProps(props, ["_key"]);
+  const { rect, element, setElement } = useRects().use(props._key);
 
-  const layoutModel = useLayoutModel();
-  const targetRect = layoutModel.useRect(element);
-  const targetPosition = createMaybeMemo(rectPosition, vec2Create, targetRect);
-  const targetSize = createMaybeMemo(rectSize, vec2Create, targetRect);
-  const position = createTransition(targetPosition, 150);
-  const size = createTransition(targetSize, 300);
-  const transitionRect = createMaybeMemo(
-    rectFromPositionSize,
-    rectCreate,
-    () => position()?.p,
-    () => size()?.p
-  );
+  createSetRect(element, rect);
 
-  createSetRect(element, transitionRect);
-
-  return <SanityPicture {...props} ref={setElement} />;
+  return <SanityPicture {...elementProps} ref={setElement} />;
 }
