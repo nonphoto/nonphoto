@@ -2,32 +2,24 @@
   "name": "web",
   "private": true,
   "scripts": {
-    "dev": "solid-start dev",
-    "build": "solid-start build",
-    "start": "solid-start start"
+    "dev": "vinxi dev",
+    "start": "vinxi start"
   },
   "type": "module",
-  "devDependencies": {
-    "@types/node": "^20.5.7",
-    "esbuild": "^0.19.2",
-    "postcss": "^8.4.29",
-    "solid-start-node": "^0.3.4",
-    "typescript": "^5.2.2",
-    "vite": "^4.4.9"
-  },
   "dependencies": {
     "@nonphoto/css": "1.0.4",
     "@nonphoto/sanity-image": "0.1.1",
-    "@solid-primitives/rootless": "1.4.2",
-    "@solidjs/meta": "^0.28.6",
-    "@solidjs/router": "^0.8.3",
-    "clsx": "2.0.0",
-    "groqd": "0.15.9",
-    "hls.js": "1.4.10",
-    "picosanity": "4.1.0",
-    "solid-js": "^1.7.11",
-    "solid-start": "^0.3.5",
-    "undici": "^5.23.0"
+    "@solid-primitives/rootless": "1.5.0",
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "^0.15.0",
+    "@solidjs/start": "^1.1.0",
+    "clsx": "2.1.1",
+    "groq": "^3.85.1",
+    "hls.js": "1.6.2",
+    "picosanity": "4.1.1",
+    "solid-js": "^1.9.5",
+    "solid-picture": "^0.0.14",
+    "vinxi": "^0.5.3"
   },
   "engines": {
     "node": ">=16.8"

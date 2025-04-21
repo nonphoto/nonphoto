@@ -1,37 +1,21 @@
 import { defaultWidths, imageProps } from "@nonphoto/sanity-image";
-import { TypeFromSelection, q, sanityImage } from "groqd";
+import groq from "groq";
 import { Show, splitProps } from "solid-js";
 import { Img, MediaElementProps } from "solid-picture";
 import { client as sanityClient } from "~/lib/sanity";
 
-export const sanityPictureSelection = {
-  color: q.string().nullable(),
-  image: sanityImage("image").nullable(),
-  metadata: q("image.asset")
-    .deref()
-    .grab({
-      dimensions: q("metadata.dimensions").grab({
-        height: q.number(),
-        width: q.number(),
-      }),
-      palette: q("metadata.palette.dominant").grab({
-        background: q.string(),
-        foreground: q.string(),
-      }),
-    })
-    .nullable(),
-  video: q("video.asset")
-    .deref()
-    .grab({
-      playbackId: q.string(),
-    })
-    .nullable(),
-};
+export const sanityPictureFragment = groq`{
+  color,
+  image,
+  "metadata": image.asset->,
+  "video": video.asset->{
+    playbackId,
+  },
+}`;
 
-export default function SanityPicture(
-  props: TypeFromSelection<typeof sanityPictureSelection> &
-    MediaElementProps & { background?: boolean }
-) {
+export interface SanityPictureProps extends MediaElementProps {}
+
+export default function SanityPicture(props: SanityPictureProps) {
   const [, elementProps] = splitProps(props, [
     "video",
     "metadata",

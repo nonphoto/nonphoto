@@ -1,37 +1,34 @@
+import { createAsync, query } from "@solidjs/router";
 import clsx from "clsx";
-import classes from "./index.module.css";
-import { q } from "groqd";
-import { For, createResource } from "solid-js";
-import { A, useRouteData } from "solid-start";
-import { fetchQuery } from "~/lib/sanity.js";
-import { typography } from "~/lib/typography.js";
+import groq from "groq";
+import { For } from "solid-js";
 import ProjectPicture, {
-  projectPictureSelection,
+  projectPictureFragment,
 } from "~/components/ProjectPicture.jsx";
+import { sanityClient } from "~/lib/sanity.js";
+import { typography } from "~/lib/typography.js";
+import classes from "./index.module.css";
 
-export function routeData() {
-  const [projects] = createResource(() =>
-    fetchQuery(
-      q("*")
-        .filter("_type == 'project'")
-        .order("date desc")
-        .grab({
-          title: q.string(),
-          slug: q.slug("slug"),
-          pictures: q("pictures")
-            .filter()
-            .grab(projectPictureSelection)
-            .nullable(),
-        })
-    )
-  );
+const projectsQuery = groq`*[_type == 'project'] | order(date, desc) {
+  title,
+  slug,
+  pictures[]{
+    _key,
+    "value":${projectPictureFragment},
+  },
+}`;
 
-  return projects;
-}
+const getProjects = query(async () => {
+  "use server";
+  return await sanityClient.fetch(projectsQuery);
+}, "projects");
 
-export default function HomePage() {
-  const projects = useRouteData<typeof routeData>();
+export const route = {
+  preload: () => getProjects(),
+};
 
+export default function RootIndex() {
+  const projects = createAsync(() => getProjects());
   return (
     <main class={classes.main}>
       <ul class={classes.projectList}>
@@ -40,13 +37,13 @@ export default function HomePage() {
             <li class={classes.project}>
               <For each={project.pictures}>
                 {(picture, index) => (
-                  <A href={`/project/${project.slug}#${index()}`}>
+                  <a href={`/project/${project.slug}#${index()}`}>
                     <ProjectPicture
                       {...picture}
                       class={classes.picture}
                       background
                     />
-                  </A>
+                  </a>
                 )}
               </For>
             </li>
