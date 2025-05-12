@@ -1,26 +1,23 @@
 import { createAsync, query } from "@solidjs/router";
 import clsx from "clsx";
 import groq from "groq";
-import { For } from "solid-js";
-import ProjectPicture, {
-  projectPictureFragment,
-} from "~/components/ProjectPicture.jsx";
-import { sanityClient } from "~/lib/sanity.js";
-import { typography } from "~/lib/typography.js";
+import { For, Suspense } from "solid-js";
+import SanityPicture from "~/components/SanityPicture";
+import { sanityClient } from "~/lib/sanity.ts";
+import { typography } from "~/lib/typography.ts";
+import { ProjectsQueryResult } from "../../sanity.types";
 import classes from "./index.module.css";
 
 const projectsQuery = groq`*[_type == 'project'] | order(date, desc) {
   title,
   slug,
-  pictures[]{
-    _key,
-    "value":${projectPictureFragment},
-  },
+  pictures,
 }`;
 
 const getProjects = query(async () => {
   "use server";
-  return await sanityClient.fetch(projectsQuery);
+  const result = await sanityClient.fetch<ProjectsQueryResult>(projectsQuery);
+  return result;
 }, "projects");
 
 export const route = {
@@ -32,23 +29,22 @@ export default function RootIndex() {
   return (
     <main class={classes.main}>
       <ul class={classes.projectList}>
-        <For each={projects()}>
-          {(project) => (
-            <li class={classes.project}>
-              <For each={project.pictures}>
-                {(picture, index) => (
-                  <a href={`/project/${project.slug}#${index()}`}>
-                    <ProjectPicture
-                      {...picture}
-                      class={classes.picture}
-                      background
-                    />
-                  </a>
-                )}
-              </For>
-            </li>
-          )}
-        </For>
+        <Suspense>
+          <For each={projects()}>
+            {(project) => (
+              <li class={classes.project}>
+                <For each={project.pictures}>
+                  {(picture, index) => (
+                    <div>
+                      {project.slug}
+                      <SanityPicture {...picture} />
+                    </div>
+                  )}
+                </For>
+              </li>
+            )}
+          </For>
+        </Suspense>
       </ul>
       <h1 class={clsx(classes.title, typography.title)}>
         <span>Jonas Luebbers</span>

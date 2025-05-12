@@ -1,7 +1,5 @@
 import { ComponentProps } from "solid-js";
-import SanityPicture, { sanityPictureFragment } from "./SanityPicture.js";
-
-export const projectPictureFragment = sanityPictureFragment;
+import SanityPicture from "./SanityPicture.tsx";
 
 export default function ProjectPicture(
   props: ComponentProps<typeof SanityPicture>

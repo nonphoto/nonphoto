@@ -23,5 +23,9 @@
   },
   "engines": {
     "node": ">=16.8"
+  },
+  "devDependencies": {
+    "@sanity/client": "6.29.1",
+    "sanity": "3.86.1"
   }
 }
