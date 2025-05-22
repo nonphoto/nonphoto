@@ -11,7 +11,15 @@ import classes from "./index.module.css";
 const projectsQuery = groq`*[_type == 'project'] | order(date, desc) {
   title,
   slug,
-  pictures,
+  pictures[]{
+    ...,
+    image {
+      asset->
+    },
+    video {
+      asset->
+    }
+  },
 }`;
 
 const getProjects = query(async () => {
@@ -34,12 +42,7 @@ export default function RootIndex() {
             {(project) => (
               <li class={classes.project}>
                 <For each={project.pictures}>
-                  {(picture, index) => (
-                    <div>
-                      {project.slug}
-                      <SanityPicture {...picture} />
-                    </div>
-                  )}
+                  {(picture) => <SanityPicture {...picture} />}
                 </For>
               </li>
             )}

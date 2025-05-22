@@ -1,6 +1,6 @@
 import { defineType } from "sanity";
 
-export default defineType({
+export const projectType = defineType({
   name: "project",
   type: "document",
   fields: [
@@ -11,7 +11,6 @@ export default defineType({
       options: { source: "title" },
       validation: (Rule) => Rule.required(),
     },
-    { name: "date", type: "date", validation: (Rule) => Rule.required() },
     { name: "roles", type: "array", of: [{ name: "role", type: "string" }] },
     { name: "description", type: "array", of: [{ type: "block" }] },
     {

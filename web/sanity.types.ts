@@ -296,39 +296,16 @@ export type AllSanitySchemaTypes =
   | MuxPlaybackId
   | MuxTrack;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/components/SanityPicture.tsx
-// Variable: sanityPictureFragment
-// Query: {  color,  image,  "metadata": image.asset->,  "video": video.asset->{    playbackId,  },}
-export type SanityPictureFragmentResult = {
-  color: never;
-  image: never;
-  metadata: never;
-  video: never;
-};
-
 // Source: ./src/routes/index.tsx
 // Variable: projectsQuery
-// Query: *[_type == 'project'] | order(date, desc) {  title,  slug,  pictures[]{    _key,    "value":{  color,  image,  "metadata": image.asset->,  "video": video.asset->{    playbackId,  },},  },}
+// Query: *[_type == 'project'] | order(date, desc) {  title,  slug,  pictures[]{    ...,    image {      asset->    },    video {      asset->    }  },}
 export type ProjectsQueryResult = Array<{
   title: string | null;
   slug: Slug | null;
   pictures: Array<{
-    _key: string;
-    value: {
-      color: string | null;
-      image: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
-      } | null;
-      metadata: {
+    color?: string;
+    image: {
+      asset: {
         _id: string;
         _type: "sanity.imageAsset";
         _createdAt: string;
@@ -350,10 +327,24 @@ export type ProjectsQueryResult = Array<{
         metadata?: SanityImageMetadata;
         source?: SanityAssetSourceData;
       } | null;
-      video: {
-        playbackId: string | null;
+    } | null;
+    video: {
+      asset: {
+        _id: string;
+        _type: "mux.videoAsset";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        status?: string;
+        assetId?: string;
+        playbackId?: string;
+        filename?: string;
+        thumbTime?: number;
+        data?: MuxAssetData;
       } | null;
-    };
+    } | null;
+    _type: "picture";
+    _key: string;
   }> | null;
 }>;
 
@@ -361,7 +352,6 @@ export type ProjectsQueryResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '{\n  color,\n  image,\n  "metadata": image.asset->,\n  "video": video.asset->{\n    playbackId,\n  },\n}': SanityPictureFragmentResult;
-    '*[_type == \'project\'] | order(date, desc) {\n  title,\n  slug,\n  pictures[]{\n    _key,\n    "value":{\n  color,\n  image,\n  "metadata": image.asset->,\n  "video": video.asset->{\n    playbackId,\n  },\n},\n  },\n}': ProjectsQueryResult;
+    "*[_type == 'project'] | order(date, desc) {\n  title,\n  slug,\n  pictures[]{\n    ...,\n    image {\n      asset->\n    },\n    video {\n      asset->\n    }\n  },\n}": ProjectsQueryResult;
   }
 }

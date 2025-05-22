@@ -1,0 +1,18 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Logs
+/logs
+*.log
+
+# Misc
+.DS_Store
+*.pem
+
+# Typescript
+*.tsbuildinfo
+
+# Dotenv and similar local-only files
+*.local

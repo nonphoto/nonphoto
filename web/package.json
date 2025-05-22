@@ -8,7 +8,7 @@
   "type": "module",
   "dependencies": {
     "@nonphoto/css": "1.0.4",
-    "@nonphoto/sanity-image": "0.1.1",
+    "@nonphoto/sanity-image": "1.0.1",
     "@solid-primitives/rootless": "1.5.0",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.0",

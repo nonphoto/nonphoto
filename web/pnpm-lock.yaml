@@ -12,8 +12,8 @@ importers:
         specifier: 1.0.4
         version: 1.0.4
       '@nonphoto/sanity-image':
-        specifier: 0.1.1
-        version: 0.1.1
+        specifier: 1.0.1
+        version: 1.0.1
       '@solid-primitives/rootless':
         specifier: 1.5.0
         version: 1.5.0(solid-js@1.9.5)
@@ -1685,8 +1685,9 @@ packages:
   '@nonphoto/css@1.0.4':
     resolution: {integrity: sha512-h8UVQTPl7KDtHYhTDAPrYQF+sCJKbDKjUEiHqotDHjplnFU0SJurAoM8hSb+T9Efw6FfqZLeRiYvlLgNPq5uFw==}
 
-  '@nonphoto/sanity-image@0.1.1':
-    resolution: {integrity: sha512-He0qMVgU7Nd6lkwgbQwfGQeHSfZroMM8S19JwZQ76/pP0xI++VYMvpml6h7sF9E4KwYO1CT7/ltXFddY9FTSNA==}
+  '@nonphoto/sanity-image@1.0.1':
+    resolution: {integrity: sha512-k+Hs1og2qhkhZnM87dcsYu0C1+NTXezvZT9HdphuVqLem52LfZVBcDTwUHAcqObjUDZK2LOX79EC/CV2zBJ8dQ==}
+    engines: {node: '>=20', pnpm: '>=9'}
 
   '@oclif/core@4.2.10':
     resolution: {integrity: sha512-fAqcXgqkUm4v5FYy7qWP4w1HaOlVSVJveah+yVTo5Nm5kTiXhmD5mQQ7+knGeBaStyrtQy6WardoC2xSic9rlQ==}
@@ -8181,7 +8182,7 @@ snapshots:
 
   '@nonphoto/css@1.0.4': {}
 
-  '@nonphoto/sanity-image@0.1.1':
+  '@nonphoto/sanity-image@1.0.1':
     dependencies:
       '@sanity/image-url': 1.0.2
 
