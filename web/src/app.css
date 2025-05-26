@@ -11,3 +11,25 @@
   font-weight: 400;
   src: url("/fonts/AUTHENTICSans-90.woff2") format("woff2");
 }
+
+@font-face {
+  font-family: "KH Teka Mono";
+  font-weight: 400;
+  src: url("/fonts/KHTekaMono-Book.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "KH Teka Mono";
+  font-weight: 500;
+  src: url("/fonts/KHTekaMono-Medium.woff2") format("woff2");
+}
+
+html {
+  background-color: white;
+  color: #afafaf;
+}
+
+::selection {
+  color: blue;
+  background-color: #a4dded;
+}

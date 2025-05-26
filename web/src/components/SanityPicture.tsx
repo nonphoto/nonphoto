@@ -1,15 +1,16 @@
-import {
-  defaultWidths,
-  imageProps,
-  ImagePropsOptions,
-} from "@nonphoto/sanity-image";
+import { defaultWidths, imageProps } from "@nonphoto/sanity-image";
 import { splitProps } from "solid-js";
 import { Img, MediaElementProps } from "solid-picture";
 import { sanityClient } from "~/lib/sanity";
+import { SanityImageMetadata } from "../../sanity.types";
 
 export interface SanityPictureProps extends MediaElementProps {
   color?: string | null;
-  image?: ImagePropsOptions["image"] | null;
+  image?: {
+    asset: {
+      metadata: SanityImageMetadata;
+    } | null;
+  } | null;
   video?: {
     asset?: {
       playbackId?: string | null;
@@ -35,8 +36,15 @@ export default function SanityPicture(props: SanityPictureProps) {
   return (
     <Img
       {...elementProps}
-      srcset={imgProps()?.srcset}
-      placeholderSrc={imgProps()?.src}
+      src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+      style={{
+        width: "3.1rem",
+        height: "1.5rem",
+        "background-color":
+          props.image?.asset?.metadata.palette?.dominant?.background,
+      }}
+      // srcset={imgProps()?.srcset}
+      // placeholderSrc={imgProps()?.src}
     />
   );
 }

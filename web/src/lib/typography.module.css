@@ -1,7 +1,17 @@
-.title {
-  font-family: "Authentic Sans Condensed";
-  font-weight: 300;
+.large {
+  font-family: "KH Teka Mono";
+  font-weight: 400;
   text-transform: uppercase;
   line-height: 1;
-  margin-bottom: -0.2em;
+  font-size: 2.5rem;
+  font-feature-settings: "ss08", "case";
+}
+
+.small {
+  font-family: "KH Teka Mono";
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1;
+  font-size: 1.25rem;
+  font-feature-settings: "case";
 }
