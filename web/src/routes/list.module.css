@@ -1,0 +1,40 @@
+.projectList {
+  display: flex;
+  width: max-content;
+  gap: var(--length-x);
+}
+
+.projectListItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--length-y);
+}
+
+.projectText {
+  width: 50svw;
+  position: sticky;
+  left: var(--length-x);
+  display: flex;
+  flex-direction: column;
+}
+
+.pictureList {
+  display: flex;
+  gap: var(--length-x);
+}
+
+.pictureListItem {
+}
+
+.picture {
+  height: 50svh;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50svh;
+  width: 50svw;
+  border: solid 1px currentColor;
+}

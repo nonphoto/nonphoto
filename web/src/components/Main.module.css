@@ -1,0 +1,5 @@
+.main {
+  padding: var(--length-y) var(--length-x);
+  display: flex;
+  flex-direction: column;
+}

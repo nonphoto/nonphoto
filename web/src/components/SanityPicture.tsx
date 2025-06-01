@@ -36,15 +36,16 @@ export default function SanityPicture(props: SanityPictureProps) {
   return (
     <Img
       {...elementProps}
-      src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+      srcset={imgProps()?.srcset}
       style={{
-        width: "3.1rem",
-        height: "1.5rem",
         "background-color":
-          props.image?.asset?.metadata.palette?.dominant?.background,
+          props.image?.asset?.metadata.palette?.lightMuted?.background,
       }}
-      // srcset={imgProps()?.srcset}
-      // placeholderSrc={imgProps()?.src}
+      placeholderSrc={imgProps()?.src}
     />
   );
+}
+
+export function sanityPictureColor(props: SanityPictureProps) {
+  return props.image?.asset?.metadata.palette?.dominant?.background;
 }

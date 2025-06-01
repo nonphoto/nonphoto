@@ -24,9 +24,15 @@
   src: url("/fonts/KHTekaMono-Medium.woff2") format("woff2");
 }
 
+:root {
+  --length-x: 1rem;
+  --length-y: 1.6129032258064515rem;
+}
+
 html {
   background-color: white;
   color: #afafaf;
+  font-size: 75%;
 }
 
 ::selection {
