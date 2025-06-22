@@ -38,6 +38,7 @@ export default function SanityPicture(props: SanityPictureProps) {
       {...elementProps}
       srcset={imgProps()?.srcset}
       style={{
+        ...elementProps.style,
         "background-color":
           props.image?.asset?.metadata.palette?.lightMuted?.background,
       }}
