@@ -1,44 +1,23 @@
-import { createAsync, query } from "@solidjs/router";
+import { createAsync } from "@solidjs/router";
 import clsx from "clsx";
-import groq from "groq";
 import { For, Suspense } from "solid-js";
 import { Main } from "~/components/Main";
 import { sanityPictureColor } from "~/components/SanityPicture";
-import data from "~/data.json";
+import { fetchSiteQuery } from "~/lib/queries";
 import { typography } from "~/lib/typography.ts";
 import classes from "./index.module.css";
 
-const projectsQuery = groq`*[_type == 'project'] | order(date, desc) {
-  title,
-  slug,
-  pictures[]{
-    ...,
-    image {
-      asset->
-    },
-    video {
-      asset->
-    }
-  },
-}`;
-
-const getProjects = query(async () => {
-  "use server";
-  // const result = await sanityClient.fetch<ProjectsQueryResult>(projectsQuery);
-  return data;
-}, "projects");
-
 export const route = {
-  preload: () => getProjects(),
+  preload: () => fetchSiteQuery(),
 };
 
 export default function IndexRoute() {
-  const projects = createAsync(() => getProjects());
+  const site = createAsync(() => fetchSiteQuery());
   return (
     <Main>
       <ul class={classes.projectList}>
         <Suspense>
-          <For each={projects()}>
+          <For each={site()?.projects}>
             {(project) => (
               <li class={classes.project}>
                 <For each={project.pictures}>

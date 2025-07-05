@@ -1,6 +1,6 @@
 import { defaultWidths, imageProps } from "@nonphoto/sanity-image";
 import { splitProps } from "solid-js";
-import { Img, MediaElementProps } from "solid-picture";
+import { Img, MediaElementProps, Picture } from "solid-picture";
 import { sanityClient } from "~/lib/sanity";
 import { SanityImageMetadata } from "../../sanity.types";
 
@@ -34,16 +34,20 @@ export default function SanityPicture(props: SanityPictureProps) {
   const videoSrc = () =>
     playbackId() ? `https://stream.mux.com/${playbackId()}` : undefined;
   return (
-    <Img
-      {...elementProps}
-      srcset={imgProps()?.srcset}
-      style={{
-        ...elementProps.style,
-        "background-color":
-          props.image?.asset?.metadata.palette?.lightMuted?.background,
-      }}
-      placeholderSrc={imgProps()?.src}
-    />
+    <Picture>
+      <Img
+        {...elementProps}
+        srcset={imgProps()?.srcset}
+        videoSrc={videoSrc()}
+        videoMode="hls"
+        style={{
+          ...elementProps.style,
+          "background-color":
+            props.image?.asset?.metadata.palette?.lightMuted?.background,
+        }}
+        placeholderSrc={imgProps()?.src}
+      />
+    </Picture>
   );
 }
 

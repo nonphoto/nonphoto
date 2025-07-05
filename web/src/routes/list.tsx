@@ -1,29 +1,23 @@
-import { createAsync, query } from "@solidjs/router";
+import { createAsync } from "@solidjs/router";
 import clsx from "clsx";
 import { createSignal, For, Suspense } from "solid-js";
 import { Main } from "~/components/Main";
 import SanityPicture, { SanityPictureProps } from "~/components/SanityPicture";
-import data from "~/data.json";
+import { fetchSiteQuery } from "~/lib/queries";
 import { typography } from "~/lib/typography";
 import classes from "./list.module.css";
 
-const getProjects = query(async () => {
-  "use server";
-  // const result = await sanityClient.fetch<ProjectsQueryResult>(projectsQuery);
-  return data;
-}, "projects");
-
 export const route = {
-  preload: () => getProjects(),
+  preload: () => fetchSiteQuery(),
 };
 
 export default function ListRoute() {
-  const projects = createAsync(() => getProjects());
+  const site = createAsync(() => fetchSiteQuery());
   return (
     <Main>
       <Suspense>
         <ul class={classes.projectList}>
-          <For each={projects()}>
+          <For each={site()?.projects}>
             {(project) => (
               <li class={classes.projectListItem}>
                 <ul class={classes.pictureList}>
@@ -61,27 +55,27 @@ function Picture({ picture }: { picture: SanityPictureProps }) {
     null
   );
 
-  createEffect(() => {
-    const elementValue = outerElement();
-    if (elementValue) {
-      const timeline = new ViewTimeline({
-        subject: elementValue,
-        axis: "inline",
-        inset: "50% 0%",
-        range: "contain 0% cover 100%",
-      });
+  // createEffect(() => {
+  //   const elementValue = outerElement();
+  //   if (elementValue) {
+  //     const timeline = new ViewTimeline({
+  //       subject: elementValue,
+  //       axis: "inline",
+  //       inset: "50% 0%",
+  //       range: "contain 0% cover 100%",
+  //     });
 
-      elementValue.animate(
-        {
-          transform: ["scaleX(0)", "scaleX(1)"],
-        },
-        {
-          fill: "both",
-          timeline,
-        }
-      );
-    }
-  });
+  //     elementValue.animate(
+  //       {
+  //         transform: ["scaleX(0)", "scaleX(1)"],
+  //       },
+  //       {
+  //         fill: "both",
+  //         timeline,
+  //       }
+  //     );
+  //   }
+  // });
 
   return (
     <div

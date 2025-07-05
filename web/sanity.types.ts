@@ -68,6 +68,21 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Site = {
+  _id: string;
+  _type: "site";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  projects?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "project";
+  }>;
+};
+
 export type Project = {
   _id: string;
   _type: "project";
@@ -76,7 +91,6 @@ export type Project = {
   _rev: string;
   title?: string;
   slug?: Slug;
-  date?: string;
   roles?: Array<string>;
   description?: Array<{
     children?: Array<{
@@ -281,6 +295,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | Site
   | Project
   | SanityImageCrop
   | SanityImageHotspot
@@ -296,62 +311,64 @@ export type AllSanitySchemaTypes =
   | MuxPlaybackId
   | MuxTrack;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: ./src/routes/index.tsx
-// Variable: projectsQuery
-// Query: *[_type == 'project'] | order(date, desc) {  title,  slug,  pictures[]{    ...,    image {      asset->    },    video {      asset->    }  },}
-export type ProjectsQueryResult = Array<{
-  title: string | null;
-  slug: Slug | null;
-  pictures: Array<{
-    color?: string;
-    image: {
-      asset: {
-        _id: string;
-        _type: "sanity.imageAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        originalFilename?: string;
-        label?: string;
-        title?: string;
-        description?: string;
-        altText?: string;
-        sha1hash?: string;
-        extension?: string;
-        mimeType?: string;
-        size?: number;
-        assetId?: string;
-        uploadId?: string;
-        path?: string;
-        url?: string;
-        metadata?: SanityImageMetadata;
-        source?: SanityAssetSourceData;
+// Source: ./src/lib/queries.ts
+// Variable: siteQuery
+// Query: *[_type == "site"][0]{  "projects": projects[]->{    title,    slug,    pictures[]{      ...,      image {        asset->      },      video {        asset->      },    },  },}
+export type SiteQueryResult = {
+  projects: Array<{
+    title: string | null;
+    slug: Slug | null;
+    pictures: Array<{
+      color?: string;
+      image: {
+        asset: {
+          _id: string;
+          _type: "sanity.imageAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          originalFilename?: string;
+          label?: string;
+          title?: string;
+          description?: string;
+          altText?: string;
+          sha1hash?: string;
+          extension?: string;
+          mimeType?: string;
+          size?: number;
+          assetId?: string;
+          uploadId?: string;
+          path?: string;
+          url?: string;
+          metadata?: SanityImageMetadata;
+          source?: SanityAssetSourceData;
+        } | null;
       } | null;
-    } | null;
-    video: {
-      asset: {
-        _id: string;
-        _type: "mux.videoAsset";
-        _createdAt: string;
-        _updatedAt: string;
-        _rev: string;
-        status?: string;
-        assetId?: string;
-        playbackId?: string;
-        filename?: string;
-        thumbTime?: number;
-        data?: MuxAssetData;
+      video: {
+        asset: {
+          _id: string;
+          _type: "mux.videoAsset";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          status?: string;
+          assetId?: string;
+          playbackId?: string;
+          filename?: string;
+          thumbTime?: number;
+          data?: MuxAssetData;
+        } | null;
       } | null;
-    } | null;
-    _type: "picture";
-    _key: string;
+      _type: "picture";
+      _key: string;
+    }> | null;
   }> | null;
-}>;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == 'project'] | order(date, desc) {\n  title,\n  slug,\n  pictures[]{\n    ...,\n    image {\n      asset->\n    },\n    video {\n      asset->\n    }\n  },\n}": ProjectsQueryResult;
+    '*[_type == "site"][0]{\n  "projects": projects[]->{\n    title,\n    slug,\n    pictures[]{\n      ...,\n      image {\n        asset->\n      },\n      video {\n        asset->\n      },\n    },\n  },\n}': SiteQueryResult;
   }
 }
