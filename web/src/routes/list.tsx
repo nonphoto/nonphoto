@@ -49,10 +49,10 @@ export default function ListRoute() {
 
 function Picture({ picture }: { picture: SanityPictureProps }) {
   const [outerElement, setOuterElement] = createSignal<HTMLDivElement | null>(
-    null
+    null,
   );
   const [innerElement, setInnerElement] = createSignal<HTMLDivElement | null>(
-    null
+    null,
   );
 
   // createEffect(() => {

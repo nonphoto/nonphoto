@@ -1,56 +1,66 @@
-import { defaultWidths, imageProps } from "@nonphoto/sanity-image";
-import { splitProps } from "solid-js";
-import { Img, MediaElementProps, Picture } from "solid-picture";
-import { sanityClient } from "~/lib/sanity";
-import { SanityImageMetadata } from "../../sanity.types";
+import {
+  imageAssetFromSource,
+  ImageSource,
+  imageSrcset,
+} from "@nonphoto/sanity-image";
+import {
+  SanityImageObject,
+  SanityImageSource,
+} from "@sanity/image-url/lib/types/types.js";
+import { ComponentProps, Show, splitProps } from "solid-js";
+import { JSX } from "solid-js/h/jsx-runtime";
+import sanityClient from "~/../../sanity.config";
 
-export interface SanityPictureProps extends MediaElementProps {
-  color?: string | null;
-  image?: {
-    asset: {
-      metadata: SanityImageMetadata;
+export interface SanityPictureProps extends ComponentProps<"picture"> {
+  style?: JSX.CSSProperties;
+  sizes?: ComponentProps<"img">["sizes"];
+  value: {
+    backgroundColor?: string | null;
+    image?: ImageSource | null;
+    video?: {
+      asset?: {
+        playbackId?: string | null;
+      } | null;
     } | null;
-  } | null;
-  video?: {
-    asset?: {
-      playbackId?: string | null;
-    } | null;
-  } | null;
+  };
 }
 
 export default function SanityPicture(props: SanityPictureProps) {
-  const [, elementProps] = splitProps(props, ["video", "image", "color"]);
-  const playbackId = () => props.video?.asset?.playbackId;
-  const imgProps = () => {
-    const imageValue = props.image;
-    if (imageValue) {
-      return imageProps({
-        image: imageValue,
-        client: sanityClient,
-        widths: defaultWidths,
-      });
-    }
-  };
-  const videoSrc = () =>
-    playbackId() ? `https://stream.mux.com/${playbackId()}` : undefined;
+  const [, elementProps] = splitProps(props, ["value", "sizes"]);
+  const imageAsset = () =>
+    props.value.image ? imageAssetFromSource(props.value.image) : undefined;
   return (
-    <Picture>
-      <Img
-        {...elementProps}
-        srcset={imgProps()?.srcset}
-        videoSrc={videoSrc()}
-        videoMode="hls"
-        style={{
-          ...elementProps.style,
-          "background-color":
-            props.image?.asset?.metadata.palette?.lightMuted?.background,
-        }}
-        placeholderSrc={imgProps()?.src}
-      />
-    </Picture>
+    <picture
+      {...elementProps}
+      style={{
+        ...elementProps.style,
+        "background-color": sanityPictureColor(props),
+      }}
+    >
+      <Show when={imageAsset()}>
+        {(imageAssetValue) => (
+          <img
+            srcset={imageSrcset(sanityClient, imageAssetValue())}
+            sizes={props.sizes}
+          />
+        )}
+      </Show>
+    </picture>
   );
 }
 
-export function sanityPictureColor(props: SanityPictureProps) {
-  return props.image?.asset?.metadata.palette?.dominant?.background;
+function isSanityImageObject(
+  image: SanityImageSource,
+): image is SanityImageObject {
+  return image != null && typeof image === "object" && "asset" in image;
+}
+
+export function sanityPictureColor(
+  props: SanityPictureProps,
+): string | undefined {
+  return props.image != null &&
+    isSanityImageObject(props.image) &&
+    "metadata" in props.image.asset
+    ? props.image.asset.metadata.palette?.dominant?.background
+    : undefined;
 }

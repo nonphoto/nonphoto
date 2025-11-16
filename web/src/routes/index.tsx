@@ -2,7 +2,7 @@ import { createAsync } from "@solidjs/router";
 import clsx from "clsx";
 import { For, Suspense } from "solid-js";
 import { Main } from "~/components/Main";
-import { sanityPictureColor } from "~/components/SanityPicture";
+import SanityPicture from "~/components/SanityPicture";
 import { fetchSiteQuery } from "~/lib/queries";
 import { typography } from "~/lib/typography.ts";
 import classes from "./index.module.css";
@@ -19,16 +19,20 @@ export default function IndexRoute() {
         <Suspense>
           <For each={site()?.projects}>
             {(project) => (
-              <li class={classes.project}>
-                <For each={project.pictures}>
-                  {(picture) => (
-                    <div
-                      class={classes.picture}
-                      style={{ background: sanityPictureColor(picture) }}
-                    />
-                  )}
-                </For>
-              </li>
+              console.log(project),
+              (
+                <li class={classes.project}>
+                  <For each={project.pictures}>
+                    {(picture) => (
+                      <SanityPicture
+                        value={picture}
+                        class={classes.picture}
+                        sizes="40px"
+                      />
+                    )}
+                  </For>
+                </li>
+              )
             )}
           </For>
         </Suspense>

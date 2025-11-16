@@ -12,8 +12,11 @@ importers:
         specifier: 1.0.4
         version: 1.0.4
       '@nonphoto/sanity-image':
-        specifier: 1.0.1
-        version: 1.0.1
+        specifier: 5.0.0
+        version: 5.0.0(typescript@5.8.3)
+      '@sanity/image-url':
+        specifier: ^1.1.0
+        version: 1.1.0
       '@solid-primitives/rootless':
         specifier: 1.5.0
         version: 1.5.0(solid-js@1.9.5)
@@ -1685,9 +1688,9 @@ packages:
   '@nonphoto/css@1.0.4':
     resolution: {integrity: sha512-h8UVQTPl7KDtHYhTDAPrYQF+sCJKbDKjUEiHqotDHjplnFU0SJurAoM8hSb+T9Efw6FfqZLeRiYvlLgNPq5uFw==}
 
-  '@nonphoto/sanity-image@1.0.1':
-    resolution: {integrity: sha512-k+Hs1og2qhkhZnM87dcsYu0C1+NTXezvZT9HdphuVqLem52LfZVBcDTwUHAcqObjUDZK2LOX79EC/CV2zBJ8dQ==}
-    engines: {node: '>=20', pnpm: '>=9'}
+  '@nonphoto/sanity-image@5.0.0':
+    resolution: {integrity: sha512-z5NRxjsTVysebmh9mg9hgIpEZk8Za4tlnzJs+5/a0BgaO/kmhFFJbeuH+kGeeuFHHCt98IwtnWbxAa2d2pjQbA==}
+    engines: {node: '>=20'}
 
   '@oclif/core@4.2.10':
     resolution: {integrity: sha512-fAqcXgqkUm4v5FYy7qWP4w1HaOlVSVJveah+yVTo5Nm5kTiXhmD5mQQ7+knGeBaStyrtQy6WardoC2xSic9rlQ==}
@@ -2131,8 +2134,8 @@ packages:
     resolution: {integrity: sha512-2sb7tbdMDuUuVyocJPKG0gZBiOML/ovCe+mJiLrv1j69ODOfa2LfUjDVR+dRw/A/+XuxoJSSP8ebG7NiwTOgIA==}
     engines: {node: '>=18'}
 
-  '@sanity/image-url@1.0.2':
-    resolution: {integrity: sha512-C4+jb2ny3ZbMgEkLd7Z3C75DsxcTEoE+axXQJsQ75ou0AKWGdVsP351hqK6mJUUxn5HCSlu3vznoh7Yljye4cQ==}
+  '@sanity/image-url@1.1.0':
+    resolution: {integrity: sha512-JHumVRxzzaZAJyOimntdukA9TjjzsJiaiq/uUBdTknMLCNvtM6KQ5OCp6W5fIdY78uyFxtQjz+MPXwK8WBIxWg==}
     engines: {node: '>=10.0.0'}
 
   '@sanity/import@3.38.2':
@@ -6313,6 +6316,14 @@ packages:
     resolution: {integrity: sha512-jjRGChg03uGp9f6wQYSO8qXkweJwRbA5WRuEQE8xLIiehIzIIi23qZSzsyvZPCPoFqkeLtZuz7Plt1LGukAInA==}
     hasBin: true
 
+  valibot@1.1.0:
+    resolution: {integrity: sha512-Nk8lX30Qhu+9txPYTwM0cFlWLdPFsFr6LblzqIySfbZph9+BFsAHsNvHOymEviUepeIW6KFHzpX8TKhbptBXXw==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   validate-html-nesting@1.2.2:
     resolution: {integrity: sha512-hGdgQozCsQJMyfK5urgFcWEqsSSrK63Awe0t/IMR0bZ0QMtnuaiHzThW81guu3qx9abLi99NEuiaN6P9gVYsNg==}
 
@@ -8182,9 +8193,11 @@ snapshots:
 
   '@nonphoto/css@1.0.4': {}
 
-  '@nonphoto/sanity-image@1.0.1':
+  '@nonphoto/sanity-image@5.0.0(typescript@5.8.3)':
     dependencies:
-      '@sanity/image-url': 1.0.2
+      valibot: 1.1.0(typescript@5.8.3)
+    transitivePeerDependencies:
+      - typescript
 
   '@oclif/core@4.2.10':
     dependencies:
@@ -8660,7 +8673,7 @@ snapshots:
       lodash: 4.17.21
       ts-brand: 0.2.0
 
-  '@sanity/image-url@1.0.2': {}
+  '@sanity/image-url@1.1.0': {}
 
   '@sanity/import@3.38.2(@types/react@19.1.2)':
     dependencies:
@@ -12578,7 +12591,7 @@ snapshots:
       '@sanity/export': 3.42.2(@types/react@19.1.2)
       '@sanity/icons': 3.7.0(react@19.1.0)
       '@sanity/id-utils': 1.0.0
-      '@sanity/image-url': 1.0.2
+      '@sanity/image-url': 1.1.0
       '@sanity/import': 3.38.2(@types/react@19.1.2)
       '@sanity/insert-menu': 1.1.10(@emotion/is-prop-valid@1.2.2)(@sanity/types@3.86.1(@types/react@19.1.2)(debug@4.4.0))(react-dom@19.1.0(react@19.1.0))(react-is@18.3.1)(react@19.1.0)(styled-components@6.1.17(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       '@sanity/logos': 2.1.13(@sanity/color@3.0.6)(react@19.1.0)
@@ -13505,6 +13518,10 @@ snapshots:
   uuid@8.3.2: {}
 
   uuidv7@0.4.4: {}
+
+  valibot@1.1.0(typescript@5.8.3):
+    optionalDependencies:
+      typescript: 5.8.3
 
   validate-html-nesting@1.2.2: {}
 
