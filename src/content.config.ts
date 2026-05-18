@@ -1,12 +1,20 @@
 import { defineCollection } from "astro:content";
-import { file } from "astro/loaders";
+import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-const posts = defineCollection({
-  loader: file("./src/posts.json"),
-  schema: z.object({
-    title: z.string(),
+export const collections = {
+  posts: defineCollection({
+    loader: glob({ pattern: "**/*.json", base: "./src/content/posts" }),
+    schema: z.object({
+      title: z.string(),
+      media: z.array(
+        z.union([
+          z.object({
+            type: z.literal("uc-video"),
+            uuid: z.string(),
+          }),
+        ]),
+      ),
+    }),
   }),
-});
-
-export const collections = { posts };
+};

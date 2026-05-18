@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@uploadcare/uc-video':
+        specifier: 0.5.1
+        version: 0.5.1
       astro:
         specifier: ^6.3.3
         version: 6.3.3(rollup@4.60.4)
@@ -553,6 +556,14 @@ packages:
 
   '@ungap/structured-clone@1.3.1':
     resolution: {integrity: sha512-mUFwbeTqrVgDQxFveS+df2yfap6iuP20NAKAsBt5jDEoOTDew+zwLAOilHCeQJOVSvmgCX4ogqIrA0mnyr08yQ==}
+
+  '@uploadcare/uc-video@0.5.1':
+    resolution: {integrity: sha512-MGMZuyim3uTKc4hC3ia55xsARXgxST5a+XSsjfjX9AbD6PZAvAWsoTOiOuQh8fvi56dxT2kZZnepNnp8BoAs4w==}
+    peerDependencies:
+      video.js: ^8
+    peerDependenciesMeta:
+      video.js:
+        optional: true
 
   anymatch@3.1.3:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
@@ -1802,6 +1813,8 @@ snapshots:
   '@types/unist@3.0.3': {}
 
   '@ungap/structured-clone@1.3.1': {}
+
+  '@uploadcare/uc-video@0.5.1': {}
 
   anymatch@3.1.3:
     dependencies:

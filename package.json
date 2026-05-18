@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@uploadcare/uc-video": "0.5.1",
     "astro": "^6.3.3"
   }
 }
