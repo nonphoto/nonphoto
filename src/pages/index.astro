@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import { Font } from "astro:assets";
 const posts = await getCollection("posts");
-console.log(posts);
 ---
 
 <html lang="en">
@@ -12,6 +12,7 @@ console.log(posts);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro</title>
+    <Font cssVariable="--font-mono" />
   </head>
   <body>
     <script>
@@ -37,5 +38,11 @@ console.log(posts);
         ))
       }
     </ul>
+    <style>
+      body {
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+      }
+    </style>
   </body>
 </html>

@@ -1,5 +1,26 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from "astro/config";
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: "Mono",
+      cssVariable: "--font-mono",
+      options: {
+        variants: [
+          {
+            weight: 400,
+            style: "normal",
+            src: ["./src/assets/fonts/KHTekaMono-Book.woff2"],
+          },
+          {
+            weight: 700,
+            style: "normal",
+            src: ["./src/assets/fonts/KHTekaMono-Medium.woff2"],
+          },
+        ],
+      },
+    },
+  ],
+});
